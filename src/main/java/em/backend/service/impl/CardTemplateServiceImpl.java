@@ -64,7 +64,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
 
             // 创建卡片模板数据
             Map<String, Object> templateData = new HashMap<>();
-            templateData.put("template_id", "AAqBVYWIiO1BV"); // 替换为实际的模板ID
+            templateData.put("template_id", "AAqB3OtipZWJR"); // 替换为实际的模板ID
             templateData.put("template_variable", templateVariables);
 
             // 创建完整的卡片内容
@@ -106,7 +106,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
             
             // 创建卡片模板数据
             Map<String, Object> templateData = new HashMap<>();
-            templateData.put("template_id", "AAqB8WUCGVxVd"); // 替换为实际的模板ID
+            templateData.put("template_id", "AAqB3OW3kjMy0"); // 替换为实际的模板ID
             templateData.put("template_variable", templateVariables);
             
             // 创建完整的卡片内容
@@ -133,7 +133,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
             
             // 创建卡片模板数据
             Map<String, Object> templateData = new HashMap<>();
-            templateData.put("template_id", "AAqBVH7kSKNH9"); // 使用实际的模板ID
+            templateData.put("template_id", "AAqB3OKYhZkFC"); // 使用实际的模板ID
             templateData.put("template_variable", templateVariables);
             
             // 创建完整的卡片内容
