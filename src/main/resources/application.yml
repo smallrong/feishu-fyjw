@@ -1,0 +1,117 @@
+server:
+  # 服务端口
+  port: 8087
+
+spring:
+  datasource:
+    # 数据库驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库连接URL
+    url: jdbc:mysql://localhost:3306/feishu-bot?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    # 数据库用户名
+    username: root
+    # 数据库密码
+    password: root
+    # Hikari连接池配置
+    hikari:
+      # 最小空闲连接数
+      minimum-idle: 5
+      # 空闲连接超时时间（毫秒）
+      idle-timeout: 180000
+      # 最大连接数
+      maximum-pool-size: 10
+      # 是否自动提交
+      auto-commit: true
+      # 连接池名称
+      pool-name: MyHikariCP
+      # 连接最大存活时间（毫秒）
+      max-lifetime: 1800000
+      # 连接超时时间（毫秒）
+      connection-timeout: 30000
+
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: localhost
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 
+    # 连接超时时间
+    timeout: 10s
+    # lettuce连接池配置
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
+
+
+# 应用名称
+application:
+  name: backend
+
+# JSON配置
+jackson:
+  # 日期格式化
+  date-format: yyyy-MM-MM HH:mm:ss
+  # 时区设置
+  time-zone: GMT+8
+  serialization:
+    # 格式化输出
+    indent_output: true
+    # 忽略无法转换的对象
+    fail_on_empty_beans: false
+
+mybatis-plus:
+  # mapper.xml文件位置
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 驼峰命名转换
+    map-underscore-to-camel-case: true
+    # SQL日志输出
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 逻辑删除字段
+      logic-delete-field: deleted
+      # 逻辑删除值
+      logic-delete-value: 1
+      # 逻辑未删除值
+      logic-not-delete-value: 0
+      # 主键类型（自增）
+      # id-type: auto
+      # # 字段验证策略
+      # field-strategy: not_null
+      # # 大写命名
+      # capital-mode: true
+      # # 表名前缀
+      # table-prefix: t_
+
+# 日志配置
+logging:
+  level:
+    # 根日志级别
+    root: info
+    # 项目日志级别
+    em.backend: debug
+  file:
+    # 日志文件路径
+    name: logs/backend.log
+
+feishu:
+  app-id: cli_a737a171cc79d01c
+  app-secret: bmc7I8QUOosDoZPR5zLJdcoQizlUDL8f
+  scopes:
+    - drive:file:view   # 查看文件权限
+    - drive:file:edit   # 编辑文件权限
+
+dify:
+  api-url: https://api.dify.ai/v1
+  api-key: app-s1Cv9pTc0Ulf9FQUvpd9pHNJ

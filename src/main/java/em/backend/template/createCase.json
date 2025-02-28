@@ -1,0 +1,120 @@
+{
+  "schema": "2.0",
+  "body": {
+    "elements": [
+      {
+        "tag": "form",
+        "elements": [
+          {
+            "tag": "input",
+            "element_id": "case_name",
+            "margin": "0px 0px 0px 0px",
+            "placeholder": {
+              "tag": "plain_text",
+              "content": "请输入案件名称"
+            },
+            "default_value": "",
+            "width": "default",
+            "label": {
+              "tag": "plain_text",
+              "content": "案件名称："
+            },
+            "name": "case_name"
+          },
+          {
+            "tag": "input",
+            "element_id": "client_name",
+            "margin": "0px 0px 0px 0px",
+            "placeholder": {
+              "tag": "plain_text",
+              "content": "请输入当事人姓名"
+            },
+            "default_value": "",
+            "width": "default",
+            "label": {
+              "tag": "plain_text",
+              "content": "当事人："
+            },
+            "name": "client_name"
+          },
+          {
+            "tag": "input",
+            "element_id": "case_desc",
+            "margin": "0px 0px 0px 0px",
+            "input_type": "multiline_text",
+            "rows": 4,
+            "auto_resize": true,
+            "placeholder": {
+              "tag": "plain_text",
+              "content": "请输入案情简介"
+            },
+            "default_value": "",
+            "width": "default",
+            "label": {
+              "tag": "plain_text",
+              "content": "案情简介："
+            },
+            "name": "case_desc"
+          },
+          {
+            "tag": "picker_datetime",
+            "element_id": "case_time",
+            "placeholder": {
+              "tag": "plain_text",
+              "content": "请选择接案时间"
+            },
+            "width": "default",
+            "margin": "0px 0px 0px 0px",
+            "name": "case_time"
+          },
+          {
+            "tag": "input",
+            "element_id": "remarks",
+            "margin": "0px 0px 0px 0px",
+            "input_type": "multiline_text",
+            "rows": 2,
+            "auto_resize": true,
+            "placeholder": {
+              "tag": "plain_text",
+              "content": "请输入备注信息"
+            },
+            "default_value": "",
+            "width": "default",
+            "label": {
+              "tag": "plain_text",
+              "content": "备注："
+            },
+            "name": "remarks"
+          },
+          {
+            "tag": "column_set",
+            "flex_mode": "none",
+            "background_style": "default",
+            "horizontal_spacing": "default",
+            "columns": [
+              {
+                "tag": "column",
+                "width": "auto",
+                "vertical_align": "top",
+                "elements": [
+                  {
+                    "tag": "button",
+                    "text": {
+                      "tag": "plain_text",
+                      "content": "提交"
+                    },
+                    "type": "primary",
+                    "action_type": "form_submit",
+                    "name": "submit_create_case"
+                  }
+                ]
+              }
+            ],
+            "margin": "0px"
+          }
+        ],
+        "name": "create_case_form"
+      }
+    ]
+  }
+}
