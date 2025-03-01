@@ -54,4 +54,12 @@ public interface ICaseService extends IService<CaseInfo> {
      * @return 卡片回调响应
      */
     P2CardActionTriggerResponse handleCaseOverview(String caseId, String operatorId);
-} 
+    
+    /**
+     * 处理法律研究
+     * @param caseId 案件ID
+     * @param operatorId 操作人ID
+     * @return 卡片回调响应
+     */
+    P2CardActionTriggerResponse handleLegalResearch(String caseId, String operatorId);
+}

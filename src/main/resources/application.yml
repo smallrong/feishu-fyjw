@@ -7,11 +7,11 @@ spring:
     # 数据库驱动
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 数据库连接URL
-    url: jdbc:mysql://localhost:3306/feishu-bot?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://rm-bp1g9al0lcl04w9t57o.mysql.rds.aliyuncs.com:3306/feishu-fyjw?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     # 数据库用户名
-    username: root
+    username: yh
     # 数据库密码
-    password: root
+    password: Qiaomai2024
     # Hikari连接池配置
     hikari:
       # 最小空闲连接数
@@ -106,11 +106,9 @@ logging:
     name: logs/backend.log
 
 feishu:
-  app-id: cli_a737a171cc79d01c
-  app-secret: bmc7I8QUOosDoZPR5zLJdcoQizlUDL8f
-  scopes:
-    - drive:file:view   # 查看文件权限
-    - drive:file:edit   # 编辑文件权限
+  app-id: cli_a73db2954dfad00e
+  app-secret: Kj5jOfzZRJrAjfkOudVg6bCZrnfNNBgb
+
 
 dify:
   api-url: https://api.dify.ai/v1

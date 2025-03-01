@@ -6,6 +6,9 @@ import em.backend.dify.IDifyClient;
 import em.backend.dify.model.ChatCompletionResponse;
 import em.backend.dify.model.ChunkResponse;
 import em.backend.dify.model.FileObject;
+import em.backend.dify.model.workflow.WorkflowCompletionResponse;
+import em.backend.dify.model.workflow.WorkflowChunkResponse;
+import em.backend.dify.model.workflow.WorkflowRunRequest;
 import em.backend.mapper.UserGroupMapper;
 import em.backend.pojo.UserGroup;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +30,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.util.FileCopyUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.mock.web.MockMultipartFile;
+import reactor.core.publisher.Flux;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,7 +60,7 @@ public class DifyClientImpl implements IDifyClient {
     
     @Value("${dify.api-key}")
     private String apiKey;
-
+    
     private final RestTemplate restTemplate = new RestTemplate();
     private final ExecutorService executorService = Executors.newCachedThreadPool();
     private final UserGroupMapper userGroupMapper;
@@ -65,6 +69,7 @@ public class DifyClientImpl implements IDifyClient {
     public void init() {
         log.info("Dify API URL: {}", apiUrl);
         log.info("Dify API Key 已加载: {}", apiKey != null && !apiKey.isEmpty() ? "是" : "否");
+        
         if (apiKey == null || apiKey.isEmpty() || "your-api-key-here".equals(apiKey)) {
             log.warn("Dify API Key 未设置或使用了默认值，API调用可能会失败");
         }
@@ -211,7 +216,6 @@ public class DifyClientImpl implements IDifyClient {
                         String jsonData = line.substring(6); // 去掉 "data: " 前缀
                         ChunkResponse chunk = JSON.parseObject(jsonData, ChunkResponse.class);
                         messageHandler.accept(chunk);
-//                        System.out.println(chunk);
                         // 捕获新的会话ID
                         if ( newConversationId == null || newConversationId.isEmpty()) {
                             newConversationId = chunk.getConversation_id();
@@ -219,7 +223,6 @@ public class DifyClientImpl implements IDifyClient {
                             // 保存到数据库
                             saveConversationId(user, newConversationId);
                         }
-//                        System.out.println("line:"+line);
                         // 如果是结束事件或错误事件，则退出循环
                         if ("message_end".equals(chunk.getEvent()) || "error".equals(chunk.getEvent())) {
                             break;
@@ -428,6 +431,201 @@ public class DifyClientImpl implements IDifyClient {
         } catch (Exception e) {
             log.error("Dify 文件上传失败", e);
             throw new RuntimeException("Dify 文件上传失败: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public WorkflowCompletionResponse runWorkflowBlocking(
+            Map<String, Object> inputs, String user, List<FileObject> files, String apiKey) {
+        
+        if (apiKey == null || apiKey.isEmpty()) {
+            throw new IllegalArgumentException("API Key不能为空");
+        }
+        
+        log.info("【Dify客户端】开始执行工作流（阻塞模式）: user={}", user);
+        log.debug("【Dify客户端】工作流输入参数: inputs={}, files={}", inputs, files);
+        
+        try {
+            // 创建请求体
+            WorkflowRunRequest request = WorkflowRunRequest.createBlockingRequest(inputs, user, files);
+            
+            // 创建HTTP头
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey);
+            
+            // 添加必要的请求头，模拟浏览器行为，避免Cloudflare拦截
+            headers.set(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+            headers.set(HttpHeaders.ACCEPT, "application/json");
+            
+            // 创建HTTP实体
+            HttpEntity<WorkflowRunRequest> entity = new HttpEntity<>(request, headers);
+            
+            log.debug("【Dify客户端】发送工作流请求（阻塞模式）: url={}", apiUrl + "/workflows/run");
+            log.debug("【Dify客户端】请求头: {}", headers);
+            log.debug("【Dify客户端】请求体: {}", JSON.toJSONString(request));
+            
+            // 发送请求
+            ResponseEntity<WorkflowCompletionResponse> response = restTemplate.exchange(
+                    apiUrl + "/workflows/run",
+                    HttpMethod.POST,
+                    entity,
+                    WorkflowCompletionResponse.class);
+            
+            WorkflowCompletionResponse result = response.getBody();
+            
+            log.info("【Dify客户端】工作流执行完成（阻塞模式）: workflowRunId={}, taskId={}, status={}", 
+                    result.getWorkflow_run_id(), result.getTask_id(), 
+                    result.getData() != null ? result.getData().getStatus() : "unknown");
+            
+            return result;
+        } catch (Exception e) {
+            log.error("【Dify客户端】工作流执行异常（阻塞模式）", e);
+            throw e;
+        }
+    }
+    
+    @Override
+    public void runWorkflowStreaming(
+            Map<String, Object> inputs, String user, 
+            Consumer<WorkflowChunkResponse> messageHandler, List<FileObject> files,
+            String apiKey) {
+        
+        if (apiKey == null || apiKey.isEmpty()) {
+            throw new IllegalArgumentException("API Key不能为空");
+        }
+        
+        log.info("【Dify客户端】开始执行工作流（流式模式）: user={}", user);
+        log.debug("【Dify客户端】工作流输入参数: inputs={}, files={}", inputs, files);
+        
+        executorService.submit(() -> {
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+            
+            try {
+                // 创建请求体
+                WorkflowRunRequest request = WorkflowRunRequest.createStreamingRequest(inputs, user, files);
+                
+                // 创建连接
+                URL url = new URL(apiUrl + "/workflows/run");
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Authorization", "Bearer " + apiKey);
+                
+                // 添加必要的请求头，模拟浏览器行为
+                connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+                connection.setRequestProperty("Accept", "text/event-stream");
+                connection.setDoOutput(true);
+                
+                log.debug("【Dify客户端】发送工作流请求（流式模式）: url={}", apiUrl + "/workflows/run");
+                log.debug("【Dify客户端】请求体: {}", JSON.toJSONString(request));
+                
+                // 写入请求体
+                String requestBodyJson = JSON.toJSONString(request);
+                connection.getOutputStream().write(requestBodyJson.getBytes("UTF-8"));
+                connection.getOutputStream().flush();
+                
+                // 读取响应
+                int responseCode = connection.getResponseCode();
+                
+                if (responseCode >= 400) {
+                    // 读取错误流
+                    reader = new BufferedReader(new InputStreamReader(connection.getErrorStream(), "UTF-8"));
+                    StringBuilder errorResponse = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        errorResponse.append(line);
+                    }
+                    log.error("【Dify客户端】工作流请求失败: {} - {}", responseCode, errorResponse.toString());
+                    
+                    WorkflowChunkResponse errorChunk = new WorkflowChunkResponse();
+                    errorChunk.setEvent("error");
+                    // 设置错误信息
+                    messageHandler.accept(errorChunk);
+                    return;
+                }
+                
+                reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("data: ")) {
+                        String jsonData = line.substring(6); // 去掉 "data: " 前缀
+                        WorkflowChunkResponse chunk = JSON.parseObject(jsonData, WorkflowChunkResponse.class);
+                        
+                        log.debug("【Dify客户端】收到工作流事件: event={}, taskId={}", 
+                                chunk.getEvent(), chunk.getTask_id());
+                        
+                        messageHandler.accept(chunk);
+                        
+                        // 如果是工作流完成事件，记录日志并退出循环
+                        if (chunk.isWorkflowFinished()) {
+                            log.info("【Dify客户端】工作流执行完成（流式模式）: workflowRunId={}, taskId={}", 
+                                    chunk.getWorkflow_run_id(), chunk.getTask_id());
+                            break;
+                        }
+                    }
+                }
+                
+                log.info("【Dify客户端】工作流流式响应完成");
+            } catch (Exception e) {
+                log.error("【Dify客户端】工作流执行异常（流式模式）", e);
+                WorkflowChunkResponse errorChunk = new WorkflowChunkResponse();
+                errorChunk.setEvent("error");
+                // 设置错误信息
+                messageHandler.accept(errorChunk);
+            } finally {
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                } catch (IOException e) {
+                    log.error("【Dify客户端】关闭连接失败", e);
+                }
+            }
+        });
+    }
+    
+    @Override
+    public boolean stopWorkflow(String taskId, String apiKey) {
+        if (apiKey == null || apiKey.isEmpty()) {
+            throw new IllegalArgumentException("API Key不能为空");
+        }
+        
+        log.info("【Dify客户端】停止工作流执行: taskId={}", taskId);
+        
+        try {
+            // 创建HTTP头
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey);
+            
+            // 添加必要的请求头，模拟浏览器行为，避免Cloudflare拦截
+            headers.set(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+            
+            // 创建HTTP实体
+            HttpEntity<Void> entity = new HttpEntity<>(headers);
+            
+            log.debug("【Dify客户端】发送停止工作流请求: url={}", apiUrl + "/workflows/stop?task_id=" + taskId);
+            
+            // 发送请求
+            ResponseEntity<Map> response = restTemplate.exchange(
+                    apiUrl + "/workflows/stop?task_id=" + taskId,
+                    HttpMethod.POST,
+                    entity,
+                    Map.class);
+            
+            boolean result = response.getStatusCode().is2xxSuccessful();
+            
+            log.info("【Dify客户端】工作流停止结果: taskId={}, result={}", taskId, result);
+            
+            return result;
+        } catch (Exception e) {
+            log.error("【Dify客户端】停止工作流异常: taskId={}", taskId, e);
+            return false;
         }
     }
 } 
