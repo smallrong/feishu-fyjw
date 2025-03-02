@@ -63,11 +63,10 @@ public interface ICardTemplateService {
      */
     String buildCardEntityContent(String cardId);
 
-
     /**
-     * 构建错误消息卡片
-     * @param content 消息内容
-     * @param currentCase 当前案件
+     * 构建法律研究卡片
+     * @param caseName 案件名称
+     * @return 卡片内容JSON字符串
      */
-    String buildErrorMessageCard(String content, String currentCase);
+    String buildLegalResearchCard(String caseName);
 } 
