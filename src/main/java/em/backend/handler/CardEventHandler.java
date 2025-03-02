@@ -58,6 +58,11 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
                     log.info("法律研究选择的案件ID: {}", legalCaseId);
                     return caseService.handleLegalResearch(legalCaseId, operatorId);
                     
+                case "button_study_submit":
+                    // 处理法律研究输入
+                    log.info("法律研究输入: {}", formData);
+                    return caseService.handleLegalResearchInput(formData, operatorId);
+                    
                 default:
                     log.warn("未知的按钮动作: {}", actionName);
                     toast.setType("warning");

@@ -23,7 +23,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
     @Override
     public String buildCreateCaseCard() {
         try {
-            ClassPathResource resource = new ClassPathResource("em/backend/template/createCase.json");
+            ClassPathResource resource = new ClassPathResource("template/createCase.json");
             return StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.error("构建创建案件卡片失败", e);
@@ -83,7 +83,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
     @Override
     public String buildMessageCard(String content, String currentCase) {
         try {
-            ClassPathResource resource = new ClassPathResource("em/backend/template/sendMessage.json");
+            ClassPathResource resource = new ClassPathResource("template/sendMessage.json");
             String cardContent = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
             
             return cardContent
@@ -152,7 +152,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
     @Override
     public String buildCaseSummaryCard(String caseName, String content) {
         try {
-            ClassPathResource resource = new ClassPathResource("em/backend/template/caseSummary.json");
+            ClassPathResource resource = new ClassPathResource("template/caseSummary.json");
             String templateJson = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
             
             // 处理Markdown内容中的特殊字符
@@ -196,7 +196,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
     public String buildStreamingCard(String title) {
         try {
             // 读取JSON模板
-            ClassPathResource resource = new ClassPathResource("em/backend/template/json.json");
+            ClassPathResource resource = new ClassPathResource("template/json.json");
             String jsonTemplate = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
             
             // 替换模板中的变量
@@ -220,6 +220,33 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
             return content.toString();
         } catch (Exception e) {
             log.error("构建卡片实体内容失败", e);
+            return null;
+        }
+    }
+
+    @Override
+    public String buildLegalResearchCard(String caseName) {
+        try {
+            // 创建模板变量
+            Map<String, Object> templateVariables = new HashMap<>();
+            
+            // 设置案件名称
+            templateVariables.put("case", caseName);
+            
+            // 创建卡片模板数据
+            Map<String, Object> templateData = new HashMap<>();
+            templateData.put("template_id", "AAqB02Ps6ef1E"); // 法律研究模板ID
+            templateData.put("template_variable", templateVariables);
+            
+            // 创建完整的卡片内容
+            Map<String, Object> cardContent = new HashMap<>();
+            cardContent.put("type", "template");
+            cardContent.put("data", templateData);
+            
+            // 转换为JSON字符串
+            return JSON.toJSONString(cardContent);
+        } catch (Exception e) {
+            log.error("构建法律研究卡片失败", e);
             return null;
         }
     }

@@ -62,4 +62,11 @@ public interface ICardTemplateService {
      * @return 卡片内容JSON字符串
      */
     String buildCardEntityContent(String cardId);
+
+    /**
+     * 构建法律研究卡片
+     * @param caseName 案件名称
+     * @return 卡片内容JSON字符串
+     */
+    String buildLegalResearchCard(String caseName);
 } 

@@ -62,4 +62,19 @@ public interface ICaseService extends IService<CaseInfo> {
      * @return 卡片回调响应
      */
     P2CardActionTriggerResponse handleLegalResearch(String caseId, String operatorId);
+    
+    /**
+     * 发送法律研究卡片
+     * @param openId 用户ID
+     * @param caseId 案件ID
+     */
+    void sendLegalResearchCard(String openId, String caseId);
+    
+    /**
+     * 处理法律研究输入
+     * @param formData 表单数据
+     * @param operatorId 操作人ID
+     * @return 卡片回调响应
+     */
+    P2CardActionTriggerResponse handleLegalResearchInput(Map<String, Object> formData, String operatorId);
 }

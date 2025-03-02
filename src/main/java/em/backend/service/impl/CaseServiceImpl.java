@@ -312,6 +312,27 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
     }
 
     @Override
+    public void sendLegalResearchCard(String openId, String caseId) {
+        try {
+            // 查询案件信息
+            CaseInfo caseInfo = getById(caseId);
+            if (caseInfo == null) {
+                log.error("案件不存在: {}", caseId);
+                messageService.sendMessage(openId, "案件不存在", openId);
+                return;
+            }
+            
+            // 构建并发送法律研究卡片
+            String cardContent = cardTemplateService.buildLegalResearchCard(caseInfo.getCaseName());
+            messageService.sendCardMessage(openId, cardContent);
+            
+            log.info("发送法律研究卡片成功: openId={}, caseId={}", openId, caseId);
+        } catch (Exception e) {
+            log.error("发送法律研究卡片失败: openId={}, caseId={}", openId, caseId, e);
+        }
+    }
+
+    @Override
     public P2CardActionTriggerResponse handleLegalResearch(String caseId, String operatorId) {
         P2CardActionTriggerResponse resp = new P2CardActionTriggerResponse();
         CallBackToast toast = new CallBackToast();
@@ -331,12 +352,59 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 resp.setToast(toast);
                 return resp;
             }
+            
+            // 3. 发送法律研究卡片
+            sendLegalResearchCard(operatorId, caseId);
+            
+            // 4. 返回选择案件的响应
+            return selectResp;
+            
+        } catch (Exception e) {
+            log.error("处理法律研究异常: caseId={}, operatorId={}", caseId, operatorId, e);
+            toast.setType("error");
+            toast.setContent("系统处理失败");
+            resp.setToast(toast);
+            return resp;
+        }
+    }
 
-            /* TODO 这里只是简单的把文字发送到工作流了 后续需要实现文件也发送
-             * 工作流流程 读取用输入->大模型分析关键字->调用ai搜索相关法律->在由大模型总结返回
-             *
-             */
+    @Override
+    public P2CardActionTriggerResponse handleLegalResearchInput(Map<String, Object> formData, String operatorId) {
+        P2CardActionTriggerResponse resp = new P2CardActionTriggerResponse();
+        CallBackToast toast = new CallBackToast();
 
+        try {
+            log.info("处理法律研究输入: formData={}, operatorId={}", formData, operatorId);
+            
+            // 1. 获取用户输入的研究内容
+            String studyInput = String.valueOf(formData.get("input_study"));
+            log.info("用户输入的法律研究内容: {}", studyInput);
+            
+            // 2. 获取当前案件信息
+            UserStatus userStatus = getCurrentCase(operatorId);
+            if (userStatus == null || userStatus.getCurrentCaseId() == null) {
+                log.error("未找到当前案件");
+                toast.setType("error");
+                toast.setContent("未找到当前案件");
+                resp.setToast(toast);
+                return resp;
+            }
+            
+            CaseInfo caseInfo = getById(userStatus.getCurrentCaseId());
+            if (caseInfo == null) {
+                log.error("案件不存在: {}", userStatus.getCurrentCaseId());
+                toast.setType("error");
+                toast.setContent("案件不存在");
+                resp.setToast(toast);
+                return resp;
+            }
+
+              /* TODO 这里只是简单的把文字发送到工作流了 后续需要实现文件也发送
+               * 工作流流程 读取用输入->大模型分析关键字->调用ai搜索相关法律->在由大模型总结返回
+               *
+               */
+
+            
             // 3. 创建并发送流式卡片
             String cardTitle = "法律研究: " + caseInfo.getCaseName();
             String cardInfo = messageService.sendStreamingMessage(operatorId, "正在处理法律研究请求，请稍候...", cardTitle);
@@ -353,8 +421,13 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
             
             // 4. 准备工作流输入参数
             Map<String, Object> inputs = new HashMap<>();
-            // 根据实际工作流要求设置输入参数
-            inputs.put("yanjiu", "关于案件 " + caseInfo.getCaseName() + " 的法律研究");
+            // 拼接用户输入和案件信息
+            String researchQuery = studyInput + "\n案件名称: " + caseInfo.getCaseName();
+            if (caseInfo.getCaseDesc() != null && !caseInfo.getCaseDesc().isEmpty()) {
+                researchQuery += "\n案件描述: " + caseInfo.getCaseDesc();
+            }
+            
+            inputs.put("yanjiu", researchQuery);
             
             // 5. 创建工作流消息处理器
             final int[] sequence = {2}; // 序列号从2开始，因为初始消息已经是1
@@ -429,7 +502,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                             operatorId,     // 用户ID
                             messageHandler, // 消息处理器
                             null,           // 无文件
-                            "app-hrVs41TXZKmQVXYafjjF7WSj"  // 使用指定的API Key 目前先写死调试
+                            "app-hrVs41TXZKmQVXYafjjF7WSj"  // 使用指定的API Key
                     );
                 } catch (Exception e) {
                     log.error("执行法律研究工作流异常", e);
@@ -452,7 +525,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
             return resp;
             
         } catch (Exception e) {
-            log.error("处理法律研究异常: caseId={}, operatorId={}", caseId, operatorId, e);
+            log.error("处理法律研究输入异常", e);
             toast.setType("error");
             toast.setContent("系统处理失败");
             resp.setToast(toast);
