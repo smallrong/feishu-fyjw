@@ -20,6 +20,7 @@ import em.backend.service.ICardTemplateService;
 import em.backend.service.IFeishuFolderService;
 import em.backend.service.IMessageService;
 import em.backend.service.IUserStatusService;
+import em.backend.service.IDifyKnowledgeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
     private final ICardTemplateService cardTemplateService;
     private final Client feishuClient;
     private final IDifyClient difyClient;
+    private final IDifyKnowledgeService difyKnowledgeService;
 
     @Override
     public P2CardActionTriggerResponse handleCreateCaseForm(Map<String, Object> formData, String operatorId) {
@@ -84,16 +86,35 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 return resp;
             }
 
-            // 4. 保存案件信息到数据库
+
+            // 4. 创建Dify知识库
+            String knowledgeDesc = String.format("案件描述：%s\n当事人：%s\n案件时间：%s",
+                    caseDesc != null ? caseDesc : "无",
+                    clientName,
+                    caseTime);
+            IDifyKnowledgeService.KnowledgeResult knowledgeResult = difyKnowledgeService.createKnowledge(
+                    knowledgeDesc
+            );
+
+            if (knowledgeResult == null) {
+                log.error("创建Dify知识库失败");
+                // 不中断流程，继续保存案件信息
+            }
+
+            // 5. 保存案件信息到数据库
             CaseInfo caseInfo = new CaseInfo();
             caseInfo.setOpenId(operatorId);
             caseInfo.setCaseName(caseName);
             caseInfo.setClientName(clientName);
             caseInfo.setCaseDesc(caseDesc);
-            caseInfo.setCaseTime(LocalDateTime.parse(caseTime.substring(0, 16),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+            caseInfo.setCaseTime(LocalDateTime.parse(caseTime.substring(0, 16), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
             caseInfo.setRemarks(remarks);
             caseInfo.setFolderUrl(folderResult.getUrl());
+
+            // 设置Dify知识库ID
+            if (knowledgeResult != null) {
+                caseInfo.setDifyKnowledgeId(knowledgeResult.getId());
+            }
 
             if (!save(caseInfo)) {
                 toast.setType("error");
@@ -102,7 +123,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 return resp;
             }
 
-            // 5. 更新用户状态
+            // 6. 更新用户状态
             UserStatus userStatus = new UserStatus();
             userStatus.setOpenId(operatorId);
             userStatus.setCurrentCaseId(caseInfo.getId());
@@ -112,7 +133,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 log.error("更新用户状态失败");
             }
 
-            // 6. 构建成功响应
+            // 7. 构建成功响应
             String cardContent = cardTemplateService.buildCreateSuccessCard(folderResult.getUrl());
             CallBackCard card = new CallBackCard();
             card.setType("raw");
@@ -273,6 +294,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
 
     /**
      * 生成案件总览的Markdown内容 后续需要替换为实际的数据
+     *
      * @param caseInfo 案件信息
      * @return Markdown格式的内容
      */
@@ -321,11 +343,11 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 messageService.sendMessage(openId, "案件不存在", openId);
                 return;
             }
-            
+
             // 构建并发送法律研究卡片
             String cardContent = cardTemplateService.buildLegalResearchCard(caseInfo.getCaseName());
             messageService.sendCardMessage(openId, cardContent);
-            
+
             log.info("发送法律研究卡片成功: openId={}, caseId={}", openId, caseId);
         } catch (Exception e) {
             log.error("发送法律研究卡片失败: openId={}, caseId={}", openId, caseId, e);
@@ -339,11 +361,11 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
 
         try {
             log.info("处理法律研究输入: formData={}, operatorId={}", formData, operatorId);
-            
+
             // 1. 获取用户输入的研究内容
             String studyInput = String.valueOf(formData.get("input_study"));
             log.info("用户输入的法律研究内容: {}", studyInput);
-            
+
             // 2. 获取当前案件信息
             UserStatus userStatus = getCurrentCase(operatorId);
             if (userStatus == null || userStatus.getCurrentCaseId() == null) {
@@ -353,7 +375,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 resp.setToast(toast);
                 return resp;
             }
-            
+
             CaseInfo caseInfo = getById(userStatus.getCurrentCaseId());
             if (caseInfo == null) {
                 log.error("案件不存在: {}", userStatus.getCurrentCaseId());
@@ -363,16 +385,16 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 return resp;
             }
 
-              /* TODO 这里只是简单的把文字发送到工作流了 后续需要实现文件也发送
-               * 工作流流程 读取用输入->大模型分析关键字->调用ai搜索相关法律->在由大模型总结返回
-               *
-               */
+            /* TODO 这里只是简单的把文字发送到工作流了 后续需要实现文件也发送
+             * 工作流流程 读取用输入->大模型分析关键字->调用ai搜索相关法律->在由大模型总结返回
+             *
+             */
 
-            
+
             // 3. 创建并发送流式卡片
             String cardTitle = "法律研究: " + caseInfo.getCaseName();
             String cardInfo = messageService.sendStreamingMessage(operatorId, "正在处理法律研究请求，请稍候...", cardTitle);
-            
+
             if (cardInfo == null) {
                 log.error("创建流式卡片失败");
                 toast.setType("error");
@@ -380,9 +402,9 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 resp.setToast(toast);
                 return resp;
             }
-            
+
             log.info("创建法律研究流式卡片成功: cardInfo={}", cardInfo);
-            
+
             // 4. 准备工作流输入参数
             Map<String, Object> inputs = new HashMap<>();
             // 拼接用户输入和案件信息
@@ -390,34 +412,34 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
             if (caseInfo.getCaseDesc() != null && !caseInfo.getCaseDesc().isEmpty()) {
                 researchQuery += "\n案件描述: " + caseInfo.getCaseDesc();
             }
-            
+
             inputs.put("yanjiu", researchQuery);
-            
+
             // 5. 创建工作流消息处理器
             final int[] sequence = {2}; // 序列号从2开始，因为初始消息已经是1
             final StringBuilder resultContent = new StringBuilder();
-            
+
             Consumer<WorkflowChunkResponse> messageHandler = chunk -> {
                 try {
                     if (chunk == null) {
                         return;
                     }
-                    
-                    log.debug("收到工作流事件: event={}, taskId={}", 
+
+                    log.debug("收到工作流事件: event={}, taskId={}",
                             chunk.getEvent(), chunk.getTask_id());
-                    
+
                     // 根据事件类型处理
                     if (chunk.isWorkflowStarted()) {
                         // 工作流开始
-                        messageService.updateStreamingContent(cardInfo, 
+                        messageService.updateStreamingContent(cardInfo,
                                 "正在开始法律研究，请稍候...", sequence[0]++);
                     } else if (chunk.isNodeStarted()) {
                         // 节点开始
-                        messageService.updateStreamingContent(cardInfo, 
+                        messageService.updateStreamingContent(cardInfo,
                                 "正在分析案件信息，请稍候...", sequence[0]++);
                     } else if (chunk.isNodeFinished()) {
                         // 节点完成
-                        messageService.updateStreamingContent(cardInfo, 
+                        messageService.updateStreamingContent(cardInfo,
                                 "正在整理研究结果，请稍候...", sequence[0]++);
                     } else if (chunk.isWorkflowFinished()) {
                         // 工作流完成
@@ -425,7 +447,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                             // 从工作流输出中提取结果
                             JSONObject dataObj = JSONObject.parseObject(JSON.toJSONString(chunk.getData()));
                             log.debug("工作流完成数据: {}", dataObj);
-                            
+
                             if (dataObj.containsKey("outputs")) {
                                 JSONObject outputs = dataObj.getJSONObject("outputs");
                                 // 根据实际输出格式，从text字段获取结果
@@ -434,17 +456,17 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                                 }
                             }
                         }
-                        
+
                         // 更新最终结果
-                        String finalContent = resultContent.length() > 0 
-                                ? resultContent.toString() 
+                        String finalContent = resultContent.length() > 0
+                                ? resultContent.toString()
                                 : "法律研究完成，但未获取到结果。";
-                                
+
                         messageService.updateStreamingContent(cardInfo, finalContent, sequence[0]++);
-                        
+
                         // 停止流式更新
                         messageService.stopStreamingMode(cardInfo, sequence[0]);
-                        
+
                         log.info("法律研究工作流执行完成: workflowRunId={}", chunk.getWorkflow_run_id());
                     } else if (chunk.isPing()) {
                         // Ping事件，不需要特殊处理
@@ -456,7 +478,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                     log.error("处理工作流消息异常", e);
                 }
             };
-            
+
             // 6. 异步执行工作流
             CompletableFuture.runAsync(() -> {
                 try {
@@ -472,7 +494,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                     log.error("执行法律研究工作流异常", e);
                     try {
                         // 更新错误信息
-                        messageService.updateStreamingContent(cardInfo, 
+                        messageService.updateStreamingContent(cardInfo,
                                 "法律研究过程中发生错误: " + e.getMessage(), sequence[0]++);
                         // 停止流式更新
                         messageService.stopStreamingMode(cardInfo, sequence[0]);
@@ -481,13 +503,13 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                     }
                 }
             });
-            
+
             // 7. 返回成功响应
             toast.setType("success");
             toast.setContent("法律研究请求已提交，请等待结果");
             resp.setToast(toast);
             return resp;
-            
+
         } catch (Exception e) {
             log.error("处理法律研究输入异常", e);
             toast.setType("error");

@@ -24,8 +24,12 @@ public class CaseInfo {
     private String remarks;
     
     private String folderUrl;
+
+    private String difyKnowledgeId;
+    
     
     private LocalDateTime createTime;
+    
     
     private LocalDateTime updateTime;
     

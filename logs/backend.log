@@ -6443,3 +6443,1124 @@ java.io.FileNotFoundException: class path resource [em/backend/template/createCa
 2025-03-02 14:57:24.198 DEBUG 37732 --- [pool-2-thread-4] e.b.mapper.UserStatusMapper.selectList   : ==>  Preparing: SELECT open_id,current_case_id,current_case_name,create_time,update_time,deleted FROM user_status WHERE deleted=0 AND (open_id = ?)
 2025-03-02 14:57:24.198 DEBUG 37732 --- [pool-2-thread-4] e.b.mapper.UserStatusMapper.selectList   : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String)
 2025-03-02 14:57:24.218 DEBUG 37732 --- [pool-2-thread-4] e.b.mapper.UserStatusMapper.selectList   : <==      Total: 1
+2025-03-02 15:36:43.426  INFO 37732 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown initiated...
+2025-03-02 15:36:43.428  INFO 37732 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown completed.
+2025-03-02 15:36:44.823  INFO 32860 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 32860 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 15:36:44.825 DEBUG 32860 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 15:36:44.825  INFO 32860 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 15:36:45.101  INFO 32860 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 15:36:45.102  INFO 32860 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 15:36:45.115  INFO 32860 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-03-02 15:36:45.365  INFO 32860 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 15:36:45.370  INFO 32860 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 15:36:45.370  INFO 32860 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 15:36:45.446  INFO 32860 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 15:36:45.447  INFO 32860 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 602 ms
+2025-03-02 15:36:45.604  INFO 32860 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: https://api.dify.ai/v1
+2025-03-02 15:36:45.605  INFO 32860 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 15:36:45.777  WARN 32860 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'feishuEventController' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\controller\FeishuEventController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'messageEventHandler' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\handler\MessageEventHandler.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMessageServiceImpl' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\service\impl\FileMessageServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'caseServiceImpl' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\service\impl\CaseServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 6; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'difyKnowledgeServiceImpl' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\service\impl\DifyKnowledgeServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.web.client.RestTemplate' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-03-02 15:36:45.779  INFO 32860 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-03-02 15:36:45.783  INFO 32860 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-03-02 15:36:45.790 ERROR 32860 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in em.backend.service.impl.DifyKnowledgeServiceImpl required a bean of type 'org.springframework.web.client.RestTemplate' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.web.client.RestTemplate' in your configuration.
+
+2025-03-02 15:36:49.156  INFO 34940 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 34940 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 15:36:49.157 DEBUG 34940 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 15:36:49.157  INFO 34940 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 15:36:49.417  INFO 34940 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 15:36:49.418  INFO 34940 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 15:36:49.431  INFO 34940 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-03-02 15:36:49.685  INFO 34940 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 15:36:49.689  INFO 34940 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 15:36:49.689  INFO 34940 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 15:36:49.770  INFO 34940 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 15:36:49.770  INFO 34940 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 596 ms
+2025-03-02 15:36:49.936  INFO 34940 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: https://api.dify.ai/v1
+2025-03-02 15:36:49.937  INFO 34940 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 15:36:50.101  WARN 34940 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'feishuEventController' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\controller\FeishuEventController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'messageEventHandler' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\handler\MessageEventHandler.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMessageServiceImpl' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\service\impl\FileMessageServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'caseServiceImpl' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\service\impl\CaseServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 6; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'difyKnowledgeServiceImpl' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\service\impl\DifyKnowledgeServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.web.client.RestTemplate' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-03-02 15:36:50.103  INFO 34940 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-03-02 15:36:50.108  INFO 34940 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-03-02 15:36:50.117 ERROR 34940 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in em.backend.service.impl.DifyKnowledgeServiceImpl required a bean of type 'org.springframework.web.client.RestTemplate' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.web.client.RestTemplate' in your configuration.
+
+2025-03-02 15:37:11.758  INFO 32128 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 32128 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 15:37:11.759 DEBUG 32128 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 15:37:11.759  INFO 32128 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 15:37:12.021  INFO 32128 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 15:37:12.023  INFO 32128 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 15:37:12.036  INFO 32128 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-03-02 15:37:12.288  INFO 32128 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 15:37:12.292  INFO 32128 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 15:37:12.292  INFO 32128 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 15:37:12.374  INFO 32128 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 15:37:12.374  INFO 32128 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 597 ms
+2025-03-02 15:37:12.558  INFO 32128 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: https://api.dify.ai/v1
+2025-03-02 15:37:12.559  INFO 32128 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 15:37:12.742  WARN 32128 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'feishuEventController' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\controller\FeishuEventController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'messageEventHandler' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\handler\MessageEventHandler.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMessageServiceImpl' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\service\impl\FileMessageServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'caseServiceImpl' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\service\impl\CaseServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 6; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'difyKnowledgeServiceImpl' defined in file [D:\project\feishu-fyjw\target\classes\em\backend\service\impl\DifyKnowledgeServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.web.client.RestTemplate' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-03-02 15:37:12.744  INFO 32128 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-03-02 15:37:12.749  INFO 32128 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-03-02 15:37:12.757 ERROR 32128 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in em.backend.service.impl.DifyKnowledgeServiceImpl required a bean of type 'org.springframework.web.client.RestTemplate' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.web.client.RestTemplate' in your configuration.
+
+2025-03-02 15:43:16.959  INFO 29068 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 29068 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 15:43:16.961 DEBUG 29068 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 15:43:16.961  INFO 29068 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 15:43:17.226  INFO 29068 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 15:43:17.227  INFO 29068 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 15:43:17.239  INFO 29068 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-03-02 15:43:17.500  INFO 29068 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 15:43:17.504  INFO 29068 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 15:43:17.505  INFO 29068 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 15:43:17.581  INFO 29068 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 15:43:17.581  INFO 29068 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 600 ms
+2025-03-02 15:43:17.750  INFO 29068 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: https://api.dify.ai/v1
+2025-03-02 15:43:17.750  INFO 29068 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 15:43:18.247  INFO 29068 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 15:43:18.451  INFO 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477111557601116162&access_key=b9d326f5bf4fc51fc10dddaf3c4b1add&service_id=33554678&ticket=6db3c91f-c063-4a3f-99e5-1ff3dc82e85e [conn_id=7477111557601116162]
+2025-03-02 15:43:18.584  INFO 29068 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 15:43:18.588  INFO 29068 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.821 seconds (JVM running for 2.163)
+2025-03-02 15:44:47.498 ERROR 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : java.io.EOFException
+2025-03-02 15:44:47.500  INFO 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : disconnected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477111557601116162&access_key=b9d326f5bf4fc51fc10dddaf3c4b1add&service_id=33554678&ticket=6db3c91f-c063-4a3f-99e5-1ff3dc82e85e [conn_id=7477111557601116162]
+2025-03-02 15:44:47.500  INFO 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : start reconnecting...
+2025-03-02 15:45:12.499  INFO 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : trying to reconnect for the 1st time
+2025-03-02 15:45:12.748  INFO 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477110470828441601&access_key=4231f0c7bae4e95cc536b803399e60ea&service_id=33554678&ticket=4c842c7f-26a3-42f9-b8a2-8a75157e378a [conn_id=7477110470828441601]
+2025-03-02 15:46:17.542 ERROR 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : java.io.EOFException
+2025-03-02 15:46:17.542  INFO 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : disconnected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477110470828441601&access_key=4231f0c7bae4e95cc536b803399e60ea&service_id=33554678&ticket=4c842c7f-26a3-42f9-b8a2-8a75157e378a [conn_id=7477110470828441601]
+2025-03-02 15:46:17.542  INFO 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : start reconnecting...
+2025-03-02 15:46:22.547  INFO 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : trying to reconnect for the 1st time
+2025-03-02 15:46:22.846  INFO 29068 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477110369305542657&access_key=1b50f79e7b9e80800e6cb6439eb5d121&service_id=33554678&ticket=f827cd48-7a0b-464f-85e8-60bca927dc1c [conn_id=7477110369305542657]
+2025-03-02 16:09:00.215  INFO 19096 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 19096 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 16:09:00.216 DEBUG 19096 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 16:09:00.216  INFO 19096 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 16:09:00.520  INFO 19096 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 16:09:00.521  INFO 19096 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 16:09:00.534  INFO 19096 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-03-02 16:09:00.794  INFO 19096 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 16:09:00.799  INFO 19096 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 16:09:00.799  INFO 19096 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 16:09:00.869  INFO 19096 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 16:09:00.869  INFO 19096 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 634 ms
+2025-03-02 16:09:01.032  INFO 19096 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: https://api.dify.ai/v1
+2025-03-02 16:09:01.033  INFO 19096 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 16:09:01.485  INFO 19096 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 16:09:01.710  INFO 19096 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477116527298478082&access_key=a8e9055195d87ffa5b2057fdd0f3d0e5&service_id=33554678&ticket=38440493-a68e-4ef6-ab6d-6a02c3a35ee8 [conn_id=7477116527298478082]
+2025-03-02 16:09:01.835  INFO 19096 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 16:09:01.840  INFO 19096 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.796 seconds (JVM running for 2.163)
+2025-03-02 16:09:03.538  INFO 19096 --- [pool-2-thread-2] em.backend.handler.MenuEventHandler      : 收到菜单事件: {"operator":{"operator_name":"罗振荣","operator_id":{"user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"}},"event_key":"create_case","timestamp":1740902941}
+2025-03-02 16:09:08.689 ERROR 19096 --- [pool-2-thread-3] com.lark.oapi.ws.Client                  : handle message failed, message_type: event, message_id: c4990779-4a5b-4f0b-8382-763b9412717a, trace_id: 083515cb13c0e434e02f2c2e618ca43a, [conn_id=7477116527298478082]
+
+com.lark.oapi.event.exception.HandlerNotFoundException: event type:im.chat.access_event.bot_p2p_chat_entered_v1, not found handler
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:272) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2025-03-02 16:09:10.420 ERROR 19096 --- [pool-2-thread-4] com.lark.oapi.ws.Client                  : handle message failed, message_type: event, message_id: f2df83e2-b208-4e4a-a182-bedaa0ee801c, trace_id: 095096cc55e03945dcc1e7d421ad7e6b, [conn_id=7477116527298478082]
+
+com.lark.oapi.event.exception.HandlerNotFoundException: event type:im.chat.access_event.bot_p2p_chat_entered_v1, not found handler
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:272) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2025-03-02 16:09:12.471  INFO 19096 --- [pool-2-thread-5] em.backend.handler.MenuEventHandler      : 收到菜单事件: {"operator":{"operator_name":"罗振荣","operator_id":{"user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"}},"event_key":"create_case","timestamp":1740902934}
+2025-03-02 16:09:20.683  INFO 19096 --- [pool-2-thread-6] em.backend.handler.CardEventHandler      : 收到卡片回调事件: {"event":{"operator":{"tenant_key":"14191646f559d758","user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"},"token":"c-53748982e0c1bc1dbf31e9593ff5546fad8031aa","action":{"tag":"button","timezone":"Asia/Shanghai","name":"submit_create_case","form_value":{"case_desc":"111","case_name":"案件test","case_time":"2025-03-02 04:04 +0800","client_name":"罗振荣","remarks":""}},"host":"im_message","context":{"open_message_id":"om_8e93dbe7516dd957f62606f50180946e","open_chat_id":"oc_ca8485b0326b6f77e9d48085090f70ac"}},"schema":"2.0","header":{"event_id":"8b786f362af069c856be4a37b78f14e3","event_type":"card.action.trigger","app_id":"cli_a73c62ce90b0d013","tenant_key":"14191646f559d758","create_time":"1740902959196134","token":"za3iBwmP42XM4YMo9z0tq1OgMlRAG7tc"},"eventReq":{"body":[123,34,115,99,104,101,109,97,34,58,34,50,46,48,34,44,34,104,101,97,100,101,114,34,58,123,34,101,118,101,110,116,95,105,100,34,58,34,56,98,55,56,54,102,51,54,50,97,102,48,54,57,99,56,53,54,98,101,52,97,51,55,98,55,56,102,49,52,101,51,34,44,34,116,111,107,101,110,34,58,34,122,97,51,105,66,119,109,80,52,50,88,77,52,89,77,111,57,122,48,116,113,49,79,103,77,108,82,65,71,55,116,99,34,44,34,99,114,101,97,116,101,95,116,105,109,101,34,58,34,49,55,52,48,57,48,50,57,53,57,49,57,54,49,51,52,34,44,34,101,118,101,110,116,95,116,121,112,101,34,58,34,99,97,114,100,46,97,99,116,105,111,110,46,116,114,105,103,103,101,114,34,44,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,97,112,112,95,105,100,34,58,34,99,108,105,95,97,55,51,99,54,50,99,101,57,48,98,48,100,48,49,51,34,125,44,34,101,118,101,110,116,34,58,123,34,111,112,101,114,97,116,111,114,34,58,123,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,117,115,101,114,95,105,100,34,58,34,100,51,100,53,101,103,98,99,34,44,34,111,112,101,110,95,105,100,34,58,34,111,117,95,56,101,50,52,56,102,100,97,56,102,52,98,102,102,56,52,57,57,99,49,97,55,48,55,50,55,54,55,98,102,99,101,34,44,34,117,110,105,111,110,95,105,100,34,58,34,111,110,95,102,51,50,98,57,50,49,49,50,97,50,56,53,102,56,51,52,57,51,48,56,100,57,54,57,56,50,48,51,100,51,101,34,125,44,34,116,111,107,101,110,34,58,34,99,45,53,51,55,52,56,57,56,50,101,48,99,49,98,99,49,100,98,102,51,49,101,57,53,57,51,102,102,53,53,52,54,102,97,100,56,48,51,49,97,97,34,44,34,97,99,116,105,111,110,34,58,123,34,116,97,103,34,58,34,98,117,116,116,111,110,34,44,34,116,105,109,101,122,111,110,101,34,58,34,65,115,105,97,47,83,104,97,110,103,104,97,105,34,44,34,102,111,114,109,95,118,97,108,117,101,34,58,123,34,99,97,115,101,95,100,101,115,99,34,58,34,49,49,49,34,44,34,99,97,115,101,95,110,97,109,101,34,58,34,-26,-95,-120,-28,-69,-74,116,101,115,116,34,44,34,99,97,115,101,95,116,105,109,101,34,58,34,50,48,50,53,45,48,51,45,48,50,32,48,52,58,48,52,32,43,48,56,48,48,34,44,34,99,108,105,101,110,116,95,110,97,109,101,34,58,34,-25,-67,-105,-26,-116,-81,-24,-115,-93,34,44,34,114,101,109,97,114,107,115,34,58,34,34,125,44,34,110,97,109,101,34,58,34,115,117,98,109,105,116,95,99,114,101,97,116,101,95,99,97,115,101,34,125,44,34,104,111,115,116,34,58,34,105,109,95,109,101,115,115,97,103,101,34,44,34,99,111,110,116,101,120,116,34,58,123,34,111,112,101,110,95,109,101,115,115,97,103,101,95,105,100,34,58,34,111,109,95,56,101,57,51,100,98,101,55,53,49,54,100,100,57,53,55,102,54,50,54,48,54,102,53,48,49,56,48,57,52,54,101,34,44,34,111,112,101,110,95,99,104,97,116,95,105,100,34,58,34,111,99,95,99,97,56,52,56,53,98,48,51,50,54,98,54,102,55,55,101,57,100,52,56,48,56,53,48,57,48,102,55,48,97,99,34,125,125,125],"headers":{}}}
+2025-03-02 16:09:20.683  INFO 19096 --- [pool-2-thread-6] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单数据: {case_desc=111, case_name=案件test, case_time=2025-03-02 04:04 +0800, client_name=罗振荣, remarks=}, 操作人: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:09:21.245  INFO 19096 --- [pool-2-thread-6] e.b.s.impl.FeishuFolderServiceImpl       : 案件文件夹创建成功: 案件test_罗振荣_2025-03-02, url: https://vcnjyexq8awr.feishu.cn/drive/folder/U10cfev2Ul0yhHdW4PNcvu80nEg
+2025-03-02 16:09:21.716  INFO 19096 --- [pool-2-thread-6] e.b.s.impl.FeishuFolderServiceImpl       : 文件夹权限设置成功, token: U10cfev2Ul0yhHdW4PNcvu80nEg, userId: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:09:22.670 ERROR 19096 --- [pool-2-thread-6] e.b.s.impl.DifyKnowledgeServiceImpl      : 创建知识库异常
+
+org.springframework.web.client.HttpClientErrorException$NotFound: 404 NOT FOUND: "<!doctype html><EOL><html lang=en><EOL><title>404 Not Found</title><EOL><h1>Not Found</h1><EOL><p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p><EOL>"
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:113) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:168) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:122) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:825) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:783) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:717) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:608) ~[spring-web-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.DifyKnowledgeServiceImpl.createKnowledge(DifyKnowledgeServiceImpl.java:45) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:96) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$a91845f4.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$1.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$1.handle(FeishuEventController.java:61) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2025-03-02 16:09:22.670 ERROR 19096 --- [pool-2-thread-6] em.backend.service.impl.CaseServiceImpl  : 创建Dify知识库失败
+2025-03-02 16:09:22.686  INFO 19096 --- [pool-2-thread-6] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Starting...
+2025-03-02 16:09:22.971  INFO 19096 --- [pool-2-thread-6] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Start completed.
+2025-03-02 16:09:22.975 DEBUG 19096 --- [pool-2-thread-6] em.backend.mapper.CaseInfoMapper.insert  : ==>  Preparing: INSERT INTO case_info ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-03-02 16:09:22.986 DEBUG 19096 --- [pool-2-thread-6] em.backend.mapper.CaseInfoMapper.insert  : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String), 案件test(String), 罗振荣(String), 111(String), 2025-03-02T04:04(LocalDateTime), (String), https://vcnjyexq8awr.feishu.cn/drive/folder/U10cfev2Ul0yhHdW4PNcvu80nEg(String), null, null
+2025-03-02 16:09:23.062 ERROR 19096 --- [pool-2-thread-6] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单失败
+
+org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+### The error may exist in em/backend/mapper/CaseInfoMapper.java (best guess)
+### The error may involve em.backend.mapper.CaseInfoMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO case_info  ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url,  create_time, update_time )  VALUES  ( ?, ?, ?, ?, ?, ?, ?,  ?, ? )
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+; Column 'create_time' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:87) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:79) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:91) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at jdk.proxy2/jdk.proxy2.$Proxy65.insert(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy74.insert(Unknown Source) ~[na:na]
+	at com.baomidou.mybatisplus.extension.service.IService.save(IService.java:63) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:122) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$a91845f4.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$1.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$1.handle(FeishuEventController.java:61) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy3/jdk.proxy3.$Proxy94.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:64) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy92.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) ~[mybatis-3.5.10.jar:3.5.10]
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:106) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:62) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy91.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	... 24 common frames omitted
+
+2025-03-02 16:13:43.172  INFO 19096 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown initiated...
+2025-03-02 16:13:43.177  INFO 19096 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown completed.
+2025-03-02 16:13:44.517  INFO 30928 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 30928 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 16:13:44.518 DEBUG 30928 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 16:13:44.519  INFO 30928 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 16:13:44.788  INFO 30928 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 16:13:44.789  INFO 30928 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 16:13:44.801  INFO 30928 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-03-02 16:13:45.065  INFO 30928 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 16:13:45.074  INFO 30928 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 16:13:45.074  INFO 30928 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 16:13:45.180  INFO 30928 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 16:13:45.180  INFO 30928 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 643 ms
+2025-03-02 16:13:45.348  INFO 30928 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: https://api.dify.ai/v1
+2025-03-02 16:13:45.348  INFO 30928 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 16:13:45.832  INFO 30928 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 16:13:46.019  INFO 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477119861064581122&access_key=902109e60925cc31b6b75c2a8d9a910d&service_id=33554678&ticket=d017469c-4734-4319-8b56-5b381e7e356c [conn_id=7477119861064581122]
+2025-03-02 16:13:46.139  INFO 30928 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 16:13:46.144  INFO 30928 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.795 seconds (JVM running for 2.147)
+2025-03-02 16:14:08.638 ERROR 30928 --- [pool-2-thread-2] com.lark.oapi.ws.Client                  : handle message failed, message_type: event, message_id: c342f76f-4f06-448b-9cc6-c6a91548fed4, trace_id: 083515cb13c0e434e02f2c2e618ca43a, [conn_id=7477119861064581122]
+
+com.lark.oapi.event.exception.HandlerNotFoundException: event type:im.chat.access_event.bot_p2p_chat_entered_v1, not found handler
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:272) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2025-03-02 16:14:10.667 ERROR 30928 --- [pool-2-thread-3] com.lark.oapi.ws.Client                  : handle message failed, message_type: event, message_id: 28728ec7-a9a5-4da9-880c-ea2a2978f46b, trace_id: 095096cc55e03945dcc1e7d421ad7e6b, [conn_id=7477119861064581122]
+
+com.lark.oapi.event.exception.HandlerNotFoundException: event type:im.chat.access_event.bot_p2p_chat_entered_v1, not found handler
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:272) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2025-03-02 16:15:40.519 ERROR 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : java.io.EOFException
+2025-03-02 16:15:40.519  INFO 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : disconnected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477119861064581122&access_key=902109e60925cc31b6b75c2a8d9a910d&service_id=33554678&ticket=d017469c-4734-4319-8b56-5b381e7e356c [conn_id=7477119861064581122]
+2025-03-02 16:15:40.520  INFO 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : start reconnecting...
+2025-03-02 16:15:52.789  INFO 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : trying to reconnect for the 1st time
+2025-03-02 16:15:53.189  INFO 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477119861064876034&access_key=2032e5a7c2dee73bad3ab547da221612&service_id=33554678&ticket=af8e33aa-2c36-40c7-a7e2-bb8f2beb187f [conn_id=7477119861064876034]
+2025-03-02 16:16:52.563 ERROR 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : java.io.EOFException
+2025-03-02 16:16:52.563  INFO 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : disconnected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477119861064876034&access_key=2032e5a7c2dee73bad3ab547da221612&service_id=33554678&ticket=af8e33aa-2c36-40c7-a7e2-bb8f2beb187f [conn_id=7477119861064876034]
+2025-03-02 16:16:52.563  INFO 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : start reconnecting...
+2025-03-02 16:17:10.430  INFO 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : trying to reconnect for the 1st time
+2025-03-02 16:17:10.748  INFO 30928 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477119861065203714&access_key=a1c06eccf1b20189518b5583aa623687&service_id=33554678&ticket=882e2973-3290-4296-8c02-2feae8d494c9 [conn_id=7477119861065203714]
+2025-03-02 16:25:40.834  INFO 39904 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 39904 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 16:25:40.837 DEBUG 39904 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 16:25:40.837  INFO 39904 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 16:25:41.101  INFO 39904 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 16:25:41.102  INFO 39904 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 16:25:41.114  INFO 39904 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-03-02 16:25:41.370  INFO 39904 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 16:25:41.373  INFO 39904 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 16:25:41.374  INFO 39904 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 16:25:41.451  INFO 39904 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 16:25:41.452  INFO 39904 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 593 ms
+2025-03-02 16:25:41.622  INFO 39904 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: http://1.13.79.29/v1
+2025-03-02 16:25:41.623  INFO 39904 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 16:25:42.094  INFO 39904 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 16:25:42.250  INFO 39904 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477122072830377986&access_key=37829c7659f1b208f3772ad781bc4120&service_id=33554678&ticket=2493475e-b094-4edf-827e-94f7d450c2b6 [conn_id=7477122072830377986]
+2025-03-02 16:25:42.408  INFO 39904 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 16:25:42.413  INFO 39904 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.779 seconds (JVM running for 2.158)
+2025-03-02 16:25:43.200  INFO 39904 --- [pool-2-thread-2] em.backend.handler.MenuEventHandler      : 收到菜单事件: {"operator":{"operator_name":"罗振荣","operator_id":{"user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"}},"event_key":"create_case","timestamp":1740903941}
+2025-03-02 16:26:01.403  INFO 39904 --- [pool-2-thread-3] em.backend.handler.CardEventHandler      : 收到卡片回调事件: {"event":{"operator":{"tenant_key":"14191646f559d758","user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"},"token":"c-b36f7968321bb584e0bed05e755a7fe183a13112","action":{"tag":"button","timezone":"Asia/Shanghai","name":"submit_create_case","form_value":{"case_desc":" ","case_name":"创建知识库test1","case_time":"2025-03-24 22:37 +0800","client_name":"罗振荣","remarks":""}},"host":"im_message","context":{"open_message_id":"om_0859b6c5f719ef7e0deb3e1206cf9b31","open_chat_id":"oc_ca8485b0326b6f77e9d48085090f70ac"}},"schema":"2.0","header":{"event_id":"c3cd9d685241a43e11d32c9380a017dd","event_type":"card.action.trigger","app_id":"cli_a73c62ce90b0d013","tenant_key":"14191646f559d758","create_time":"1740903959920708","token":"za3iBwmP42XM4YMo9z0tq1OgMlRAG7tc"},"eventReq":{"body":[123,34,115,99,104,101,109,97,34,58,34,50,46,48,34,44,34,104,101,97,100,101,114,34,58,123,34,101,118,101,110,116,95,105,100,34,58,34,99,51,99,100,57,100,54,56,53,50,52,49,97,52,51,101,49,49,100,51,50,99,57,51,56,48,97,48,49,55,100,100,34,44,34,116,111,107,101,110,34,58,34,122,97,51,105,66,119,109,80,52,50,88,77,52,89,77,111,57,122,48,116,113,49,79,103,77,108,82,65,71,55,116,99,34,44,34,99,114,101,97,116,101,95,116,105,109,101,34,58,34,49,55,52,48,57,48,51,57,53,57,57,50,48,55,48,56,34,44,34,101,118,101,110,116,95,116,121,112,101,34,58,34,99,97,114,100,46,97,99,116,105,111,110,46,116,114,105,103,103,101,114,34,44,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,97,112,112,95,105,100,34,58,34,99,108,105,95,97,55,51,99,54,50,99,101,57,48,98,48,100,48,49,51,34,125,44,34,101,118,101,110,116,34,58,123,34,111,112,101,114,97,116,111,114,34,58,123,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,117,115,101,114,95,105,100,34,58,34,100,51,100,53,101,103,98,99,34,44,34,111,112,101,110,95,105,100,34,58,34,111,117,95,56,101,50,52,56,102,100,97,56,102,52,98,102,102,56,52,57,57,99,49,97,55,48,55,50,55,54,55,98,102,99,101,34,44,34,117,110,105,111,110,95,105,100,34,58,34,111,110,95,102,51,50,98,57,50,49,49,50,97,50,56,53,102,56,51,52,57,51,48,56,100,57,54,57,56,50,48,51,100,51,101,34,125,44,34,116,111,107,101,110,34,58,34,99,45,98,51,54,102,55,57,54,56,51,50,49,98,98,53,56,52,101,48,98,101,100,48,53,101,55,53,53,97,55,102,101,49,56,51,97,49,51,49,49,50,34,44,34,97,99,116,105,111,110,34,58,123,34,116,97,103,34,58,34,98,117,116,116,111,110,34,44,34,116,105,109,101,122,111,110,101,34,58,34,65,115,105,97,47,83,104,97,110,103,104,97,105,34,44,34,102,111,114,109,95,118,97,108,117,101,34,58,123,34,99,97,115,101,95,100,101,115,99,34,58,34,32,34,44,34,99,97,115,101,95,110,97,109,101,34,58,34,-27,-120,-101,-27,-69,-70,-25,-97,-91,-24,-81,-122,-27,-70,-109,116,101,115,116,49,34,44,34,99,97,115,101,95,116,105,109,101,34,58,34,50,48,50,53,45,48,51,45,50,52,32,50,50,58,51,55,32,43,48,56,48,48,34,44,34,99,108,105,101,110,116,95,110,97,109,101,34,58,34,-25,-67,-105,-26,-116,-81,-24,-115,-93,34,44,34,114,101,109,97,114,107,115,34,58,34,34,125,44,34,110,97,109,101,34,58,34,115,117,98,109,105,116,95,99,114,101,97,116,101,95,99,97,115,101,34,125,44,34,104,111,115,116,34,58,34,105,109,95,109,101,115,115,97,103,101,34,44,34,99,111,110,116,101,120,116,34,58,123,34,111,112,101,110,95,109,101,115,115,97,103,101,95,105,100,34,58,34,111,109,95,48,56,53,57,98,54,99,53,102,55,49,57,101,102,55,101,48,100,101,98,51,101,49,50,48,54,99,102,57,98,51,49,34,44,34,111,112,101,110,95,99,104,97,116,95,105,100,34,58,34,111,99,95,99,97,56,52,56,53,98,48,51,50,54,98,54,102,55,55,101,57,100,52,56,48,56,53,48,57,48,102,55,48,97,99,34,125,125,125],"headers":{}}}
+2025-03-02 16:26:01.403  INFO 39904 --- [pool-2-thread-3] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单数据: {case_desc= , case_name=创建知识库test1, case_time=2025-03-24 22:37 +0800, client_name=罗振荣, remarks=}, 操作人: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:26:02.012  INFO 39904 --- [pool-2-thread-3] e.b.s.impl.FeishuFolderServiceImpl       : 案件文件夹创建成功: 创建知识库test1_罗振荣_2025-03-24, url: https://vcnjyexq8awr.feishu.cn/drive/folder/C9WFfqKk5l7Cd5dNIq0cJBaNnde
+2025-03-02 16:26:02.472  INFO 39904 --- [pool-2-thread-3] e.b.s.impl.FeishuFolderServiceImpl       : 文件夹权限设置成功, token: C9WFfqKk5l7Cd5dNIq0cJBaNnde, userId: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:26:02.473  INFO 39904 --- [pool-2-thread-3] e.b.s.impl.DifyKnowledgeServiceImpl      : 开始创建知识库: name=创建知识库test1_ou_8e248fda8f4bff8499c1a7072767bfce_20250302162602, description=案件描述： 
+当事人：罗振荣
+案件时间：2025-03-24 22:37 +0800
+2025-03-02 16:26:02.524 DEBUG 39904 --- [pool-2-thread-3] e.b.s.impl.DifyKnowledgeServiceImpl      : 发送创建知识库请求: url=http://1.13.79.29/v1/datasets, body={"name":"创建知识库test1_ou_8e248fda8f4bff8499c1a7072767bfce_20250302162602","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","indexing_technique":"high_quality","permission":"all_team_members"}
+2025-03-02 16:26:02.573 ERROR 39904 --- [pool-2-thread-3] e.b.s.impl.DifyKnowledgeServiceImpl      : 创建知识库异常
+
+org.springframework.web.client.HttpClientErrorException$NotFound: 404 Not Found: "<html><EOL><EOL><head><title>404 Not Found</title></head><EOL><EOL><body><EOL><EOL><center><h1>404 Not Found</h1></center><EOL><EOL><hr><center>nginx</center><EOL><EOL></body><EOL><EOL></html><EOL><EOL>"
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:113) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:168) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:122) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:825) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:783) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:717) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:608) ~[spring-web-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.DifyKnowledgeServiceImpl.createKnowledge(DifyKnowledgeServiceImpl.java:50) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:96) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$d8d2e58f.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:1) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2025-03-02 16:26:02.573 ERROR 39904 --- [pool-2-thread-3] em.backend.service.impl.CaseServiceImpl  : 创建Dify知识库失败
+2025-03-02 16:26:02.594  INFO 39904 --- [pool-2-thread-3] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Starting...
+2025-03-02 16:26:02.856  INFO 39904 --- [pool-2-thread-3] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Start completed.
+2025-03-02 16:26:02.861 DEBUG 39904 --- [pool-2-thread-3] em.backend.mapper.CaseInfoMapper.insert  : ==>  Preparing: INSERT INTO case_info ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-03-02 16:26:02.872 DEBUG 39904 --- [pool-2-thread-3] em.backend.mapper.CaseInfoMapper.insert  : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String), 创建知识库test1(String), 罗振荣(String),  (String), 2025-03-24T22:37(LocalDateTime), (String), https://vcnjyexq8awr.feishu.cn/drive/folder/C9WFfqKk5l7Cd5dNIq0cJBaNnde(String), null, null
+2025-03-02 16:26:02.941 ERROR 39904 --- [pool-2-thread-3] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单失败
+
+org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+### The error may exist in em/backend/mapper/CaseInfoMapper.java (best guess)
+### The error may involve em.backend.mapper.CaseInfoMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO case_info  ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url,  create_time, update_time )  VALUES  ( ?, ?, ?, ?, ?, ?, ?,  ?, ? )
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+; Column 'create_time' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:87) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:79) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:91) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at jdk.proxy2/jdk.proxy2.$Proxy65.insert(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy74.insert(Unknown Source) ~[na:na]
+	at com.baomidou.mybatisplus.extension.service.IService.save(IService.java:63) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:122) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$d8d2e58f.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:1) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy3/jdk.proxy3.$Proxy94.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:64) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy92.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) ~[mybatis-3.5.10.jar:3.5.10]
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:106) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:62) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy91.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	... 24 common frames omitted
+
+2025-03-02 16:26:23.986  INFO 39904 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown initiated...
+2025-03-02 16:26:23.988  INFO 39904 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown completed.
+2025-03-02 16:26:25.975  INFO 29348 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 29348 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 16:26:25.977 DEBUG 29348 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 16:26:25.977  INFO 29348 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 16:26:26.250  INFO 29348 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 16:26:26.251  INFO 29348 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 16:26:26.264  INFO 29348 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-03-02 16:26:26.518  INFO 29348 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 16:26:26.522  INFO 29348 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 16:26:26.522  INFO 29348 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 16:26:26.594  INFO 29348 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 16:26:26.594  INFO 29348 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 597 ms
+2025-03-02 16:26:26.781  INFO 29348 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: http://1.13.79.29:8080/v1
+2025-03-02 16:26:26.782  INFO 29348 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 16:26:27.267  INFO 29348 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 16:26:27.484  INFO 29348 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477121557305032706&access_key=92b51753df1a9010d83073bf0bbfadd5&service_id=33554678&ticket=79c21470-3ad1-43b5-b2ef-a027e8b5fd47 [conn_id=7477121557305032706]
+2025-03-02 16:26:27.556  INFO 29348 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 16:26:27.560  INFO 29348 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.76 seconds (JVM running for 2.156)
+2025-03-02 16:26:41.902  INFO 29340 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 29340 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 16:26:41.903 DEBUG 29340 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 16:26:41.903  INFO 29340 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 16:26:42.163  INFO 29340 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 16:26:42.165  INFO 29340 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 16:26:42.178  INFO 29340 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-03-02 16:26:42.429  INFO 29340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 16:26:42.433  INFO 29340 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 16:26:42.433  INFO 29340 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 16:26:42.508  INFO 29340 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 16:26:42.508  INFO 29340 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 586 ms
+2025-03-02 16:26:42.686  INFO 29340 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: http://1.13.79.29:8088/v1
+2025-03-02 16:26:42.687  INFO 29340 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 16:26:43.200  INFO 29340 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 16:26:43.398  INFO 29340 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477120955887845377&access_key=d0abbe3949ed9401d4a4869f2f7409a0&service_id=33554678&ticket=94286325-dfb8-479a-b0f1-ac83345e1337 [conn_id=7477120955887845377]
+2025-03-02 16:26:43.499  INFO 29340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 16:26:43.504  INFO 29340 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.781 seconds (JVM running for 2.166)
+2025-03-02 16:26:47.531  INFO 29340 --- [pool-2-thread-2] em.backend.handler.CardEventHandler      : 收到卡片回调事件: {"event":{"operator":{"tenant_key":"14191646f559d758","user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"},"token":"c-9cf59d3acc357e45d0e64a8bd700bac8db1c9446","action":{"tag":"button","timezone":"Asia/Shanghai","name":"submit_create_case","form_value":{"case_desc":" ","case_name":"创建知识库test2","case_time":"2025-03-24 22:37 +0800","client_name":"罗振荣","remarks":""}},"host":"im_message","context":{"open_message_id":"om_0859b6c5f719ef7e0deb3e1206cf9b31","open_chat_id":"oc_ca8485b0326b6f77e9d48085090f70ac"}},"schema":"2.0","header":{"event_id":"da87e3f56294768b5261da69f98ce683","event_type":"card.action.trigger","app_id":"cli_a73c62ce90b0d013","tenant_key":"14191646f559d758","create_time":"1740904006033764","token":"za3iBwmP42XM4YMo9z0tq1OgMlRAG7tc"},"eventReq":{"body":[123,34,115,99,104,101,109,97,34,58,34,50,46,48,34,44,34,104,101,97,100,101,114,34,58,123,34,101,118,101,110,116,95,105,100,34,58,34,100,97,56,55,101,51,102,53,54,50,57,52,55,54,56,98,53,50,54,49,100,97,54,57,102,57,56,99,101,54,56,51,34,44,34,116,111,107,101,110,34,58,34,122,97,51,105,66,119,109,80,52,50,88,77,52,89,77,111,57,122,48,116,113,49,79,103,77,108,82,65,71,55,116,99,34,44,34,99,114,101,97,116,101,95,116,105,109,101,34,58,34,49,55,52,48,57,48,52,48,48,54,48,51,51,55,54,52,34,44,34,101,118,101,110,116,95,116,121,112,101,34,58,34,99,97,114,100,46,97,99,116,105,111,110,46,116,114,105,103,103,101,114,34,44,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,97,112,112,95,105,100,34,58,34,99,108,105,95,97,55,51,99,54,50,99,101,57,48,98,48,100,48,49,51,34,125,44,34,101,118,101,110,116,34,58,123,34,111,112,101,114,97,116,111,114,34,58,123,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,117,115,101,114,95,105,100,34,58,34,100,51,100,53,101,103,98,99,34,44,34,111,112,101,110,95,105,100,34,58,34,111,117,95,56,101,50,52,56,102,100,97,56,102,52,98,102,102,56,52,57,57,99,49,97,55,48,55,50,55,54,55,98,102,99,101,34,44,34,117,110,105,111,110,95,105,100,34,58,34,111,110,95,102,51,50,98,57,50,49,49,50,97,50,56,53,102,56,51,52,57,51,48,56,100,57,54,57,56,50,48,51,100,51,101,34,125,44,34,116,111,107,101,110,34,58,34,99,45,57,99,102,53,57,100,51,97,99,99,51,53,55,101,52,53,100,48,101,54,52,97,56,98,100,55,48,48,98,97,99,56,100,98,49,99,57,52,52,54,34,44,34,97,99,116,105,111,110,34,58,123,34,116,97,103,34,58,34,98,117,116,116,111,110,34,44,34,116,105,109,101,122,111,110,101,34,58,34,65,115,105,97,47,83,104,97,110,103,104,97,105,34,44,34,102,111,114,109,95,118,97,108,117,101,34,58,123,34,99,97,115,101,95,100,101,115,99,34,58,34,32,34,44,34,99,97,115,101,95,110,97,109,101,34,58,34,-27,-120,-101,-27,-69,-70,-25,-97,-91,-24,-81,-122,-27,-70,-109,116,101,115,116,50,34,44,34,99,97,115,101,95,116,105,109,101,34,58,34,50,48,50,53,45,48,51,45,50,52,32,50,50,58,51,55,32,43,48,56,48,48,34,44,34,99,108,105,101,110,116,95,110,97,109,101,34,58,34,-25,-67,-105,-26,-116,-81,-24,-115,-93,34,44,34,114,101,109,97,114,107,115,34,58,34,34,125,44,34,110,97,109,101,34,58,34,115,117,98,109,105,116,95,99,114,101,97,116,101,95,99,97,115,101,34,125,44,34,104,111,115,116,34,58,34,105,109,95,109,101,115,115,97,103,101,34,44,34,99,111,110,116,101,120,116,34,58,123,34,111,112,101,110,95,109,101,115,115,97,103,101,95,105,100,34,58,34,111,109,95,48,56,53,57,98,54,99,53,102,55,49,57,101,102,55,101,48,100,101,98,51,101,49,50,48,54,99,102,57,98,51,49,34,44,34,111,112,101,110,95,99,104,97,116,95,105,100,34,58,34,111,99,95,99,97,56,52,56,53,98,48,51,50,54,98,54,102,55,55,101,57,100,52,56,48,56,53,48,57,48,102,55,48,97,99,34,125,125,125],"headers":{}}}
+2025-03-02 16:26:47.537  INFO 29340 --- [pool-2-thread-2] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单数据: {case_desc= , case_name=创建知识库test2, case_time=2025-03-24 22:37 +0800, client_name=罗振荣, remarks=}, 操作人: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:26:48.304  INFO 29340 --- [pool-2-thread-2] e.b.s.impl.FeishuFolderServiceImpl       : 案件文件夹创建成功: 创建知识库test2_罗振荣_2025-03-24, url: https://vcnjyexq8awr.feishu.cn/drive/folder/SNSJfNVEEl8MW7d3hOAc7XS9nah
+2025-03-02 16:26:48.758  INFO 29340 --- [pool-2-thread-2] e.b.s.impl.FeishuFolderServiceImpl       : 文件夹权限设置成功, token: SNSJfNVEEl8MW7d3hOAc7XS9nah, userId: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:26:48.759  INFO 29340 --- [pool-2-thread-2] e.b.s.impl.DifyKnowledgeServiceImpl      : 开始创建知识库: name=创建知识库test2_ou_8e248fda8f4bff8499c1a7072767bfce_20250302162648, description=案件描述： 
+当事人：罗振荣
+案件时间：2025-03-24 22:37 +0800
+2025-03-02 16:26:48.808 DEBUG 29340 --- [pool-2-thread-2] e.b.s.impl.DifyKnowledgeServiceImpl      : 发送创建知识库请求: url=http://1.13.79.29:8088/v1/datasets, body={"name":"创建知识库test2_ou_8e248fda8f4bff8499c1a7072767bfce_20250302162648","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","indexing_technique":"high_quality","permission":"all_team_members"}
+2025-03-02 16:26:48.867 ERROR 29340 --- [pool-2-thread-2] e.b.s.impl.DifyKnowledgeServiceImpl      : 创建知识库异常
+
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 BAD REQUEST: "{"code": "invalid_param", "message": "type is required. Name must be between 1 to 40 characters.", "params": "name"}<EOL>"
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:101) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:168) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:122) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:825) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:783) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:717) ~[spring-web-5.3.24.jar:5.3.24]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:608) ~[spring-web-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.DifyKnowledgeServiceImpl.createKnowledge(DifyKnowledgeServiceImpl.java:50) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:96) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$e87309f0.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:1) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2025-03-02 16:26:48.868 ERROR 29340 --- [pool-2-thread-2] em.backend.service.impl.CaseServiceImpl  : 创建Dify知识库失败
+2025-03-02 16:26:48.885  INFO 29340 --- [pool-2-thread-2] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Starting...
+2025-03-02 16:26:49.163  INFO 29340 --- [pool-2-thread-2] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Start completed.
+2025-03-02 16:26:49.166 DEBUG 29340 --- [pool-2-thread-2] em.backend.mapper.CaseInfoMapper.insert  : ==>  Preparing: INSERT INTO case_info ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-03-02 16:26:49.186 DEBUG 29340 --- [pool-2-thread-2] em.backend.mapper.CaseInfoMapper.insert  : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String), 创建知识库test2(String), 罗振荣(String),  (String), 2025-03-24T22:37(LocalDateTime), (String), https://vcnjyexq8awr.feishu.cn/drive/folder/SNSJfNVEEl8MW7d3hOAc7XS9nah(String), null, null
+2025-03-02 16:26:49.261 ERROR 29340 --- [pool-2-thread-2] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单失败
+
+org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+### The error may exist in em/backend/mapper/CaseInfoMapper.java (best guess)
+### The error may involve em.backend.mapper.CaseInfoMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO case_info  ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url,  create_time, update_time )  VALUES  ( ?, ?, ?, ?, ?, ?, ?,  ?, ? )
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+; Column 'create_time' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:87) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:79) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:91) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at jdk.proxy2/jdk.proxy2.$Proxy65.insert(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy74.insert(Unknown Source) ~[na:na]
+	at com.baomidou.mybatisplus.extension.service.IService.save(IService.java:63) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:122) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$e87309f0.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:1) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy3/jdk.proxy3.$Proxy93.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:64) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy91.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) ~[mybatis-3.5.10.jar:3.5.10]
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:106) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:62) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy90.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	... 24 common frames omitted
+
+2025-03-02 16:33:36.067  INFO 29340 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown initiated...
+2025-03-02 16:33:36.070  INFO 29340 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown completed.
+2025-03-02 16:33:39.700  INFO 32796 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 32796 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 16:33:39.701 DEBUG 32796 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 16:33:39.701  INFO 32796 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 16:33:39.986  INFO 32796 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 16:33:39.987  INFO 32796 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 16:33:40.000  INFO 32796 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-03-02 16:33:40.319  INFO 32796 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 16:33:40.324  INFO 32796 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 16:33:40.324  INFO 32796 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 16:33:40.400  INFO 32796 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 16:33:40.400  INFO 32796 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 678 ms
+2025-03-02 16:33:40.571  INFO 32796 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: http://1.13.79.29:8088/v1
+2025-03-02 16:33:40.571  INFO 32796 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 16:33:41.070  INFO 32796 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 16:33:41.233  INFO 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477123828696858652&access_key=12b211e3d2112c3831f24779e281e285&service_id=33554678&ticket=dfc10b96-3ab1-41ca-b354-ece5afc8aec9 [conn_id=7477123828696858652]
+2025-03-02 16:33:41.375  INFO 32796 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 16:33:41.380  INFO 32796 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.863 seconds (JVM running for 2.229)
+2025-03-02 16:35:10.565 ERROR 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : java.io.EOFException
+2025-03-02 16:35:10.566  INFO 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : disconnected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477123828696858652&access_key=12b211e3d2112c3831f24779e281e285&service_id=33554678&ticket=dfc10b96-3ab1-41ca-b354-ece5afc8aec9 [conn_id=7477123828696858652]
+2025-03-02 16:35:10.566  INFO 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : start reconnecting...
+2025-03-02 16:35:33.305  INFO 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : trying to reconnect for the 1st time
+2025-03-02 16:35:33.617  INFO 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477123828697088028&access_key=6b1f0965b0e5b7780dcd47f8b8f7d83c&service_id=33554678&ticket=75d75e74-667e-4f0e-ba69-66219f619ce1 [conn_id=7477123828697088028]
+2025-03-02 16:36:40.491 ERROR 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : java.io.EOFException
+2025-03-02 16:36:40.491  INFO 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : disconnected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477123828697088028&access_key=6b1f0965b0e5b7780dcd47f8b8f7d83c&service_id=33554678&ticket=75d75e74-667e-4f0e-ba69-66219f619ce1 [conn_id=7477123828697088028]
+2025-03-02 16:36:40.491  INFO 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : start reconnecting...
+2025-03-02 16:36:44.281  INFO 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : trying to reconnect for the 1st time
+2025-03-02 16:36:44.607  INFO 32796 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477124627645497372&access_key=8042d1de638ec497e38564f54ce7b251&service_id=33554678&ticket=686962ad-1571-43d6-a26b-65719e593e2a [conn_id=7477124627645497372]
+2025-03-02 16:37:15.160  INFO 34292 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 34292 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 16:37:15.161 DEBUG 34292 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 16:37:15.161  INFO 34292 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 16:37:15.425  INFO 34292 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 16:37:15.426  INFO 34292 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 16:37:15.442  INFO 34292 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2025-03-02 16:37:15.695  INFO 34292 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 16:37:15.701  INFO 34292 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 16:37:15.701  INFO 34292 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 16:37:15.774  INFO 34292 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 16:37:15.774  INFO 34292 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 597 ms
+2025-03-02 16:37:15.937  INFO 34292 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: http://1.13.79.29:8088/v1
+2025-03-02 16:37:15.937  INFO 34292 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 16:37:16.403  INFO 34292 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 16:37:16.642  INFO 34292 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477123576150867970&access_key=93685b856384379affc69f63a78deb94&service_id=33554678&ticket=c9b947fa-92f8-4e36-a2bd-ef4d280e6961 [conn_id=7477123576150867970]
+2025-03-02 16:37:16.715  INFO 34292 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 16:37:16.721  INFO 34292 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.759 seconds (JVM running for 2.109)
+2025-03-02 16:37:23.235  INFO 34292 --- [pool-2-thread-2] em.backend.handler.MenuEventHandler      : 收到菜单事件: {"operator":{"operator_name":"罗振荣","operator_id":{"user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"}},"event_key":"create_case","timestamp":1740904641}
+2025-03-02 16:37:29.070  INFO 34292 --- [pool-2-thread-3] em.backend.handler.CardEventHandler      : 收到卡片回调事件: {"event":{"operator":{"tenant_key":"14191646f559d758","user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"},"token":"c-e67427f0d3553cf1b005b120b507705b2c9c709f","action":{"tag":"button","timezone":"Asia/Shanghai","name":"submit_create_case","form_value":{"case_desc":" ","case_name":"创建知识库test2","case_time":"2025-03-24 22:37 +0800","client_name":"罗振荣","remarks":""}},"host":"im_message","context":{"open_message_id":"om_0859b6c5f719ef7e0deb3e1206cf9b31","open_chat_id":"oc_ca8485b0326b6f77e9d48085090f70ac"}},"schema":"2.0","header":{"event_id":"c6f98301db31874558a43aa6721a2bd3","event_type":"card.action.trigger","app_id":"cli_a73c62ce90b0d013","tenant_key":"14191646f559d758","create_time":"1740904647594871","token":"za3iBwmP42XM4YMo9z0tq1OgMlRAG7tc"},"eventReq":{"body":[123,34,115,99,104,101,109,97,34,58,34,50,46,48,34,44,34,104,101,97,100,101,114,34,58,123,34,101,118,101,110,116,95,105,100,34,58,34,99,54,102,57,56,51,48,49,100,98,51,49,56,55,52,53,53,56,97,52,51,97,97,54,55,50,49,97,50,98,100,51,34,44,34,116,111,107,101,110,34,58,34,122,97,51,105,66,119,109,80,52,50,88,77,52,89,77,111,57,122,48,116,113,49,79,103,77,108,82,65,71,55,116,99,34,44,34,99,114,101,97,116,101,95,116,105,109,101,34,58,34,49,55,52,48,57,48,52,54,52,55,53,57,52,56,55,49,34,44,34,101,118,101,110,116,95,116,121,112,101,34,58,34,99,97,114,100,46,97,99,116,105,111,110,46,116,114,105,103,103,101,114,34,44,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,97,112,112,95,105,100,34,58,34,99,108,105,95,97,55,51,99,54,50,99,101,57,48,98,48,100,48,49,51,34,125,44,34,101,118,101,110,116,34,58,123,34,111,112,101,114,97,116,111,114,34,58,123,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,117,115,101,114,95,105,100,34,58,34,100,51,100,53,101,103,98,99,34,44,34,111,112,101,110,95,105,100,34,58,34,111,117,95,56,101,50,52,56,102,100,97,56,102,52,98,102,102,56,52,57,57,99,49,97,55,48,55,50,55,54,55,98,102,99,101,34,44,34,117,110,105,111,110,95,105,100,34,58,34,111,110,95,102,51,50,98,57,50,49,49,50,97,50,56,53,102,56,51,52,57,51,48,56,100,57,54,57,56,50,48,51,100,51,101,34,125,44,34,116,111,107,101,110,34,58,34,99,45,101,54,55,52,50,55,102,48,100,51,53,53,51,99,102,49,98,48,48,53,98,49,50,48,98,53,48,55,55,48,53,98,50,99,57,99,55,48,57,102,34,44,34,97,99,116,105,111,110,34,58,123,34,116,97,103,34,58,34,98,117,116,116,111,110,34,44,34,116,105,109,101,122,111,110,101,34,58,34,65,115,105,97,47,83,104,97,110,103,104,97,105,34,44,34,102,111,114,109,95,118,97,108,117,101,34,58,123,34,99,97,115,101,95,100,101,115,99,34,58,34,32,34,44,34,99,97,115,101,95,110,97,109,101,34,58,34,-27,-120,-101,-27,-69,-70,-25,-97,-91,-24,-81,-122,-27,-70,-109,116,101,115,116,50,34,44,34,99,97,115,101,95,116,105,109,101,34,58,34,50,48,50,53,45,48,51,45,50,52,32,50,50,58,51,55,32,43,48,56,48,48,34,44,34,99,108,105,101,110,116,95,110,97,109,101,34,58,34,-25,-67,-105,-26,-116,-81,-24,-115,-93,34,44,34,114,101,109,97,114,107,115,34,58,34,34,125,44,34,110,97,109,101,34,58,34,115,117,98,109,105,116,95,99,114,101,97,116,101,95,99,97,115,101,34,125,44,34,104,111,115,116,34,58,34,105,109,95,109,101,115,115,97,103,101,34,44,34,99,111,110,116,101,120,116,34,58,123,34,111,112,101,110,95,109,101,115,115,97,103,101,95,105,100,34,58,34,111,109,95,48,56,53,57,98,54,99,53,102,55,49,57,101,102,55,101,48,100,101,98,51,101,49,50,48,54,99,102,57,98,51,49,34,44,34,111,112,101,110,95,99,104,97,116,95,105,100,34,58,34,111,99,95,99,97,56,52,56,53,98,48,51,50,54,98,54,102,55,55,101,57,100,52,56,48,56,53,48,57,48,102,55,48,97,99,34,125,125,125],"headers":{}}}
+2025-03-02 16:37:29.071  INFO 34292 --- [pool-2-thread-3] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单数据: {case_desc= , case_name=创建知识库test2, case_time=2025-03-24 22:37 +0800, client_name=罗振荣, remarks=}, 操作人: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:37:29.594  INFO 34292 --- [pool-2-thread-3] e.b.s.impl.FeishuFolderServiceImpl       : 案件文件夹创建成功: 创建知识库test2_罗振荣_2025-03-24, url: https://vcnjyexq8awr.feishu.cn/drive/folder/O3oxfYpzjlWUNRdGvRccg37XnEh
+2025-03-02 16:37:30.057  INFO 34292 --- [pool-2-thread-3] e.b.s.impl.FeishuFolderServiceImpl       : 文件夹权限设置成功, token: O3oxfYpzjlWUNRdGvRccg37XnEh, userId: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:37:30.057  INFO 34292 --- [pool-2-thread-3] e.b.s.impl.DifyKnowledgeServiceImpl      : 开始创建知识库: name=21f690784ddb4b30b01921107d314869, description=案件描述： 
+当事人：罗振荣
+案件时间：2025-03-24 22:37 +0800
+2025-03-02 16:37:30.111 DEBUG 34292 --- [pool-2-thread-3] e.b.s.impl.DifyKnowledgeServiceImpl      : 发送创建知识库请求: url=http://1.13.79.29:8088/v1/datasets, body={"name":"21f690784ddb4b30b01921107d314869","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","indexing_technique":"high_quality","permission":"all_team_members"}
+2025-03-02 16:37:30.213  INFO 34292 --- [pool-2-thread-3] e.b.s.impl.DifyKnowledgeServiceImpl      : 创建知识库成功: response={"id":"6dfaa5bc-df1b-4ee6-9f81-0951aaab59eb","name":"21f690784ddb4b30b01921107d314869","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","provider":"vendor","permission":"all_team_members","indexing_technique":"high_quality","app_count":0,"document_count":0,"word_count":0,"created_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","created_at":1740904649,"updated_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","updated_at":1740904649,"embedding_model":"text-embedding-3-large","embedding_model_provider":"langgenius/openai/openai","retrieval_model_dict":{"search_method":"semantic_search","reranking_enable":false,"reranking_model":{"reranking_provider_name":"","reranking_model_name":""},"top_k":2,"score_threshold_enabled":false},"tags":[],"external_knowledge_info":{},"external_retrieval_model":{"top_k":2,"score_threshold":0.0}}
+2025-03-02 16:37:30.232  INFO 34292 --- [pool-2-thread-3] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Starting...
+2025-03-02 16:37:30.525  INFO 34292 --- [pool-2-thread-3] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Start completed.
+2025-03-02 16:37:30.528 DEBUG 34292 --- [pool-2-thread-3] em.backend.mapper.CaseInfoMapper.insert  : ==>  Preparing: INSERT INTO case_info ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, dify_knowledge_id, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-03-02 16:37:30.543 DEBUG 34292 --- [pool-2-thread-3] em.backend.mapper.CaseInfoMapper.insert  : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String), 创建知识库test2(String), 罗振荣(String),  (String), 2025-03-24T22:37(LocalDateTime), (String), https://vcnjyexq8awr.feishu.cn/drive/folder/O3oxfYpzjlWUNRdGvRccg37XnEh(String), 6dfaa5bc-df1b-4ee6-9f81-0951aaab59eb(String), null, null
+2025-03-02 16:37:30.619 ERROR 34292 --- [pool-2-thread-3] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单失败
+
+org.springframework.jdbc.BadSqlGrammarException: 
+### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'dify_knowledge_id' in 'field list'
+### The error may exist in em/backend/mapper/CaseInfoMapper.java (best guess)
+### The error may involve em.backend.mapper.CaseInfoMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO case_info  ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, dify_knowledge_id, create_time, update_time )  VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'dify_knowledge_id' in 'field list'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'dify_knowledge_id' in 'field list'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:239) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:91) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at jdk.proxy2/jdk.proxy2.$Proxy65.insert(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy74.insert(Unknown Source) ~[na:na]
+	at com.baomidou.mybatisplus.extension.service.IService.save(IService.java:63) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:120) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$344c6192.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:1) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'dify_knowledge_id' in 'field list'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy3/jdk.proxy3.$Proxy94.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:64) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy92.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) ~[mybatis-3.5.10.jar:3.5.10]
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:106) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:62) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy91.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	... 24 common frames omitted
+
+2025-03-02 16:39:22.186  INFO 34292 --- [pool-2-thread-5] em.backend.handler.CardEventHandler      : 收到卡片回调事件: {"event":{"operator":{"tenant_key":"14191646f559d758","user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"},"token":"c-c516120c6a19e89289f19f8a88f54981bc3d4486","action":{"tag":"button","timezone":"Asia/Shanghai","name":"submit_create_case","form_value":{"case_desc":" ","case_name":"创建知识库test2","case_time":"2025-03-24 22:37 +0800","client_name":"罗振荣","remarks":""}},"host":"im_message","context":{"open_message_id":"om_0859b6c5f719ef7e0deb3e1206cf9b31","open_chat_id":"oc_ca8485b0326b6f77e9d48085090f70ac"}},"schema":"2.0","header":{"event_id":"b77ee07c400c2ae9c094f2c37c48e97a","event_type":"card.action.trigger","app_id":"cli_a73c62ce90b0d013","tenant_key":"14191646f559d758","create_time":"1740904760714270","token":"za3iBwmP42XM4YMo9z0tq1OgMlRAG7tc"},"eventReq":{"body":[123,34,115,99,104,101,109,97,34,58,34,50,46,48,34,44,34,104,101,97,100,101,114,34,58,123,34,101,118,101,110,116,95,105,100,34,58,34,98,55,55,101,101,48,55,99,52,48,48,99,50,97,101,57,99,48,57,52,102,50,99,51,55,99,52,56,101,57,55,97,34,44,34,116,111,107,101,110,34,58,34,122,97,51,105,66,119,109,80,52,50,88,77,52,89,77,111,57,122,48,116,113,49,79,103,77,108,82,65,71,55,116,99,34,44,34,99,114,101,97,116,101,95,116,105,109,101,34,58,34,49,55,52,48,57,48,52,55,54,48,55,49,52,50,55,48,34,44,34,101,118,101,110,116,95,116,121,112,101,34,58,34,99,97,114,100,46,97,99,116,105,111,110,46,116,114,105,103,103,101,114,34,44,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,97,112,112,95,105,100,34,58,34,99,108,105,95,97,55,51,99,54,50,99,101,57,48,98,48,100,48,49,51,34,125,44,34,101,118,101,110,116,34,58,123,34,111,112,101,114,97,116,111,114,34,58,123,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,117,115,101,114,95,105,100,34,58,34,100,51,100,53,101,103,98,99,34,44,34,111,112,101,110,95,105,100,34,58,34,111,117,95,56,101,50,52,56,102,100,97,56,102,52,98,102,102,56,52,57,57,99,49,97,55,48,55,50,55,54,55,98,102,99,101,34,44,34,117,110,105,111,110,95,105,100,34,58,34,111,110,95,102,51,50,98,57,50,49,49,50,97,50,56,53,102,56,51,52,57,51,48,56,100,57,54,57,56,50,48,51,100,51,101,34,125,44,34,116,111,107,101,110,34,58,34,99,45,99,53,49,54,49,50,48,99,54,97,49,57,101,56,57,50,56,57,102,49,57,102,56,97,56,56,102,53,52,57,56,49,98,99,51,100,52,52,56,54,34,44,34,97,99,116,105,111,110,34,58,123,34,116,97,103,34,58,34,98,117,116,116,111,110,34,44,34,116,105,109,101,122,111,110,101,34,58,34,65,115,105,97,47,83,104,97,110,103,104,97,105,34,44,34,102,111,114,109,95,118,97,108,117,101,34,58,123,34,99,97,115,101,95,100,101,115,99,34,58,34,32,34,44,34,99,97,115,101,95,110,97,109,101,34,58,34,-27,-120,-101,-27,-69,-70,-25,-97,-91,-24,-81,-122,-27,-70,-109,116,101,115,116,50,34,44,34,99,97,115,101,95,116,105,109,101,34,58,34,50,48,50,53,45,48,51,45,50,52,32,50,50,58,51,55,32,43,48,56,48,48,34,44,34,99,108,105,101,110,116,95,110,97,109,101,34,58,34,-25,-67,-105,-26,-116,-81,-24,-115,-93,34,44,34,114,101,109,97,114,107,115,34,58,34,34,125,44,34,110,97,109,101,34,58,34,115,117,98,109,105,116,95,99,114,101,97,116,101,95,99,97,115,101,34,125,44,34,104,111,115,116,34,58,34,105,109,95,109,101,115,115,97,103,101,34,44,34,99,111,110,116,101,120,116,34,58,123,34,111,112,101,110,95,109,101,115,115,97,103,101,95,105,100,34,58,34,111,109,95,48,56,53,57,98,54,99,53,102,55,49,57,101,102,55,101,48,100,101,98,51,101,49,50,48,54,99,102,57,98,51,49,34,44,34,111,112,101,110,95,99,104,97,116,95,105,100,34,58,34,111,99,95,99,97,56,52,56,53,98,48,51,50,54,98,54,102,55,55,101,57,100,52,56,48,56,53,48,57,48,102,55,48,97,99,34,125,125,125],"headers":{}}}
+2025-03-02 16:39:22.186  INFO 34292 --- [pool-2-thread-5] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单数据: {case_desc= , case_name=创建知识库test2, case_time=2025-03-24 22:37 +0800, client_name=罗振荣, remarks=}, 操作人: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:39:22.828  INFO 34292 --- [pool-2-thread-5] e.b.s.impl.FeishuFolderServiceImpl       : 案件文件夹创建成功: 创建知识库test2_罗振荣_2025-03-24, url: https://vcnjyexq8awr.feishu.cn/drive/folder/ZYXxfdc6dlyfTYdLh1ccptvQnwf
+2025-03-02 16:39:23.462  INFO 34292 --- [pool-2-thread-5] e.b.s.impl.FeishuFolderServiceImpl       : 文件夹权限设置成功, token: ZYXxfdc6dlyfTYdLh1ccptvQnwf, userId: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:39:23.463  INFO 34292 --- [pool-2-thread-5] e.b.s.impl.DifyKnowledgeServiceImpl      : 开始创建知识库: name=ab3ca0820840484c8b1104489fc17dee, description=案件描述： 
+当事人：罗振荣
+案件时间：2025-03-24 22:37 +0800
+2025-03-02 16:39:23.463 DEBUG 34292 --- [pool-2-thread-5] e.b.s.impl.DifyKnowledgeServiceImpl      : 发送创建知识库请求: url=http://1.13.79.29:8088/v1/datasets, body={"name":"ab3ca0820840484c8b1104489fc17dee","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","indexing_technique":"high_quality","permission":"all_team_members"}
+2025-03-02 16:39:23.542  INFO 34292 --- [pool-2-thread-5] e.b.s.impl.DifyKnowledgeServiceImpl      : 创建知识库成功: response={"id":"531fc1d7-560e-4107-9d27-ab004b6126b2","name":"ab3ca0820840484c8b1104489fc17dee","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","provider":"vendor","permission":"all_team_members","indexing_technique":"high_quality","app_count":0,"document_count":0,"word_count":0,"created_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","created_at":1740904762,"updated_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","updated_at":1740904762,"embedding_model":"text-embedding-3-large","embedding_model_provider":"langgenius/openai/openai","retrieval_model_dict":{"search_method":"semantic_search","reranking_enable":false,"reranking_model":{"reranking_provider_name":"","reranking_model_name":""},"top_k":2,"score_threshold_enabled":false},"tags":[],"external_knowledge_info":{},"external_retrieval_model":{"top_k":2,"score_threshold":0.0}}
+2025-03-02 16:39:23.566 DEBUG 34292 --- [pool-2-thread-5] em.backend.mapper.CaseInfoMapper.insert  : ==>  Preparing: INSERT INTO case_info ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, dify_knowledge_id, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-03-02 16:39:23.567 DEBUG 34292 --- [pool-2-thread-5] em.backend.mapper.CaseInfoMapper.insert  : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String), 创建知识库test2(String), 罗振荣(String),  (String), 2025-03-24T22:37(LocalDateTime), (String), https://vcnjyexq8awr.feishu.cn/drive/folder/ZYXxfdc6dlyfTYdLh1ccptvQnwf(String), 531fc1d7-560e-4107-9d27-ab004b6126b2(String), null, null
+2025-03-02 16:39:23.613 ERROR 34292 --- [pool-2-thread-5] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单失败
+
+org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+### The error may exist in em/backend/mapper/CaseInfoMapper.java (best guess)
+### The error may involve em.backend.mapper.CaseInfoMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO case_info  ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, dify_knowledge_id, create_time, update_time )  VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+; Column 'create_time' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:87) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:79) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:91) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at jdk.proxy2/jdk.proxy2.$Proxy65.insert(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy74.insert(Unknown Source) ~[na:na]
+	at com.baomidou.mybatisplus.extension.service.IService.save(IService.java:63) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:120) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$344c6192.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:1) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy3/jdk.proxy3.$Proxy94.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:64) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy92.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) ~[mybatis-3.5.10.jar:3.5.10]
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:106) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:62) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy91.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	... 24 common frames omitted
+
+2025-03-02 16:40:01.635  INFO 34292 --- [pool-2-thread-6] em.backend.handler.CardEventHandler      : 收到卡片回调事件: {"event":{"operator":{"tenant_key":"14191646f559d758","user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"},"token":"c-0357ef72aabc2a3f89f065c38ce3d8123a0fbbb6","action":{"tag":"button","timezone":"Asia/Shanghai","name":"submit_create_case","form_value":{"case_desc":" ","case_name":"创建知识库test2","case_time":"2025-03-24 22:37 +0800","client_name":"罗振荣","remarks":""}},"host":"im_message","context":{"open_message_id":"om_0859b6c5f719ef7e0deb3e1206cf9b31","open_chat_id":"oc_ca8485b0326b6f77e9d48085090f70ac"}},"schema":"2.0","header":{"event_id":"594b283e837d9d72c99c5eff8ac7d7cf","event_type":"card.action.trigger","app_id":"cli_a73c62ce90b0d013","tenant_key":"14191646f559d758","create_time":"1740904800162283","token":"za3iBwmP42XM4YMo9z0tq1OgMlRAG7tc"},"eventReq":{"body":[123,34,115,99,104,101,109,97,34,58,34,50,46,48,34,44,34,104,101,97,100,101,114,34,58,123,34,101,118,101,110,116,95,105,100,34,58,34,53,57,52,98,50,56,51,101,56,51,55,100,57,100,55,50,99,57,57,99,53,101,102,102,56,97,99,55,100,55,99,102,34,44,34,116,111,107,101,110,34,58,34,122,97,51,105,66,119,109,80,52,50,88,77,52,89,77,111,57,122,48,116,113,49,79,103,77,108,82,65,71,55,116,99,34,44,34,99,114,101,97,116,101,95,116,105,109,101,34,58,34,49,55,52,48,57,48,52,56,48,48,49,54,50,50,56,51,34,44,34,101,118,101,110,116,95,116,121,112,101,34,58,34,99,97,114,100,46,97,99,116,105,111,110,46,116,114,105,103,103,101,114,34,44,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,97,112,112,95,105,100,34,58,34,99,108,105,95,97,55,51,99,54,50,99,101,57,48,98,48,100,48,49,51,34,125,44,34,101,118,101,110,116,34,58,123,34,111,112,101,114,97,116,111,114,34,58,123,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,117,115,101,114,95,105,100,34,58,34,100,51,100,53,101,103,98,99,34,44,34,111,112,101,110,95,105,100,34,58,34,111,117,95,56,101,50,52,56,102,100,97,56,102,52,98,102,102,56,52,57,57,99,49,97,55,48,55,50,55,54,55,98,102,99,101,34,44,34,117,110,105,111,110,95,105,100,34,58,34,111,110,95,102,51,50,98,57,50,49,49,50,97,50,56,53,102,56,51,52,57,51,48,56,100,57,54,57,56,50,48,51,100,51,101,34,125,44,34,116,111,107,101,110,34,58,34,99,45,48,51,53,55,101,102,55,50,97,97,98,99,50,97,51,102,56,57,102,48,54,53,99,51,56,99,101,51,100,56,49,50,51,97,48,102,98,98,98,54,34,44,34,97,99,116,105,111,110,34,58,123,34,116,97,103,34,58,34,98,117,116,116,111,110,34,44,34,116,105,109,101,122,111,110,101,34,58,34,65,115,105,97,47,83,104,97,110,103,104,97,105,34,44,34,102,111,114,109,95,118,97,108,117,101,34,58,123,34,99,97,115,101,95,100,101,115,99,34,58,34,32,34,44,34,99,97,115,101,95,110,97,109,101,34,58,34,-27,-120,-101,-27,-69,-70,-25,-97,-91,-24,-81,-122,-27,-70,-109,116,101,115,116,50,34,44,34,99,97,115,101,95,116,105,109,101,34,58,34,50,48,50,53,45,48,51,45,50,52,32,50,50,58,51,55,32,43,48,56,48,48,34,44,34,99,108,105,101,110,116,95,110,97,109,101,34,58,34,-25,-67,-105,-26,-116,-81,-24,-115,-93,34,44,34,114,101,109,97,114,107,115,34,58,34,34,125,44,34,110,97,109,101,34,58,34,115,117,98,109,105,116,95,99,114,101,97,116,101,95,99,97,115,101,34,125,44,34,104,111,115,116,34,58,34,105,109,95,109,101,115,115,97,103,101,34,44,34,99,111,110,116,101,120,116,34,58,123,34,111,112,101,110,95,109,101,115,115,97,103,101,95,105,100,34,58,34,111,109,95,48,56,53,57,98,54,99,53,102,55,49,57,101,102,55,101,48,100,101,98,51,101,49,50,48,54,99,102,57,98,51,49,34,44,34,111,112,101,110,95,99,104,97,116,95,105,100,34,58,34,111,99,95,99,97,56,52,56,53,98,48,51,50,54,98,54,102,55,55,101,57,100,52,56,48,56,53,48,57,48,102,55,48,97,99,34,125,125,125],"headers":{}}}
+2025-03-02 16:40:01.635  INFO 34292 --- [pool-2-thread-6] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单数据: {case_desc= , case_name=创建知识库test2, case_time=2025-03-24 22:37 +0800, client_name=罗振荣, remarks=}, 操作人: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:40:02.153  INFO 34292 --- [pool-2-thread-6] e.b.s.impl.FeishuFolderServiceImpl       : 案件文件夹创建成功: 创建知识库test2_罗振荣_2025-03-24, url: https://vcnjyexq8awr.feishu.cn/drive/folder/VqPefx1o2l5IBQdA9AUc9Wh7nFh
+2025-03-02 16:40:02.607  INFO 34292 --- [pool-2-thread-6] e.b.s.impl.FeishuFolderServiceImpl       : 文件夹权限设置成功, token: VqPefx1o2l5IBQdA9AUc9Wh7nFh, userId: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:40:02.607  INFO 34292 --- [pool-2-thread-6] e.b.s.impl.DifyKnowledgeServiceImpl      : 开始创建知识库: name=33f28abafb28444db85beb112e55debd, description=案件描述： 
+当事人：罗振荣
+案件时间：2025-03-24 22:37 +0800
+2025-03-02 16:40:02.609 DEBUG 34292 --- [pool-2-thread-6] e.b.s.impl.DifyKnowledgeServiceImpl      : 发送创建知识库请求: url=http://1.13.79.29:8088/v1/datasets, body={"name":"33f28abafb28444db85beb112e55debd","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","indexing_technique":"high_quality","permission":"all_team_members"}
+2025-03-02 16:40:02.688  INFO 34292 --- [pool-2-thread-6] e.b.s.impl.DifyKnowledgeServiceImpl      : 创建知识库成功: response={"id":"bcbc9509-b292-4b94-929f-7598a3dcfdbd","name":"33f28abafb28444db85beb112e55debd","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","provider":"vendor","permission":"all_team_members","indexing_technique":"high_quality","app_count":0,"document_count":0,"word_count":0,"created_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","created_at":1740904801,"updated_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","updated_at":1740904801,"embedding_model":"text-embedding-3-large","embedding_model_provider":"langgenius/openai/openai","retrieval_model_dict":{"search_method":"semantic_search","reranking_enable":false,"reranking_model":{"reranking_provider_name":"","reranking_model_name":""},"top_k":2,"score_threshold_enabled":false},"tags":[],"external_knowledge_info":{},"external_retrieval_model":{"top_k":2,"score_threshold":0.0}}
+2025-03-02 16:40:02.713 DEBUG 34292 --- [pool-2-thread-6] em.backend.mapper.CaseInfoMapper.insert  : ==>  Preparing: INSERT INTO case_info ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, dify_knowledge_id, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-03-02 16:40:02.714 DEBUG 34292 --- [pool-2-thread-6] em.backend.mapper.CaseInfoMapper.insert  : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String), 创建知识库test2(String), 罗振荣(String),  (String), 2025-03-24T22:37(LocalDateTime), (String), https://vcnjyexq8awr.feishu.cn/drive/folder/VqPefx1o2l5IBQdA9AUc9Wh7nFh(String), bcbc9509-b292-4b94-929f-7598a3dcfdbd(String), null, null
+2025-03-02 16:40:02.759 ERROR 34292 --- [pool-2-thread-6] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单失败
+
+org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+### The error may exist in em/backend/mapper/CaseInfoMapper.java (best guess)
+### The error may involve em.backend.mapper.CaseInfoMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO case_info  ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, dify_knowledge_id, create_time, update_time )  VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+; Column 'create_time' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:87) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:79) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:91) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at jdk.proxy2/jdk.proxy2.$Proxy65.insert(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy74.insert(Unknown Source) ~[na:na]
+	at com.baomidou.mybatisplus.extension.service.IService.save(IService.java:63) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:120) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$344c6192.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:1) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy3/jdk.proxy3.$Proxy94.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:64) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy92.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) ~[mybatis-3.5.10.jar:3.5.10]
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:106) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:62) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy91.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	... 24 common frames omitted
+
+2025-03-02 16:40:23.199  INFO 34292 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown initiated...
+2025-03-02 16:40:23.202  INFO 34292 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown completed.
+2025-03-02 16:40:25.235  INFO 35700 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 35700 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 16:40:25.236 DEBUG 35700 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 16:40:25.236  INFO 35700 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 16:40:25.503  INFO 35700 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 16:40:25.504  INFO 35700 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 16:40:25.517  INFO 35700 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-03-02 16:40:25.775  INFO 35700 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 16:40:25.781  INFO 35700 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 16:40:25.781  INFO 35700 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 16:40:25.864  INFO 35700 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 16:40:25.864  INFO 35700 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 610 ms
+2025-03-02 16:40:26.041  INFO 35700 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: http://1.13.79.29:8088/v1
+2025-03-02 16:40:26.042  INFO 35700 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 16:40:26.519  INFO 35700 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 16:40:26.765  INFO 35700 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477123576151261186&access_key=4dd2cfa587c9641460c347c83a78f6b9&service_id=33554678&ticket=167e54a0-8fdc-4877-ae14-0288da1d66bd [conn_id=7477123576151261186]
+2025-03-02 16:40:26.813  INFO 35700 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 16:40:26.819  INFO 35700 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.753 seconds (JVM running for 2.117)
+2025-03-02 16:40:29.264  INFO 35700 --- [pool-2-thread-2] em.backend.handler.CardEventHandler      : 收到卡片回调事件: {"event":{"operator":{"tenant_key":"14191646f559d758","user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"},"token":"c-d6ac1bc676bff3713540f2081558c5a7a3582c5c","action":{"tag":"button","timezone":"Asia/Shanghai","name":"submit_create_case","form_value":{"case_desc":" ","case_name":"创建知识库test2","case_time":"2025-03-24 22:37 +0800","client_name":"罗振荣","remarks":""}},"host":"im_message","context":{"open_message_id":"om_0859b6c5f719ef7e0deb3e1206cf9b31","open_chat_id":"oc_ca8485b0326b6f77e9d48085090f70ac"}},"schema":"2.0","header":{"event_id":"259391dfd9000475c32657aa9860c9c3","event_type":"card.action.trigger","app_id":"cli_a73c62ce90b0d013","tenant_key":"14191646f559d758","create_time":"1740904827766330","token":"za3iBwmP42XM4YMo9z0tq1OgMlRAG7tc"},"eventReq":{"body":[123,34,115,99,104,101,109,97,34,58,34,50,46,48,34,44,34,104,101,97,100,101,114,34,58,123,34,101,118,101,110,116,95,105,100,34,58,34,50,53,57,51,57,49,100,102,100,57,48,48,48,52,55,53,99,51,50,54,53,55,97,97,57,56,54,48,99,57,99,51,34,44,34,116,111,107,101,110,34,58,34,122,97,51,105,66,119,109,80,52,50,88,77,52,89,77,111,57,122,48,116,113,49,79,103,77,108,82,65,71,55,116,99,34,44,34,99,114,101,97,116,101,95,116,105,109,101,34,58,34,49,55,52,48,57,48,52,56,50,55,55,54,54,51,51,48,34,44,34,101,118,101,110,116,95,116,121,112,101,34,58,34,99,97,114,100,46,97,99,116,105,111,110,46,116,114,105,103,103,101,114,34,44,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,97,112,112,95,105,100,34,58,34,99,108,105,95,97,55,51,99,54,50,99,101,57,48,98,48,100,48,49,51,34,125,44,34,101,118,101,110,116,34,58,123,34,111,112,101,114,97,116,111,114,34,58,123,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,117,115,101,114,95,105,100,34,58,34,100,51,100,53,101,103,98,99,34,44,34,111,112,101,110,95,105,100,34,58,34,111,117,95,56,101,50,52,56,102,100,97,56,102,52,98,102,102,56,52,57,57,99,49,97,55,48,55,50,55,54,55,98,102,99,101,34,44,34,117,110,105,111,110,95,105,100,34,58,34,111,110,95,102,51,50,98,57,50,49,49,50,97,50,56,53,102,56,51,52,57,51,48,56,100,57,54,57,56,50,48,51,100,51,101,34,125,44,34,116,111,107,101,110,34,58,34,99,45,100,54,97,99,49,98,99,54,55,54,98,102,102,51,55,49,51,53,52,48,102,50,48,56,49,53,53,56,99,53,97,55,97,51,53,56,50,99,53,99,34,44,34,97,99,116,105,111,110,34,58,123,34,116,97,103,34,58,34,98,117,116,116,111,110,34,44,34,116,105,109,101,122,111,110,101,34,58,34,65,115,105,97,47,83,104,97,110,103,104,97,105,34,44,34,102,111,114,109,95,118,97,108,117,101,34,58,123,34,99,97,115,101,95,100,101,115,99,34,58,34,32,34,44,34,99,97,115,101,95,110,97,109,101,34,58,34,-27,-120,-101,-27,-69,-70,-25,-97,-91,-24,-81,-122,-27,-70,-109,116,101,115,116,50,34,44,34,99,97,115,101,95,116,105,109,101,34,58,34,50,48,50,53,45,48,51,45,50,52,32,50,50,58,51,55,32,43,48,56,48,48,34,44,34,99,108,105,101,110,116,95,110,97,109,101,34,58,34,-25,-67,-105,-26,-116,-81,-24,-115,-93,34,44,34,114,101,109,97,114,107,115,34,58,34,34,125,44,34,110,97,109,101,34,58,34,115,117,98,109,105,116,95,99,114,101,97,116,101,95,99,97,115,101,34,125,44,34,104,111,115,116,34,58,34,105,109,95,109,101,115,115,97,103,101,34,44,34,99,111,110,116,101,120,116,34,58,123,34,111,112,101,110,95,109,101,115,115,97,103,101,95,105,100,34,58,34,111,109,95,48,56,53,57,98,54,99,53,102,55,49,57,101,102,55,101,48,100,101,98,51,101,49,50,48,54,99,102,57,98,51,49,34,44,34,111,112,101,110,95,99,104,97,116,95,105,100,34,58,34,111,99,95,99,97,56,52,56,53,98,48,51,50,54,98,54,102,55,55,101,57,100,52,56,48,56,53,48,57,48,102,55,48,97,99,34,125,125,125],"headers":{}}}
+2025-03-02 16:40:29.270  INFO 35700 --- [pool-2-thread-2] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单数据: {case_desc= , case_name=创建知识库test2, case_time=2025-03-24 22:37 +0800, client_name=罗振荣, remarks=}, 操作人: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:40:29.974  INFO 35700 --- [pool-2-thread-2] e.b.s.impl.FeishuFolderServiceImpl       : 案件文件夹创建成功: 创建知识库test2_罗振荣_2025-03-24, url: https://vcnjyexq8awr.feishu.cn/drive/folder/FZkQfRTJglFGymdQRnDcjyransb
+2025-03-02 16:40:30.427  INFO 35700 --- [pool-2-thread-2] e.b.s.impl.FeishuFolderServiceImpl       : 文件夹权限设置成功, token: FZkQfRTJglFGymdQRnDcjyransb, userId: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:40:30.427  INFO 35700 --- [pool-2-thread-2] e.b.s.impl.DifyKnowledgeServiceImpl      : 开始创建知识库: name=b0adcd8c5e4d4f63a3b3d9b04b55a1eb, description=案件描述： 
+当事人：罗振荣
+案件时间：2025-03-24 22:37 +0800
+2025-03-02 16:40:30.476 DEBUG 35700 --- [pool-2-thread-2] e.b.s.impl.DifyKnowledgeServiceImpl      : 发送创建知识库请求: url=http://1.13.79.29:8088/v1/datasets, body={"name":"b0adcd8c5e4d4f63a3b3d9b04b55a1eb","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","indexing_technique":"high_quality","permission":"all_team_members"}
+2025-03-02 16:40:30.577  INFO 35700 --- [pool-2-thread-2] e.b.s.impl.DifyKnowledgeServiceImpl      : 创建知识库成功: response={"id":"58e7d341-69d2-43ca-8737-aa95e670704c","name":"b0adcd8c5e4d4f63a3b3d9b04b55a1eb","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","provider":"vendor","permission":"all_team_members","indexing_technique":"high_quality","app_count":0,"document_count":0,"word_count":0,"created_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","created_at":1740904829,"updated_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","updated_at":1740904829,"embedding_model":"text-embedding-3-large","embedding_model_provider":"langgenius/openai/openai","retrieval_model_dict":{"search_method":"semantic_search","reranking_enable":false,"reranking_model":{"reranking_provider_name":"","reranking_model_name":""},"top_k":2,"score_threshold_enabled":false},"tags":[],"external_knowledge_info":{},"external_retrieval_model":{"top_k":2,"score_threshold":0.0}}
+2025-03-02 16:40:30.595  INFO 35700 --- [pool-2-thread-2] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Starting...
+2025-03-02 16:40:30.850  INFO 35700 --- [pool-2-thread-2] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Start completed.
+2025-03-02 16:40:30.853 DEBUG 35700 --- [pool-2-thread-2] em.backend.mapper.CaseInfoMapper.insert  : ==>  Preparing: INSERT INTO case_info ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, dify_knowledge_id, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-03-02 16:40:30.864 DEBUG 35700 --- [pool-2-thread-2] em.backend.mapper.CaseInfoMapper.insert  : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String), 创建知识库test2(String), 罗振荣(String),  (String), 2025-03-24T22:37(LocalDateTime), (String), https://vcnjyexq8awr.feishu.cn/drive/folder/FZkQfRTJglFGymdQRnDcjyransb(String), 58e7d341-69d2-43ca-8737-aa95e670704c(String), null, null
+2025-03-02 16:40:30.934 ERROR 35700 --- [pool-2-thread-2] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单失败
+
+org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+### The error may exist in em/backend/mapper/CaseInfoMapper.java (best guess)
+### The error may involve em.backend.mapper.CaseInfoMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO case_info  ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, dify_knowledge_id, create_time, update_time )  VALUES  ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+; Column 'create_time' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:87) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:79) ~[spring-jdbc-5.3.24.jar:5.3.24]
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:91) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at jdk.proxy2/jdk.proxy2.$Proxy65.insert(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89) ~[mybatis-plus-core-3.5.3.1.jar:3.5.3.1]
+	at jdk.proxy2/jdk.proxy2.$Proxy74.insert(Unknown Source) ~[na:na]
+	at com.baomidou.mybatisplus.extension.service.IService.save(IService.java:63) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at em.backend.service.impl.CaseServiceImpl.handleCreateCaseForm(CaseServiceImpl.java:120) ~[classes/:na]
+	at em.backend.service.impl.CaseServiceImpl$$FastClassBySpringCGLIB$$abd48970.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85) ~[spring-aop-5.3.24.jar:5.3.24]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704) ~[spring-aop-5.3.24.jar:5.3.24]
+	at em.backend.service.impl.CaseServiceImpl$$EnhancerBySpringCGLIB$$d8d2e58f.handleCreateCaseForm(<generated>) ~[classes/:na]
+	at em.backend.handler.CardEventHandler.handle(CardEventHandler.java:41) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:64) ~[classes/:na]
+	at em.backend.controller.FeishuEventController$3.handle(FeishuEventController.java:1) ~[classes/:na]
+	at com.lark.oapi.event.EventDispatcher.doWithoutValidation(EventDispatcher.java:267) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleDataFrame(Client.java:301) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Client.handleMessage(Client.java:249) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at com.lark.oapi.ws.Listener.lambda$onMessage$0(Listener.java:38) ~[oapi-sdk-2.4.10.jar:2.4.10]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy3/jdk.proxy3.$Proxy93.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:64) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy91.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) ~[mybatis-3.5.10.jar:3.5.10]
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:106) ~[mybatis-plus-extension-3.5.3.1.jar:3.5.3.1]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:62) ~[mybatis-3.5.10.jar:3.5.10]
+	at jdk.proxy2/jdk.proxy2.$Proxy90.update(Unknown Source) ~[na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194) ~[mybatis-3.5.10.jar:3.5.10]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:181) ~[mybatis-3.5.10.jar:3.5.10]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427) ~[mybatis-spring-2.0.7.jar:2.0.7]
+	... 24 common frames omitted
+
+2025-03-02 16:41:45.449  INFO 35700 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown initiated...
+2025-03-02 16:41:45.452  INFO 35700 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Shutdown completed.
+2025-03-02 16:41:49.583  INFO 26984 --- [main] em.backend.BackendApplication            : Starting BackendApplication using Java 17.0.11 on LAPTOP-6DQQ7FL5 with PID 26984 (D:\project\feishu-fyjw\target\classes started by 12117 in D:\project\feishu-fyjw)
+2025-03-02 16:41:49.585 DEBUG 26984 --- [main] em.backend.BackendApplication            : Running with Spring Boot v2.7.6, Spring v5.3.24
+2025-03-02 16:41:49.585  INFO 26984 --- [main] em.backend.BackendApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-03-02 16:41:49.895  INFO 26984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-02 16:41:49.895  INFO 26984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-02 16:41:49.912  INFO 26984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2025-03-02 16:41:50.198  INFO 26984 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8087 (http)
+2025-03-02 16:41:50.203  INFO 26984 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-02 16:41:50.203  INFO 26984 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2025-03-02 16:41:50.286  INFO 26984 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-02 16:41:50.286  INFO 26984 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 682 ms
+2025-03-02 16:41:50.471  INFO 26984 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API URL: http://1.13.79.29:8088/v1
+2025-03-02 16:41:50.471  INFO 26984 --- [main] em.backend.dify.impl.DifyClientImpl      : Dify API Key 已加载: 是
+2025-03-02 16:41:50.957  INFO 26984 --- [main] e.b.controller.FeishuEventController     : 飞书事件监听已启动
+2025-03-02 16:41:51.150  INFO 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477124627646169116&access_key=0a7197c9d062ae7deab9f4792ab86db3&service_id=33554678&ticket=72f21298-57ab-40c0-a68c-5bc14582f146 [conn_id=7477124627646169116]
+2025-03-02 16:41:51.293  INFO 26984 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8087 (http) with context path ''
+2025-03-02 16:41:51.298  INFO 26984 --- [main] em.backend.BackendApplication            : Started BackendApplication in 1.902 seconds (JVM running for 2.286)
+2025-03-02 16:41:57.179  INFO 26984 --- [pool-2-thread-2] em.backend.handler.CardEventHandler      : 收到卡片回调事件: {"event":{"operator":{"tenant_key":"14191646f559d758","user_id":"d3d5egbc","open_id":"ou_8e248fda8f4bff8499c1a7072767bfce","union_id":"on_f32b92112a285f8349308d9698203d3e"},"token":"c-4bc3c2613cf5567e03e43d263df35d5712ed35ed","action":{"tag":"button","timezone":"Asia/Shanghai","name":"submit_create_case","form_value":{"case_desc":" ","case_name":"创建知识库test2","case_time":"2025-03-24 22:37 +0800","client_name":"罗振荣","remarks":""}},"host":"im_message","context":{"open_message_id":"om_0859b6c5f719ef7e0deb3e1206cf9b31","open_chat_id":"oc_ca8485b0326b6f77e9d48085090f70ac"}},"schema":"2.0","header":{"event_id":"a2b8655f6a7ee967e234b15c2aa6d71c","event_type":"card.action.trigger","app_id":"cli_a73c62ce90b0d013","tenant_key":"14191646f559d758","create_time":"1740904915685176","token":"za3iBwmP42XM4YMo9z0tq1OgMlRAG7tc"},"eventReq":{"body":[123,34,115,99,104,101,109,97,34,58,34,50,46,48,34,44,34,104,101,97,100,101,114,34,58,123,34,101,118,101,110,116,95,105,100,34,58,34,97,50,98,56,54,53,53,102,54,97,55,101,101,57,54,55,101,50,51,52,98,49,53,99,50,97,97,54,100,55,49,99,34,44,34,116,111,107,101,110,34,58,34,122,97,51,105,66,119,109,80,52,50,88,77,52,89,77,111,57,122,48,116,113,49,79,103,77,108,82,65,71,55,116,99,34,44,34,99,114,101,97,116,101,95,116,105,109,101,34,58,34,49,55,52,48,57,48,52,57,49,53,54,56,53,49,55,54,34,44,34,101,118,101,110,116,95,116,121,112,101,34,58,34,99,97,114,100,46,97,99,116,105,111,110,46,116,114,105,103,103,101,114,34,44,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,97,112,112,95,105,100,34,58,34,99,108,105,95,97,55,51,99,54,50,99,101,57,48,98,48,100,48,49,51,34,125,44,34,101,118,101,110,116,34,58,123,34,111,112,101,114,97,116,111,114,34,58,123,34,116,101,110,97,110,116,95,107,101,121,34,58,34,49,52,49,57,49,54,52,54,102,53,53,57,100,55,53,56,34,44,34,117,115,101,114,95,105,100,34,58,34,100,51,100,53,101,103,98,99,34,44,34,111,112,101,110,95,105,100,34,58,34,111,117,95,56,101,50,52,56,102,100,97,56,102,52,98,102,102,56,52,57,57,99,49,97,55,48,55,50,55,54,55,98,102,99,101,34,44,34,117,110,105,111,110,95,105,100,34,58,34,111,110,95,102,51,50,98,57,50,49,49,50,97,50,56,53,102,56,51,52,57,51,48,56,100,57,54,57,56,50,48,51,100,51,101,34,125,44,34,116,111,107,101,110,34,58,34,99,45,52,98,99,51,99,50,54,49,51,99,102,53,53,54,55,101,48,51,101,52,51,100,50,54,51,100,102,51,53,100,53,55,49,50,101,100,51,53,101,100,34,44,34,97,99,116,105,111,110,34,58,123,34,116,97,103,34,58,34,98,117,116,116,111,110,34,44,34,116,105,109,101,122,111,110,101,34,58,34,65,115,105,97,47,83,104,97,110,103,104,97,105,34,44,34,102,111,114,109,95,118,97,108,117,101,34,58,123,34,99,97,115,101,95,100,101,115,99,34,58,34,32,34,44,34,99,97,115,101,95,110,97,109,101,34,58,34,-27,-120,-101,-27,-69,-70,-25,-97,-91,-24,-81,-122,-27,-70,-109,116,101,115,116,50,34,44,34,99,97,115,101,95,116,105,109,101,34,58,34,50,48,50,53,45,48,51,45,50,52,32,50,50,58,51,55,32,43,48,56,48,48,34,44,34,99,108,105,101,110,116,95,110,97,109,101,34,58,34,-25,-67,-105,-26,-116,-81,-24,-115,-93,34,44,34,114,101,109,97,114,107,115,34,58,34,34,125,44,34,110,97,109,101,34,58,34,115,117,98,109,105,116,95,99,114,101,97,116,101,95,99,97,115,101,34,125,44,34,104,111,115,116,34,58,34,105,109,95,109,101,115,115,97,103,101,34,44,34,99,111,110,116,101,120,116,34,58,123,34,111,112,101,110,95,109,101,115,115,97,103,101,95,105,100,34,58,34,111,109,95,48,56,53,57,98,54,99,53,102,55,49,57,101,102,55,101,48,100,101,98,51,101,49,50,48,54,99,102,57,98,51,49,34,44,34,111,112,101,110,95,99,104,97,116,95,105,100,34,58,34,111,99,95,99,97,56,52,56,53,98,48,51,50,54,98,54,102,55,55,101,57,100,52,56,48,56,53,48,57,48,102,55,48,97,99,34,125,125,125],"headers":{}}}
+2025-03-02 16:41:57.185  INFO 26984 --- [pool-2-thread-2] em.backend.service.impl.CaseServiceImpl  : 处理创建案件表单数据: {case_desc= , case_name=创建知识库test2, case_time=2025-03-24 22:37 +0800, client_name=罗振荣, remarks=}, 操作人: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:41:57.902  INFO 26984 --- [pool-2-thread-2] e.b.s.impl.FeishuFolderServiceImpl       : 案件文件夹创建成功: 创建知识库test2_罗振荣_2025-03-24, url: https://vcnjyexq8awr.feishu.cn/drive/folder/IyQpfrSMLlWJUAdlKw3cmcb3njf
+2025-03-02 16:41:58.350  INFO 26984 --- [pool-2-thread-2] e.b.s.impl.FeishuFolderServiceImpl       : 文件夹权限设置成功, token: IyQpfrSMLlWJUAdlKw3cmcb3njf, userId: ou_8e248fda8f4bff8499c1a7072767bfce
+2025-03-02 16:41:58.351  INFO 26984 --- [pool-2-thread-2] e.b.s.impl.DifyKnowledgeServiceImpl      : 开始创建知识库: name=e2ff20297ebe490bb1fa88ef0713fa3c, description=案件描述： 
+当事人：罗振荣
+案件时间：2025-03-24 22:37 +0800
+2025-03-02 16:41:58.397 DEBUG 26984 --- [pool-2-thread-2] e.b.s.impl.DifyKnowledgeServiceImpl      : 发送创建知识库请求: url=http://1.13.79.29:8088/v1/datasets, body={"name":"e2ff20297ebe490bb1fa88ef0713fa3c","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","indexing_technique":"high_quality","permission":"all_team_members"}
+2025-03-02 16:41:58.498  INFO 26984 --- [pool-2-thread-2] e.b.s.impl.DifyKnowledgeServiceImpl      : 创建知识库成功: response={"id":"9e74458d-e7c1-4f5d-bb67-32be98c21d1e","name":"e2ff20297ebe490bb1fa88ef0713fa3c","description":"案件描述： \n当事人：罗振荣\n案件时间：2025-03-24 22:37 +0800","provider":"vendor","permission":"all_team_members","indexing_technique":"high_quality","app_count":0,"document_count":0,"word_count":0,"created_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","created_at":1740904917,"updated_by":"c57027cb-91fa-479c-b9a7-bb440278b3ed","updated_at":1740904917,"embedding_model":"text-embedding-3-large","embedding_model_provider":"langgenius/openai/openai","retrieval_model_dict":{"search_method":"semantic_search","reranking_enable":false,"reranking_model":{"reranking_provider_name":"","reranking_model_name":""},"top_k":2,"score_threshold_enabled":false},"tags":[],"external_knowledge_info":{},"external_retrieval_model":{"top_k":2,"score_threshold":0.0}}
+2025-03-02 16:41:58.514  INFO 26984 --- [pool-2-thread-2] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Starting...
+2025-03-02 16:41:58.828  INFO 26984 --- [pool-2-thread-2] com.zaxxer.hikari.HikariDataSource       : MyHikariCP - Start completed.
+2025-03-02 16:41:58.832 DEBUG 26984 --- [pool-2-thread-2] em.backend.mapper.CaseInfoMapper.insert  : ==>  Preparing: INSERT INTO case_info ( open_id, case_name, client_name, case_desc, case_time, remarks, folder_url, dify_knowledge_id ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+2025-03-02 16:41:58.842 DEBUG 26984 --- [pool-2-thread-2] em.backend.mapper.CaseInfoMapper.insert  : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String), 创建知识库test2(String), 罗振荣(String),  (String), 2025-03-24T22:37(LocalDateTime), (String), https://vcnjyexq8awr.feishu.cn/drive/folder/IyQpfrSMLlWJUAdlKw3cmcb3njf(String), 9e74458d-e7c1-4f5d-bb67-32be98c21d1e(String)
+2025-03-02 16:41:58.901 DEBUG 26984 --- [pool-2-thread-2] em.backend.mapper.CaseInfoMapper.insert  : <==    Updates: 1
+2025-03-02 16:41:58.941 DEBUG 26984 --- [pool-2-thread-2] e.b.mapper.UserStatusMapper.selectById   : ==>  Preparing: SELECT open_id,current_case_id,current_case_name,create_time,update_time,deleted FROM user_status WHERE open_id=? AND deleted=0
+2025-03-02 16:41:58.942 DEBUG 26984 --- [pool-2-thread-2] e.b.mapper.UserStatusMapper.selectById   : ==> Parameters: ou_8e248fda8f4bff8499c1a7072767bfce(String)
+2025-03-02 16:41:58.973 DEBUG 26984 --- [pool-2-thread-2] e.b.mapper.UserStatusMapper.selectById   : <==      Total: 1
+2025-03-02 16:41:58.978 DEBUG 26984 --- [pool-2-thread-2] e.b.mapper.UserStatusMapper.updateById   : ==>  Preparing: UPDATE user_status SET current_case_id=?, current_case_name=? WHERE open_id=? AND deleted=0
+2025-03-02 16:41:58.979 DEBUG 26984 --- [pool-2-thread-2] e.b.mapper.UserStatusMapper.updateById   : ==> Parameters: 19(Long), 创建知识库test2(String), ou_8e248fda8f4bff8499c1a7072767bfce(String)
+2025-03-02 16:41:59.033 DEBUG 26984 --- [pool-2-thread-2] e.b.mapper.UserStatusMapper.updateById   : <==    Updates: 1
+2025-03-02 16:42:58.490 ERROR 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : java.io.EOFException
+2025-03-02 16:42:58.491  INFO 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : disconnected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477124627646169116&access_key=0a7197c9d062ae7deab9f4792ab86db3&service_id=33554678&ticket=72f21298-57ab-40c0-a68c-5bc14582f146 [conn_id=7477124627646169116]
+2025-03-02 16:42:58.491  INFO 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : start reconnecting...
+2025-03-02 16:43:07.984  INFO 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : trying to reconnect for the 1st time
+2025-03-02 16:43:08.283  INFO 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477126653890723842&access_key=f1fe43db1645ef60d836fe233e0c2aba&service_id=33554678&ticket=7c2e558f-a12c-4d04-8b80-f995345d9dc9 [conn_id=7477126653890723842]
+2025-03-02 16:44:50.508 ERROR 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : java.io.EOFException
+2025-03-02 16:44:50.508  INFO 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : disconnected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477126653890723842&access_key=f1fe43db1645ef60d836fe233e0c2aba&service_id=33554678&ticket=7c2e558f-a12c-4d04-8b80-f995345d9dc9 [conn_id=7477126653890723842]
+2025-03-02 16:44:50.508  INFO 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : start reconnecting...
+2025-03-02 16:44:54.604  INFO 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Client                  : trying to reconnect for the 1st time
+2025-03-02 16:44:54.907  INFO 26984 --- [OkHttp https://msg-frontier.feishu.cn/...] com.lark.oapi.ws.Listener                : connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7477126756454563841&access_key=63dfb822df0b956a9f6e0703f65c649e&service_id=33554678&ticket=382491e6-fdee-4f61-b5a5-e02324704596 [conn_id=7477126756454563841]

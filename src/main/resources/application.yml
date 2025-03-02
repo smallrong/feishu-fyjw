@@ -111,5 +111,6 @@ feishu:
 
 
 dify:
-  api-url: https://api.dify.ai/v1
+  api-url: http://1.13.79.29:8088/v1
   api-key: app-s1Cv9pTc0Ulf9FQUvpd9pHNJ
+  api-knowledge-key: dataset-f4YbNiU99LcX38H6fhybVfXY
