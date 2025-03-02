@@ -69,4 +69,6 @@ public interface ICardTemplateService {
      * @return 卡片内容JSON字符串
      */
     String buildLegalResearchCard(String caseName);
+
+    String buildErrorMessageCard(String content, String currentCase);
 } 
