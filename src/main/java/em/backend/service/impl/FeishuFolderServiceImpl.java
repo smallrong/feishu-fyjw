@@ -12,6 +12,9 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -119,7 +122,7 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
             return null;
         }
     }
-} 
+
     public List<FileInfo> getFolderFiles(String folderToken) {
 //        try {
 //            // 构造请求对象
