@@ -2,6 +2,7 @@ package em.backend.service;
 
 import lombok.Data;
 import java.io.File;
+import java.util.List;
 
 /**
  * 飞书文件夹服务接口
@@ -16,6 +17,24 @@ public interface IFeishuFolderService {
         public FolderResult(String token, String url) {
             this.token = token;
             this.url = url;
+        }
+    }
+    
+    @Data
+    class FileInfo {
+        private String fileToken;
+        private String fileName;
+        private String fileType;
+        private Long fileSize;
+        private String createTime;
+        private String updateTime;
+        
+        public FileInfo(String fileToken, String fileName, String fileType, String createTime, String updateTime) {
+            this.fileToken = fileToken;
+            this.fileName = fileName;
+            this.fileType = fileType;
+            this.createTime = createTime;
+            this.updateTime = updateTime;
         }
     }
     
@@ -45,4 +64,11 @@ public interface IFeishuFolderService {
      * @return 文件的Key
      */
     String uploadFile(File file, String fileName, String fileType);
+    
+    /**
+     * 获取文件夹下的所有文件
+     * @param folderToken 文件夹token
+     * @return 文件信息列表，如果获取失败返回空列表
+     */
+    List<FileInfo> getFolderFiles(String folderToken);
 } 

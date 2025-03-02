@@ -250,4 +250,22 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
             return null;
         }
     }
-} 
+
+    @Override
+    public String buildErrorMessageCard(String content, String currentCase) {
+        try {
+            ClassPathResource resource = new ClassPathResource("template/errorMessage.json");
+            String cardContent = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+
+            return cardContent
+                    .replace("${case}", currentCase)
+                    .replace("${text}", content);
+        } catch (Exception e) {
+            log.error("构建消息卡片失败", e);
+            return null;
+        }
+    }
+
+
+
+}
