@@ -393,7 +393,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 researchQuery += "\n案件描述: " + caseInfo.getCaseDesc();
             }
             
-            inputs.put("yanjiu", researchQuery);
+            inputs.put("content", researchQuery);
             
             // 5. 创建工作流消息处理器
             final int[] sequence = {2}; // 序列号从2开始，因为初始消息已经是1
@@ -468,7 +468,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                             operatorId,     // 用户ID
                             messageHandler, // 消息处理器
                             null,           // 无文件
-                            "app-hrVs41TXZKmQVXYafjjF7WSj"  // 使用指定的API Key
+                            "app-CuItMOSRz9WGVoQCGyeEDbKC"  // 使用指定的API Key
                     );
                 } catch (Exception e) {
                     log.error("执行法律研究工作流异常", e);
@@ -557,18 +557,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                 contentBuilder.append(", 委托人: ").append(caseInfo.getClientName());
             }
             
-            if (caseInfo.getCaseDesc() != null && !caseInfo.getCaseDesc().isEmpty()) {
-                // 确保描述不会导致整体超过256个字符
-                String desc = caseInfo.getCaseDesc();
-                int remainingChars = 256 - contentBuilder.length() - 8; // 8是", 描述: "的长度
-                
-                if (remainingChars > 0) {
-                    if (desc.length() > remainingChars) {
-                        desc = desc.substring(0, remainingChars - 3) + "...";
-                    }
-                    contentBuilder.append(", 描述: ").append(desc);
-                }
-            }
+
             
             // 设置工作流输入参数
             inputs.put("type", documentType);
@@ -686,7 +675,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                             operatorId,     // 用户ID
                             messageHandler, // 消息处理器
                             null,           // 无文件
-                            "app-3NoNRJM8bAt7o5jbEICJVEEh"  // 使用指定的API Key
+                            "app-EOeMAYUjkIHI1bIluo8wP5MC"  // 使用指定的API Key
                     );
                 } catch (Exception e) {
                     log.error("执行{}工作流异常", documentType, e);
