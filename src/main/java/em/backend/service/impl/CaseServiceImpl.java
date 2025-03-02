@@ -333,42 +333,6 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
     }
 
     @Override
-    public P2CardActionTriggerResponse handleLegalResearch(String caseId, String operatorId) {
-        P2CardActionTriggerResponse resp = new P2CardActionTriggerResponse();
-        CallBackToast toast = new CallBackToast();
-
-        try {
-            log.info("处理法律研究: caseId={}, operatorId={}", caseId, operatorId);
-            
-            // 1. 先执行选择案件逻辑
-            P2CardActionTriggerResponse selectResp = handleSelectCase(caseId, operatorId);
-            
-            // 2. 查询案件信息
-            CaseInfo caseInfo = getById(caseId);
-            if (caseInfo == null) {
-                log.error("案件不存在: {}", caseId);
-                toast.setType("error");
-                toast.setContent("案件不存在");
-                resp.setToast(toast);
-                return resp;
-            }
-            
-            // 3. 发送法律研究卡片
-            sendLegalResearchCard(operatorId, caseId);
-            
-            // 4. 返回选择案件的响应
-            return selectResp;
-            
-        } catch (Exception e) {
-            log.error("处理法律研究异常: caseId={}, operatorId={}", caseId, operatorId, e);
-            toast.setType("error");
-            toast.setContent("系统处理失败");
-            resp.setToast(toast);
-            return resp;
-        }
-    }
-
-    @Override
     public P2CardActionTriggerResponse handleLegalResearchInput(Map<String, Object> formData, String operatorId) {
         P2CardActionTriggerResponse resp = new P2CardActionTriggerResponse();
         CallBackToast toast = new CallBackToast();

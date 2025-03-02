@@ -2,7 +2,9 @@ package em.backend.handler;
 
 import com.lark.oapi.core.utils.Jsons;
 import com.lark.oapi.service.application.v6.model.P2BotMenuV6;
+import em.backend.pojo.UserStatus;
 import em.backend.service.ICaseService;
+import em.backend.service.IMessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
 
     private final ICaseService caseService;
+    private final IMessageService messageService;
 
     @Override
     public Void handle(P2BotMenuV6 event) {
@@ -36,8 +39,15 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
                     caseService.sendSelectCaseCard(openId, "case_overview_callback");
                     break;
                     
-                case "legal_research":  // 新增法律研究事件
-                    caseService.sendSelectCaseCard(openId, "legal_research_callback");
+                case "legal_research":  // 法律研究事件
+                    // 直接发送法律研究卡片，不需要先选择案件
+                    UserStatus userStatus = caseService.getCurrentCase(openId);
+                    if (userStatus != null && userStatus.getCurrentCaseId() != null) {
+                        caseService.sendLegalResearchCard(openId, userStatus.getCurrentCaseId().toString());
+                    } else {
+                        // 如果没有当前案件，提示用户先选择案件
+                        messageService.sendMessage(openId, "请先选择一个案件", openId);
+                    }
                     break;
 
                 default:
