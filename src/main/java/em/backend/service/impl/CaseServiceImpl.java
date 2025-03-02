@@ -209,7 +209,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
                     .list();
 
             if (cases.isEmpty()) {
-                messageService.sendMessage(openId, "您还没有创建任何案件", openId);
+                messageService.sendCardMessage(openId, cardTemplateService.buildErrorMessageCard("您还没有创建任何案件", "当前未选择案件"));
                 return;
             }
 

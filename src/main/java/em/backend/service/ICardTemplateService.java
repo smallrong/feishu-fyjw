@@ -62,4 +62,12 @@ public interface ICardTemplateService {
      * @return 卡片内容JSON字符串
      */
     String buildCardEntityContent(String cardId);
+
+
+    /**
+     * 构建错误消息卡片
+     * @param content 消息内容
+     * @param currentCase 当前案件
+     */
+    String buildErrorMessageCard(String content, String currentCase);
 } 

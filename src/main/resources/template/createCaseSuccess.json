@@ -1,0 +1,80 @@
+// {
+//     "schema": "2.0",
+//     "config": {
+//         "update_multi": true,
+//         "locales": [
+//             "en_us"
+//         ],
+//         "style": {
+//             "text_size": {
+//                 "normal_v2": {
+//                     "default": "normal",
+//                     "pc": "normal",
+//                     "mobile": "heading"
+//                 }
+//             }
+//         }
+//     },
+//     "body": {
+//         "direction": "vertical",
+//         "padding": "12px 12px 12px 12px",
+//         "elements": [
+//             {
+//                 "tag": "markdown",
+//                 "content": "[点我跳转](${url})",
+//                 "text_align": "left",
+//                 "text_size": "normal_v2",
+//                 "margin": "0px 0px 0px 0px"
+//             },
+//             {
+//                 "tag": "column_set",
+//                 "horizontal_spacing": "8px",
+//                 "horizontal_align": "left",
+//                 "columns": [
+//                     {
+//                         "tag": "column",
+//                         "width": "weighted",
+//                         "elements": [
+//                             {
+//                                 "tag": "div",
+//                                 "text": {
+//                                     "tag": "plain_text",
+//                                     "content": "",
+//                                     "text_size": "normal_v2",
+//                                     "text_align": "left",
+//                                     "text_color": "default"
+//                                 },
+//                                 "margin": "0px 0px 0px 0px"
+//                             }
+//                         ],
+//                         "vertical_spacing": "8px",
+//                         "horizontal_align": "left",
+//                         "vertical_align": "top",
+//                         "weight": 1
+//                     }
+//                 ],
+//                 "margin": "0px 0px 0px 0px"
+//             },
+//             {
+//                 "tag": "hr",
+//                 "margin": "0px 0px 0px 0px"
+//             }
+//         ]
+//     },
+//     "header": {
+//         "title": {
+//             "tag": "plain_text",
+//             "content": "[创建成功] 案件已经创建成功，可以在云文档中查看到",
+//             "i18n_content": {
+//                 "en_us": "[Resolved] Alert: Process Error - Please Address Promptly",
+//                 "ja_jp": "注文確認待ち"
+//             }
+//         },
+//         "subtitle": {
+//             "tag": "plain_text",
+//             "content": ""
+//         },
+//         "template": "green",
+//         "padding": "12px 12px 12px 12px"
+//     }
+// }

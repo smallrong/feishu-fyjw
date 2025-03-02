@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -81,4 +84,38 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
             return false;
         }
     }
-} 
+
+    @Override
+    public List<FileInfo> getFolderFiles(String folderToken) {
+//        try {
+//            // 构造请求对象
+//            ListFileReq req = ListFileReq.newBuilder()
+//                    .folderToken(folderToken)
+//                    .build();
+//
+//            // 调用API获取文件列表
+//            ListFileResp resp = feishuClient.drive().v1().file().list(req);
+//
+//            // 处理响应
+//            if (resp.success()) {
+//                return Arrays.stream(resp.getData().getFiles())
+//                        .map(file -> new FileInfo(
+//                                file.getToken(),
+//                                file.getName(),
+//                                file.getType(),
+//                                file.getCreatedTime(),
+//                                file.getModifiedTime()
+//                        ))
+//                        .toList();
+//            } else {
+//                log.error("获取文件列表失败, code: {}, msg: {}, reqId: {}",
+//                        resp.getCode(), resp.getMsg(), resp.getRequestId());
+//                return List.of();
+//            }
+//        } catch (Exception e) {
+//            log.error("获取文件列表异常", e);
+//            return List.of();
+//        }
+        return null;
+    }
+}

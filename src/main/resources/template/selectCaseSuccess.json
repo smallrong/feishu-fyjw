@@ -1,0 +1,50 @@
+// {
+//     "schema": "2.0",
+//     "config": {
+//         "update_multi": true,
+//         "locales": [
+//             "en_us"
+//         ],
+//         "style": {
+//             "text_size": {
+//                 "normal_v2": {
+//                     "default": "normal",
+//                     "pc": "normal",
+//                     "mobile": "heading"
+//                 }
+//             }
+//         }
+//     },
+//     "body": {
+//         "direction": "vertical",
+//         "padding": "12px 12px 12px 12px",
+//         "elements": [
+//             {
+//                 "tag": "div",
+//                 "text": {
+//                     "tag": "plain_text",
+//                     "content": "切换成功！ 当前案件为：${case}",
+//                     "text_size": "normal_v2",
+//                     "text_align": "center",
+//                     "text_color": "green"
+//                 },
+//                 "margin": "0px 0px 0px 0px"
+//             }
+//         ]
+//     },
+//     "header": {
+//         "title": {
+//             "tag": "plain_text",
+//             "content": "当前案件：${case}",
+//             "i18n_content": {
+//                 "en_us": "👋 Dive into Bot Card Interactions: A Hands-on Tutorial"
+//             }
+//         },
+//         "subtitle": {
+//             "tag": "plain_text",
+//             "content": ""
+//         },
+//         "template": "blue",
+//         "padding": "12px 12px 12px 12px"
+//     }
+// }

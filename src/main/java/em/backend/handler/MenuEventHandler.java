@@ -35,9 +35,12 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
                 case "case_overview":  // 新增案件总览事件
                     caseService.sendSelectCaseCard(openId, "case_overview_callback");
                     break;
-                    
+
                 case "legal_research":  // 新增法律研究事件
                     caseService.sendSelectCaseCard(openId, "legal_research_callback");
+                    break;
+                case "file_analysis":  // 新增文件分析事件
+                    caseService.sendSelectCaseCard(openId, "file_analysis_callback");
                     break;
 
                 default:

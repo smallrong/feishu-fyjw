@@ -23,7 +23,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
     @Override
     public String buildCreateCaseCard() {
         try {
-            ClassPathResource resource = new ClassPathResource("em/backend/template/createCase.json");
+            ClassPathResource resource = new ClassPathResource("template/createCase.json");
             return StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.error("构建创建案件卡片失败", e);
@@ -94,6 +94,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
             return null;
         }
     }
+
 
     @Override
     public String buildCreateSuccessCard(String url) {
@@ -220,6 +221,22 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
             return content.toString();
         } catch (Exception e) {
             log.error("构建卡片实体内容失败", e);
+            return null;
+        }
+    }
+
+
+    @Override
+    public String buildErrorMessageCard(String content, String currentCase) {
+        try {
+            ClassPathResource resource = new ClassPathResource("em/backend/template/errorMessage.json");
+            String cardContent = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+
+            return cardContent
+                    .replace("${case}", currentCase)
+                    .replace("${text}", content);
+        } catch (Exception e) {
+            log.error("构建消息卡片失败", e);
             return null;
         }
     }
