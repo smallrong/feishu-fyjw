@@ -59,4 +59,21 @@ public interface IMessageService {
      * @return 是否发送成功
      */
     boolean sendFileMessage(String receiveId, String fileKey, String fileName);
+
+    /**
+     * 回复消息
+     * @param messageId 消息ID
+     * @param content 消息内容
+     * @param msgType 消息类型
+     * @return 是否成功
+     */
+    boolean replyMessage(String messageId, String content, String msgType);
+    
+    /**
+     * 更新卡片内容
+     * @param cardId 卡片ID
+     * @param content 新的卡片内容
+     * @return 是否成功
+     */
+    boolean updateCardContent(String cardId, String content);
 } 

@@ -71,4 +71,12 @@ public interface ICardTemplateService {
     String buildLegalResearchCard(String caseName);
 
     String buildErrorMessageCard(String content, String currentCase);
+
+    /**
+     * 构建模板卡片
+     * @param templateId 模板ID
+     * @param params 模板参数
+     * @return 卡片内容JSON字符串
+     */
+    String buildTemplateCard(String templateId, Map<String, Object> params);
 } 
