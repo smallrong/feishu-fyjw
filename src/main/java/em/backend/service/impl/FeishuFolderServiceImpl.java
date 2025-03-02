@@ -2,10 +2,15 @@ package em.backend.service.impl;
 
 import com.lark.oapi.Client;
 import com.lark.oapi.service.drive.v1.model.*;
+import com.lark.oapi.service.im.v1.model.*;
 import em.backend.service.IFeishuFolderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import java.io.File;
+
+import java.util.Arrays;
+import java.util.List;
 
 import java.util.Arrays;
 import java.util.List;
@@ -86,6 +91,38 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
     }
 
     @Override
+    public String uploadFile(File file, String fileName, String fileType) {
+        try {
+            log.info("上传文件: fileName={}, fileType={}", fileName, fileType);
+            
+            // 构建上传文件请求
+            CreateFileReq req = CreateFileReq.newBuilder()
+                .createFileReqBody(CreateFileReqBody.newBuilder()
+                    .fileType(fileType)
+                    .fileName(fileName)
+                    .file(file)
+                    .build())
+                .build();
+            
+            // 发送请求
+            CreateFileResp resp = feishuClient.im().v1().file().create(req);
+            
+            // 处理响应
+            if (!resp.success()) {
+                log.error("上传文件失败: code={}, msg={}", resp.getCode(), resp.getMsg());
+                return null;
+            }
+            
+            // 返回文件Key
+            String fileKey = resp.getData().getFileKey();
+            log.info("上传文件成功: fileKey={}", fileKey);
+            return fileKey;
+        } catch (Exception e) {
+            log.error("上传文件异常", e);
+            return null;
+        }
+    }
+
     public List<FileInfo> getFolderFiles(String folderToken) {
 //        try {
 //            // 构造请求对象

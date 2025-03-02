@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 import java.nio.charset.StandardCharsets;
+import java.io.File;
 
 @Slf4j
 @Service
@@ -219,6 +220,42 @@ public class MessageServiceImpl implements IMessageService {
             return true;
         } catch (Exception e) {
             log.error("停止卡片流式更新异常", e);
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean sendFileMessage(String receiveId, String fileKey, String fileName) {
+        try {
+            log.info("发送文件消息: receiveId={}, fileKey={}, fileName={}", receiveId, fileKey, fileName);
+            
+            // 构建文件消息内容
+            JSONObject content = new JSONObject();
+            content.put("file_key", fileKey);
+            
+            // 构建发送消息请求
+            CreateMessageReq req = CreateMessageReq.newBuilder()
+                .receiveIdType("open_id")
+                .createMessageReqBody(CreateMessageReqBody.newBuilder()
+                    .receiveId(receiveId)
+                    .msgType("file")
+                    .content(content.toString())
+                    .build())
+                .build();
+            
+            // 发送请求
+            CreateMessageResp resp = feishuClient.im().v1().message().create(req);
+            
+            // 处理响应
+            if (resp.getCode() != 0) {
+                log.error("发送文件消息失败: code={}, msg={}", resp.getCode(), resp.getMsg());
+                return false;
+            }
+            
+            log.info("发送文件消息成功: messageId={}", resp.getData().getMessageId());
+            return true;
+        } catch (Exception e) {
+            log.error("发送文件消息异常", e);
             return false;
         }
     }

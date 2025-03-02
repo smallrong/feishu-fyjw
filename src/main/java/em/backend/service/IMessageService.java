@@ -1,5 +1,7 @@
 package em.backend.service;
 
+import java.io.File;
+
 /**
  * 消息服务接口
  */
@@ -47,4 +49,14 @@ public interface IMessageService {
      * @return 是否成功
      */
     boolean stopStreamingMode(String cardInfo, int sequence);
+    
+    /**
+     * 发送文件消息
+     * 
+     * @param receiveId 接收者ID
+     * @param fileKey 文件Key
+     * @param fileName 文件名称
+     * @return 是否发送成功
+     */
+    boolean sendFileMessage(String receiveId, String fileKey, String fileName);
 } 

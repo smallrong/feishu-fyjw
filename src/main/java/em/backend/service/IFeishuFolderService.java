@@ -1,6 +1,7 @@
 package em.backend.service;
 
 import lombok.Data;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -53,6 +54,16 @@ public interface IFeishuFolderService {
      * @return 是否设置成功
      */
     boolean setFolderPermission(String token, String userId);
+    
+    /**
+     * 上传文件到飞书
+     * 
+     * @param file 文件对象
+     * @param fileName 文件名称
+     * @param fileType 文件类型
+     * @return 文件的Key
+     */
+    String uploadFile(File file, String fileName, String fileType);
     
     /**
      * 获取文件夹下的所有文件
