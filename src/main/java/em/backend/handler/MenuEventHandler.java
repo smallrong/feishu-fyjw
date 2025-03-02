@@ -49,6 +49,18 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
                         messageService.sendMessage(openId, "请先选择一个案件", openId);
                     }
                     break;
+                    
+                case "indictment_generation":  // 起诉状/答辩状生成事件
+                    caseService.handleDocumentGeneration(openId, "起诉状/答辩状");
+                    break;
+                    
+                case "application_generation":  // 申请书/答辩书生成事件
+                    caseService.handleDocumentGeneration(openId, "申请书/答辩书");
+                    break;
+                    
+                case "agent_speech_generation":  // 代理词生成事件
+                    caseService.handleDocumentGeneration(openId, "代理词");
+                    break;
 
                 default:
                     log.warn("未知的菜单事件: {}", eventKey);
