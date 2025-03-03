@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import em.backend.pojo.CaseInfo;
 import em.backend.service.ICardTemplateService;
+import em.backend.service.IFeishuFolderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -266,6 +267,40 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
         }
     }
 
+    // @Override
+    // public String buildFileClassificationCard(String caseName, List<IFeishuFolderService.FileInfo> files) {
+    //     try {
+    //         // 创建卡片模板变量
+    //         Map<String, Object> templateVariables = new HashMap<>();
+    //         templateVariables.put("case_name", caseName);
 
+    //         // 构建文件列表
+    //         List<Map<String, String>> fileList = new ArrayList<>();
+    //         for (IFeishuFolderService.FileInfo file : files) {
+    //             Map<String, String> fileMap = new HashMap<>();
+    //             fileMap.put("name", file.getFileName());
+    //             fileMap.put("type", file.getFileType());
+    //             fileMap.put("token", file.getFileToken());
+    //             fileMap.put("create_time", file.getCreateTime());
+    //             fileList.add(fileMap);
+    //         }
+    //         templateVariables.put("files", fileList);
+
+    //         // 创建卡片模板数据
+    //         Map<String, Object> templateData = new HashMap<>();
+    //         templateData.put("template_id", "file_classification_template"); // 替换为实际的模板ID
+    //         templateData.put("template_variable", templateVariables);
+
+    //         // 创建完整的卡片内容
+    //         Map<String, Object> cardContent = new HashMap<>();
+    //         cardContent.put("type", "template");
+    //         cardContent.put("data", templateData);
+
+    //         return JSON.toJSONString(cardContent);
+    //     } catch (Exception e) {
+    //         log.error("构建文件分类卡片失败", e);
+    //         return null;
+    //     }
+    // }
 
 }

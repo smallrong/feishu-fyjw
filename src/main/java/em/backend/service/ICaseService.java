@@ -34,6 +34,8 @@ public interface ICaseService extends IService<CaseInfo> {
      */
     UserStatus getCurrentCase(String openId);
 
+    CaseInfo getCurrentCaseInfo(String id);
+
     /**
      * 发送创建案件卡片
      * @param openId 用户ID
@@ -77,4 +79,11 @@ public interface ICaseService extends IService<CaseInfo> {
      * @return 卡片回调响应
      */
     P2CardActionTriggerResponse handleDocumentGeneration(String operatorId, String documentType);
+
+    /**
+     * 发送文件分类卡片
+     * @param openId 用户ID
+     * @param caseId 案件ID
+     */
+    void sendFileClassificationCard(String openId, String caseId,String difyKnowledgeId);
 }
