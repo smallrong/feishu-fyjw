@@ -40,7 +40,15 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
                     break;
 
                 case "case_overview":  // 新增案件总览事件
-                    caseService.sendSelectCaseCard(openId, "case_overview_callback");
+
+
+                    if (fileClassStatus != null && fileClassStatus.getCurrentCaseId() != null) {
+                        // 如果有当前案件，发送文件分类卡片
+                        caseService.handleCaseOverview(String.valueOf(currentCaseInfo.getId()), openId);
+                    } else {
+                        // 如果没有当前案件，提示用户先选择案件
+                        messageService.sendMessage(openId, "请先选择一个案件再进行文件分类", openId);
+                    }
                     break;
                     
                 case "legal_research":  // 法律研究事件
