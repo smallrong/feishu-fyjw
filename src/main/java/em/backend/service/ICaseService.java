@@ -109,4 +109,6 @@ public interface ICaseService extends IService<CaseInfo> {
      * @return 卡片回调响应
      */
     P2CardActionTriggerResponse handleCaseStatement(String operatorId);
+    
+    public void sendFileClassificationCard(String openId, String caseId,String difyKnowledgeId);
 }

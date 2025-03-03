@@ -1065,7 +1065,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
             }
             
             // 设置工作流输入参数
-            // inputs.put("type", documentType);
+             inputs.put("type", documentType);
             inputs.put("content", contentBuilder.toString());
             
             // 检查是否有知识库ID，如果有则添加到输入参数中
