@@ -99,5 +99,12 @@ public interface ICaseService extends IService<CaseInfo> {
      * @param operatorId 操作人ID
      * @return 卡片回调响应
      */
-    P2CardActionTriggerResponse handleStrategyAnalysisConfirm(Map<String, Object> formData, String operatorId);
+    P2CardActionTriggerResponse handleStrategyAnalysisConfirm(Map<String, Object> formData, String operatorId,String cardId);
+
+    /**
+     * 处理案情陈述请求
+     * @param operatorId 操作人ID
+     * @return 卡片回调响应
+     */
+    P2CardActionTriggerResponse handleCaseStatement(String operatorId);
 }

@@ -62,6 +62,18 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
                     caseService.handleDocumentGeneration(openId, "代理词");
                     break;
                     
+                case "case_statement":  // 案情陈述事件
+                    // 检查当前案件
+                    UserStatus caseStatementStatus = caseService.getCurrentCase(openId);
+                    if (caseStatementStatus != null && caseStatementStatus.getCurrentCaseId() != null) {
+                        // 直接调用案情陈述处理方法
+                        caseService.handleCaseStatement(openId);
+                    } else {
+                        // 如果没有当前案件，提示用户先选择案件
+                        messageService.sendMessage(openId, "请先选择一个案件", openId);
+                    }
+                    break;
+                    
                 case "strategy_analysis":  // 策略分析事件
                     // 检查当前案件
                     UserStatus strategyStatus = caseService.getCurrentCase(openId);

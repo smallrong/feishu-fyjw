@@ -25,6 +25,8 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
         
         try {
             log.info("收到卡片回调事件: {}", Jsons.DEFAULT.toJson(event));
+            String openMessageId = event.getEvent().getContext().getOpenMessageId();
+            log.info("消息ID: {}", openMessageId);
             
             String actionName = event.getEvent().getAction().getName();
             Map<String, Object> formData = event.getEvent().getAction().getFormValue();
@@ -65,7 +67,7 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
                 case "button_suggest_submit":
                     // 处理策略分析确认
                     log.info("策略分析确认: formData={}", formData);
-                    return caseService.handleStrategyAnalysisConfirm(formData, operatorId);
+                    return caseService.handleStrategyAnalysisConfirm(formData, operatorId,openMessageId);
                     
                 default:
                     log.warn("未知的按钮动作: {}", actionName);

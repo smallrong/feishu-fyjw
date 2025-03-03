@@ -255,15 +255,13 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
     public String buildErrorMessageCard(String content, String currentCase) {
         try {
             ClassPathResource resource = new ClassPathResource("template/errorMessage.json");
-            String template = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
-            
-            // 替换变量
-            template = template.replace("{{content}}", content);
-            template = template.replace("{{case}}", currentCase);
-            
-            return template;
+            String cardContent = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+
+            return cardContent
+                    .replace("${case}", currentCase)
+                    .replace("${text}", content);
         } catch (Exception e) {
-            log.error("构建错误消息卡片失败", e);
+            log.error("构建消息卡片失败", e);
             return null;
         }
     }
