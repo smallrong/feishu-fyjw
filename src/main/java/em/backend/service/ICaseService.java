@@ -34,6 +34,8 @@ public interface ICaseService extends IService<CaseInfo> {
      */
     UserStatus getCurrentCase(String openId);
 
+    CaseInfo getCurrentCaseInfo(String id);
+
     /**
      * 发送创建案件卡片
      * @param openId 用户ID

@@ -3,6 +3,9 @@ package em.backend.service;
 import lombok.Data;
 import java.io.File;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import org.springframework.scheduling.annotation.Async;
+import java.util.Map;
 
 /**
  * 飞书文件夹服务接口
@@ -71,4 +74,30 @@ public interface IFeishuFolderService {
      * @return 文件信息列表，如果获取失败返回空列表
      */
     List<FileInfo> getFolderFiles(String folderToken);
+    
+    /**
+     * 异步分析文件夹中的所有内容
+     * 支持以下类型：
+     * - 文件夹（递归分析）
+     * - 文档（doc, docx, pdf, txt等）
+     * - 图片（jpg, jpeg, png等）
+     * - 音频（mp3, wav等）
+     * - 视频（mp4, avi等）
+     * - 压缩包（zip, rar等，会自动解压分析）
+     * 
+     * @param folderToken 文件夹token
+     * @param openId 用户ID
+     * @param caseId 案件ID
+     */
+    @Async
+    void analyzeFilesAsync(String folderToken, String openId, String caseId,String caseName,String difyKnowledgeId);
+
+    /**
+     * 上传数据到多维表格
+     * @param appToken 多维表格的应用Token
+     * @param tableId 表格ID
+     * @param record 要上传的记录列表，每个记录是一个Map，key为字段名，value为字段值
+     * @return 是否上传成功
+     */
+    boolean uploadToMultiSheet(String appToken, String tableId,String openId,Map<String, Object> records);
 } 

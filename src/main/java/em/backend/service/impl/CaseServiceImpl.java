@@ -2,6 +2,7 @@ package em.backend.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lark.oapi.Client;
 import com.lark.oapi.event.cardcallback.model.CallBackCard;
@@ -212,6 +213,10 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
         return userStatusService.lambdaQuery()
                 .eq(UserStatus::getOpenId, openId)
                 .one();
+    }
+    @Override
+    public CaseInfo getCurrentCaseInfo(String id) {
+        return getById(id);
     }
 
     @Override
@@ -1212,6 +1217,49 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
             resp.setToast(toast);
             return resp;
         }
+    }
+
+    @Override
+    public void sendFileClassificationCard(String openId, String caseId,String difyKnowledgeId) {
+        try {
+            // 查询案件信息
+            CaseInfo caseInfo = getById(caseId);
+            if (caseInfo == null) {
+                log.error("案件不存在: {}", caseId);
+                messageService.sendMessage(openId, "案件不存在", openId);
+                return;
+            }
+
+            // 获取案件文件夹中的文件列表
+            String folderToken = extractFolderToken(caseInfo.getFolderUrl());
+            log.info("获取文件夹token: {}", folderToken);
+            if (folderToken == null) {
+                log.error("无法获取文件夹token: {}", caseInfo.getFolderUrl());
+                messageService.sendMessage(openId, "无法获取文件列表", openId);
+                return;
+            }
+
+//            cardTemplateService.buildMessageCard(openId, caseId, folderToken);
+            messageService.sendCardMessage(caseInfo.getOpenId(), cardTemplateService.buildMessageCard("材料开始分析",caseInfo.getCaseName()));
+            log.info("发送文件分类卡片成功: openId={}, caseId={}", openId, caseId);
+
+            folderService.analyzeFilesAsync(folderToken,openId,caseId,caseInfo.getCaseName(),difyKnowledgeId);
+        } catch (Exception e) {
+            log.error("发送文件分类卡片失败: openId={}, caseId={}", openId, caseId, e);
+            messageService.sendMessage(openId, "发送文件分类卡片失败", openId);
+        }
+    }
+
+    /**
+     * 从文件夹URL中提取token
+     */
+    private String extractFolderToken(String folderUrl) {
+        if (folderUrl == null || folderUrl.isEmpty()) {
+            return null;
+        }
+        // 示例URL: https://xxx.feishu.cn/drive/folder/xxx
+        String[] parts = folderUrl.split("/");
+        return parts[parts.length - 1];
     }
 
     /**
