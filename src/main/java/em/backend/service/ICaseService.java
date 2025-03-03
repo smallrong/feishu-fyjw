@@ -79,6 +79,29 @@ public interface ICaseService extends IService<CaseInfo> {
      * @return 卡片回调响应
      */
     P2CardActionTriggerResponse handleDocumentGeneration(String operatorId, String documentType);
+    
+    /**
+     * 处理法律研究输入 V2 版本 - 使用回复消息API而非流式卡片
+     * @param formData 表单数据
+     * @param operatorId 操作人ID
+     * @return 卡片回调响应
+     */
+    P2CardActionTriggerResponse handleLegalResearchInputV2(Map<String, Object> formData, String operatorId);
+    
+    /**
+     * 处理策略分析请求
+     * @param operatorId 操作人ID
+     * @return 卡片回调响应
+     */
+    P2CardActionTriggerResponse handleStrategyAnalysis(String operatorId);
+    
+    /**
+     * 处理策略分析确认
+     * @param formData 表单数据
+     * @param operatorId 操作人ID
+     * @return 卡片回调响应
+     */
+    P2CardActionTriggerResponse handleStrategyAnalysisConfirm(Map<String, Object> formData, String operatorId);
 
     /**
      * 发送文件分类卡片

@@ -256,18 +256,43 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
     public String buildErrorMessageCard(String content, String currentCase) {
         try {
             ClassPathResource resource = new ClassPathResource("template/errorMessage.json");
-            String cardContent = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
-
-            return cardContent
-                    .replace("${case}", currentCase)
-                    .replace("${text}", content);
+            String template = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+            
+            // 替换变量
+            template = template.replace("{{content}}", content);
+            template = template.replace("{{case}}", currentCase);
+            
+            return template;
         } catch (Exception e) {
-            log.error("构建消息卡片失败", e);
+            log.error("构建错误消息卡片失败", e);
             return null;
         }
     }
 
-    // @Override
+    @Override
+    public String buildTemplateCard(String templateId, Map<String, Object> params) {
+        try {
+            // 构建飞书卡片消息
+            JSONObject cardObj = new JSONObject();
+            cardObj.put("type", "template");
+            cardObj.put("data", new JSONObject());
+            cardObj.getJSONObject("data").put("template_id", templateId);
+            
+            // 添加变量
+            if (params != null && !params.isEmpty()) {
+                JSONObject variables = new JSONObject();
+                for (Map.Entry<String, Object> entry : params.entrySet()) {
+                    variables.put(entry.getKey(), entry.getValue());
+                }
+                cardObj.getJSONObject("data").put("template_variable", variables);
+            }
+            
+            return cardObj.toString();
+        } catch (Exception e) {
+            log.error("构建模板卡片失败: templateId={}", templateId, e);
+            return null;
+        }
+    }    // @Override
     // public String buildFileClassificationCard(String caseName, List<IFeishuFolderService.FileInfo> files) {
     //     try {
     //         // 创建卡片模板变量

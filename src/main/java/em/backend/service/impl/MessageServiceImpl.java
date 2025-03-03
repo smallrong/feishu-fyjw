@@ -259,4 +259,68 @@ public class MessageServiceImpl implements IMessageService {
             return false;
         }
     }
+
+    @Override
+    public boolean updateCardContent(String messageId, String content) {
+        try {
+            log.info("更新卡片内容: messageId={}", messageId);
+            
+            // 使用patch方法更新卡片内容
+            PatchMessageReq req = PatchMessageReq.newBuilder()
+                    .messageId(messageId)
+                    .patchMessageReqBody(PatchMessageReqBody.newBuilder()
+                            .content(content)
+                            .build())
+                    .build();
+            
+            // 发送请求
+            PatchMessageResp resp = feishuClient.im().v1().message().patch(req);
+            
+            // 检查响应
+            if (resp.getCode() != 0) {
+                log.error("更新卡片内容失败: code={}, msg={}", resp.getCode(), resp.getMsg());
+                return false;
+            }
+            
+            log.info("更新卡片内容成功: messageId={}", messageId);
+            return true;
+        } catch (Exception e) {
+            log.error("更新卡片内容异常", e);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean replyMessage(String messageId, String content, String msgType) {
+        try {
+            log.info("回复消息: messageId={}, msgType={}", messageId, msgType);
+            
+            // 构建请求体
+            ReplyMessageReqBody reqBody = ReplyMessageReqBody.newBuilder()
+                    .content(content)
+                    .msgType(msgType)
+                    .build();
+            
+            // 构建请求
+            ReplyMessageReq req = ReplyMessageReq.newBuilder()
+                    .messageId(messageId)
+                    .replyMessageReqBody(reqBody)
+                    .build();
+            
+            // 发送请求
+            ReplyMessageResp resp = feishuClient.im().v1().message().reply(req);
+            
+            // 检查响应
+            if (resp.getCode() != 0) {
+                log.error("回复消息失败: code={}, msg={}", resp.getCode(), resp.getMsg());
+                return false;
+            }
+            
+            log.info("回复消息成功: messageId={}", messageId);
+            return true;
+        } catch (Exception e) {
+            log.error("回复消息异常", e);
+            return false;
+        }
+    }
 } 
