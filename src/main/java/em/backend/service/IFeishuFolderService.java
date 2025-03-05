@@ -90,7 +90,7 @@ public interface IFeishuFolderService {
      * @param caseId 案件ID
      */
     @Async
-    void analyzeFilesAsync(String folderToken, String openId, String caseId,String caseName,String difyKnowledgeId);
+    void analyzeFilesAsync(String folderToken, String openId, String caseId,String caseName,String difyKnowledgeId,String cardInfo);
 
     /**
      * 上传数据到多维表格

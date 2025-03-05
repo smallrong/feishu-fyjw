@@ -207,106 +207,183 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
        }
     }
 
+
+
+    
+    /**
+     * 获取文件夹中的文件总数（包括子文件夹中的文件）
+     * @param folderToken 文件夹token
+     * @return 文件总数
+     */
+    private int getTotalFileCount(String folderToken) {
+        try {
+            int totalCount = 0;
+            List<FileInfo> files = getFolderFiles(folderToken);
+            
+            for (FileInfo file : files) {
+                String fileType = getFileType(file.getFileName());
+                if (isFolder(fileType)) {
+                    // 如果是文件夹，递归统计子文件夹中的文件
+                    totalCount += getTotalFileCount(file.getFileToken());
+                } else {
+                    // 如果是文件，计数加1
+                    totalCount++;
+                }
+            }
+            
+            return totalCount;
+        } catch (Exception e) {
+            log.error("统计文件总数异常: folderToken={}", folderToken, e);
+            return 0;
+        }
+    }
+
+    private static class FileCounter {
+        private int totalFiles = 0;
+        private int processedFiles = 0;
+        private int messageCount=2;
+        private List<String> failedFiles = new ArrayList<>();
+    }
+
     @Async
     @Override
-    public void analyzeFilesAsync(String folderToken, String openId, String caseId, String caseName, String difyKnowledgeId) {
+    public void analyzeFilesAsync(String folderToken, String openId, String caseId, String caseName, String difyKnowledgeId, String cardInfo) {
+        // 创建文件计数器
+        FileCounter counter = new FileCounter();
+        // 先计算总文件数
+        counter.totalFiles = getTotalFileCount(folderToken);
         try {
             log.info("开始异步分析文件: folderToken={}, openId={}, caseId={}", folderToken, openId, caseId);
             
-            // 1. 获取文件夹中的所有文件
-            List<FileInfo> files = getFolderFiles(folderToken);
-            log.info("获取到的文件列表: {}", files);
-            if (files.isEmpty()) {
+
+            
+            if (counter.totalFiles == 0) {
                 log.warn("文件夹为空，无需分析: folderToken={}", folderToken);
                 messageService.sendMessage(openId, "文件夹为空，无需分析", openId);
                 return;
             }
-            
+
             // 2. 创建临时目录
             File tempDirectory = new File(tempDir, caseId);
             if (!tempDirectory.exists()) {
                 tempDirectory.mkdirs();
             }
-
-
+            log.info("cardInfo:{}",cardInfo);
+            messageService.updateStreamingContent(cardInfo, "检测到" + counter.totalFiles + "个文件，正在分析中...", counter.messageCount++);
             
-            for (FileInfo file : files) {
-                try {
-                    String fileType = getFileType(file.getFileName());
-                    
-                    if (isFolder(fileType)) {
-                        // 递归分析子文件夹
-                        analyzeFilesAsync(file.getFileToken(), openId, caseId, caseName, difyKnowledgeId);
-                    } else {
-                        // 下载文件到临时目录
-                        File downloadedFile = downloadFile(file, tempDirectory);
-                        if (downloadedFile != null) {
-                            try {
-                                String analysisResult = null;
-                                String curFileTypeChi = "文档";
-                                if (isDocument(fileType)) {
-                                    analysisResult = analyzeDocument(downloadedFile, fileType, openId);
-                                } else if (isPdf(fileType)) {
-                                    analysisResult = analyzePdf(downloadedFile, openId, difyKnowledgeId);
-                                } else if (isImage(fileType)) {
-                                    analysisResult = analyzeImage(downloadedFile, openId, difyKnowledgeId);
-                                    curFileTypeChi = "图片";
-                                } else if (isAudio(fileType)) {
-                                    analysisResult = analyzeAudio(downloadedFile, openId, difyKnowledgeId);
-                                    curFileTypeChi = "音频";
-                                } else if (isVideo(fileType)) {
-                                    analysisResult = analyzeVideo(downloadedFile, openId, difyKnowledgeId);
-                                } else if (isArchive(fileType)) {
-                                    analysisResult = analyzeArchive(downloadedFile, openId, caseId, tempDirectory, difyKnowledgeId);
-                                } else {
-                                    log.info("不支持的文件类型: {}", fileType);
-                                }
-                                
-                                // 将分析结果添加到记录中
-                                if (analysisResult != null) {
-                                    Map<String, Object> record = new HashMap<>();
-                                    record.put("原始文件名", file.getFileName());
-                                    record.put("文件生成时间", System.currentTimeMillis());
-                                    record.put("文件类型", curFileTypeChi);
-                                    record.put("文件内容", analysisResult);
-                                    record.put("创建人", openId);
+            // 开始递归处理文件
+            analyzeFilesRecursive(folderToken, openId, caseId, caseName, difyKnowledgeId, cardInfo, tempDirectory, counter);
 
-
-                                    uploadToMultiSheet("AY2JbDhHBaU7HYsvjMncKMh7n6Y", "tblXyJKE7HZlDWFE", openId,record);
-                                }
-                            } finally {
-                                downloadedFile.delete();
-                            }
-                        }
-                    }
-                    
-                    messageService.sendMessage(openId, 
-                        String.format("完成分析: %s", file.getFileName()), openId);
-                        
-                } catch (Exception e) {
-                    log.error("分析文件失败: {}", file.getFileName(), e);
-                    messageService.sendMessage(openId, 
-                        String.format("分析文件失败: %s, 原因: %s", file.getFileName(), e.getMessage()), openId);
-                }
-            }
-
-
-            // 5. 清理临时目录
+            // 清理临时目录
             try {
                 FileUtils.deleteDirectory(tempDirectory);
             } catch (Exception e) {
                 log.error("清理临时目录失败", e);
             }
+             // 添加失败文件报告
+            if (!counter.failedFiles.isEmpty()) {
+            StringBuilder failureReport = new StringBuilder("\n以下文件解析失败：\n");
+            for (String failedFile : counter.failedFiles) {
+                failureReport.append("- ").append(failedFile).append("\n");
+            }
+            messageService.updateStreamingContent(cardInfo, failureReport.toString(), counter.messageCount++);
+        }
 
-            // 6. 发送分析完成的消息
-            messageService.sendCardMessage(openId, cardTemplateService.buildMessageCard("文件分析完毕", caseName));
-            
+        // 发送分析完成的消息
+        String completionMsg = String.format("\n文件分析完毕，共处理%d个文件，成功%d个，失败%d个", 
+            counter.totalFiles, 
+            counter.totalFiles - counter.failedFiles.size(),
+            counter.failedFiles.size());
+        messageService.updateStreamingContent(cardInfo, completionMsg, counter.messageCount++);
         } catch (Exception e) {
             log.error("文件分析过程发生异常", e);
-            messageService.sendMessage(openId, "文件分析过程发生异常: " + e.getMessage(), openId);
+            messageService.updateStreamingContent(cardInfo, "文件分析过程发生异常:", counter.messageCount++);
+            messageService.stopStreamingMode(cardInfo,counter.messageCount++);
         }
     }
-    
+
+    private void analyzeFilesRecursive(String folderToken, String openId, String caseId, String caseName, 
+                                     String difyKnowledgeId, String cardInfo, File tempDirectory, FileCounter counter) {
+        List<FileInfo> files = getFolderFiles(folderToken);
+        
+        for (FileInfo file : files) {
+            try {
+                String fileType = getFileType(file.getFileName());
+                
+                if (isFolder(fileType)) {
+                    // 递归处理子文件夹
+                    analyzeFilesRecursive(file.getFileToken(), openId, caseId, caseName, difyKnowledgeId, cardInfo, tempDirectory, counter);
+                } else {
+                    // 更新进度信息
+                    counter.processedFiles++;
+                    String progressMsg = String.format("正在分析第%d/%d个文件: %s", 
+                        counter.processedFiles, counter.totalFiles, file.getFileName());
+                    boolean b = messageService.updateStreamingContent(cardInfo, progressMsg, counter.messageCount);
+                    if (!b) {
+                        messageService.restartStreamingMode(cardInfo, counter.messageCount++);
+                        messageService.updateStreamingContent(cardInfo, progressMsg, counter.messageCount++);
+                    }else{
+                        counter.messageCount++;
+                    }
+
+                    // 处理文件
+                    File downloadedFile = downloadFile(file, tempDirectory);
+                    if (downloadedFile != null) {
+                        try {
+                            String analysisResult = null;
+                            String curFileTypeChi = "文档";
+                            if (isDocument(fileType)) {
+                                analysisResult = analyzeDocument(downloadedFile, fileType, openId);
+                            } else if (isPdf(fileType)) {
+                                analysisResult = analyzePdf(downloadedFile, openId, difyKnowledgeId);
+                            } else if (isImage(fileType)) {
+                                analysisResult = analyzeImage(downloadedFile, openId, difyKnowledgeId);
+                                curFileTypeChi = "图片";
+                            } else if (isAudio(fileType)) {
+                                analysisResult = analyzeAudio(downloadedFile, openId, difyKnowledgeId);
+                                curFileTypeChi = "音频";
+                            } else if (isVideo(fileType)) {
+                                analysisResult = analyzeVideo(downloadedFile, openId, difyKnowledgeId);
+                            } else if (isArchive(fileType)) {
+                                analysisResult = analyzeArchive(downloadedFile, openId, caseId, tempDirectory, difyKnowledgeId);
+                            } else {
+                                log.info("不支持的文件类型: {}", fileType);
+                            }
+                            
+                            // 将分析结果添加到记录中
+                            if (analysisResult != null) {
+                                Map<String, Object> record = new HashMap<>();
+                                record.put("原始文件名", file.getFileName());
+                                record.put("文件生成时间", System.currentTimeMillis());
+                                record.put("文件类型", curFileTypeChi);
+                                record.put("文件内容", analysisResult);
+                                record.put("创建人", openId);
+
+
+                                uploadToMultiSheet("AY2JbDhHBaU7HYsvjMncKMh7n6Y", "tblXyJKE7HZlDWFE", openId,record);
+                            }
+                        } finally {
+                            downloadedFile.delete();
+                        }
+                    }
+                }
+                
+                messageService.sendMessage(openId, 
+                    String.format("完成分析: %s", file.getFileName()), openId);
+                    
+            } catch (Exception e) {
+                log.error("分析文件失败: {}", file.getFileName(), e);
+                messageService.sendMessage(openId, 
+                    String.format("分析文件失败: %s, 原因: %s", file.getFileName(), e.getMessage()), openId);
+            }
+        }
+    }
+
+//    @Override
+//    public boolean uploadToMultiSheet(String appToken, String tableId, String openId, Map<String, Object> records) {
+//        return false;
+//    }
+
     /**
      * 下载文件到临时目录
      */
@@ -477,14 +554,11 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
     private String analyzePdf(File file, String openId, String difyKnowledgeId) {
         try {
             log.info("开始分析Pdf: {}", file.getName());
-            messageService.sendMessage(openId, String.format("开始分析Pdf: %s", file.getName()), openId);
 
             // 1. 调用dify工作流进行图片分析
             String analysisResult = difyService.analyzeFileBlocking(file);
             if (analysisResult == null || analysisResult.isEmpty()) {
                 log.info("PDF可能是图片类型,尝试转换为图片后分析: {}", file.getName());
-                messageService.sendMessage(openId, String.format("PDF是图片类型,正在转换并分析: %s", file.getName()), openId);
-                
                 // 使用PDFBox加载PDF文档
                 PDDocument document = PDDocument.load(file);
                 PDFRenderer pdfRenderer = new PDFRenderer(document);
@@ -536,8 +610,8 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
                 return null;
             }
 
-            log.info("音频分析和上传完成: {}", file.getName());
-            messageService.sendMessage(openId, String.format("音频分析和上传完成: %s", file.getName()), openId);
+            log.info("PDF上传完成: {}", file.getName());
+            messageService.sendMessage(openId, String.format("PDF上传完成: %s", file.getName()), openId);
 
             return analysisResult;
         } catch (Exception e) {
@@ -610,7 +684,7 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
     @Override
     public boolean uploadToMultiSheet(String appToken, String tableId,String openId,Map<String, Object> records) {
         try {
-            log.info("开始上传数据到多维表格: appToken={}, tableId={}, recordCount={}", 
+            log.info("开始上传数据到多维表格: appToken={}, tableId={}, recordCount={}",
                 appToken, tableId, records.size());
 
 
@@ -622,14 +696,14 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
                     .build();
             // 调用API
             CreateAppTableRecordResp resp = feishuClient.bitable().v1().appTableRecord().create(req);
-            
+
 
             // 处理响应
             if (resp.success()) {
                 log.info("成功上传记录到多维表格");
                 return true;
             } else {
-                log.error("数据上传失败: code={}, msg={}, reqId={}", 
+                log.error("数据上传失败: code={}, msg={}, reqId={}",
                     resp.getCode(), resp.getMsg(), resp.getRequestId());
                 return false;
             }

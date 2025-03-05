@@ -1240,10 +1240,16 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
             }
 
 //            cardTemplateService.buildMessageCard(openId, caseId, folderToken);
-            messageService.sendCardMessage(caseInfo.getOpenId(), cardTemplateService.buildMessageCard("材料开始分析",caseInfo.getCaseName()));
-            log.info("发送文件分类卡片成功: openId={}, caseId={}", openId, caseId);
+            String documentType = "文件生成";
+            String cardTitle = documentType + ": " + caseInfo.getCaseName();
+            String cardInfo = messageService.sendStreamingMessage(openId, "正在处理" + documentType + "生成请求，请稍候...", cardTitle);
 
-            folderService.analyzeFilesAsync(folderToken,openId,caseId,caseInfo.getCaseName(),difyKnowledgeId);
+            if (cardInfo == null) {
+                log.error("创建流式卡片失败");
+            }
+            log.info("创建{}流式卡片成功: cardInfo={}", documentType, cardInfo);
+
+            folderService.analyzeFilesAsync(folderToken,openId,caseId,caseInfo.getCaseName(),difyKnowledgeId,cardInfo);
         } catch (Exception e) {
             log.error("发送文件分类卡片失败: openId={}, caseId={}", openId, caseId, e);
             messageService.sendMessage(openId, "发送文件分类卡片失败", openId);
