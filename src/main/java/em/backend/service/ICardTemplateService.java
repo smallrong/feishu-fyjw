@@ -34,7 +34,7 @@ public interface ICardTemplateService {
      * 构建创建成功卡片
      * @param url 文件夹URL
      */
-    String buildCreateSuccessCard(String url);
+    String buildCreateSuccessCard(String caseName,String url);
 
     /**
      * 构建选择成功卡片

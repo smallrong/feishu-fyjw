@@ -139,7 +139,7 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
             }
 
             // 7. 构建成功响应
-            String cardContent = cardTemplateService.buildCreateSuccessCard(folderResult.getUrl());
+            String cardContent = cardTemplateService.buildCreateSuccessCard(caseName,folderResult.getUrl());
             CallBackCard card = new CallBackCard();
             card.setType("raw");
             card.setData(JSONObject.parseObject(cardContent));

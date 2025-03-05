@@ -97,14 +97,15 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
     }
 
     @Override
-    public String buildCreateSuccessCard(String url) {
+    public String buildCreateSuccessCard(String caseName,String url) {
         try {
             // 创建模板变量
             Map<String, Object> templateVariables = new HashMap<>();
             
             // 设置URL
             templateVariables.put("url", url);
-            
+            templateVariables.put("case", caseName);
+
             // 创建卡片模板数据
             Map<String, Object> templateData = new HashMap<>();
             templateData.put("template_id", "AAqB3OW3kjMy0"); // 替换为实际的模板ID
