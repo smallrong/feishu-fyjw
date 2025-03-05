@@ -223,6 +223,51 @@ public class MessageServiceImpl implements IMessageService {
             return false;
         }
     }
+
+    @Override
+    public boolean restartStreamingMode(String cardInfo, int sequence) {
+        try {
+            String[] parts = cardInfo.split(":");
+            if (parts.length != 2) {
+                log.error("卡片信息格式错误: {}", cardInfo);
+                return false;
+            }
+
+            String cardId = parts[0];
+
+            log.info("重置卡片流式更新: cardId=[{}], sequence=[{}]", cardId, sequence);
+
+            // 构建请求体
+            JSONObject settings = new JSONObject();
+            JSONObject config = new JSONObject();
+            config.put("streaming_mode", true);
+            settings.put("config", config);
+
+            // 构建请求
+            SettingsCardReq req = SettingsCardReq.newBuilder()
+                    .cardId(cardId)
+                    .settingsCardReqBody(SettingsCardReqBody.newBuilder()
+                            .settings(settings.toString())
+                            .sequence(sequence)
+                            .build())
+                    .build();
+
+            // 发送请求
+            SettingsCardResp resp = feishuClient.cardkit().v1().card().settings(req);
+
+            // 处理响应
+            if (!resp.success()) {
+                log.error("重启卡片流式更新失败: code=[{}], msg=[{}]", resp.getCode(), resp.getMsg());
+                return false;
+            }
+
+            log.info("重启卡片流式更新成功");
+            return true;
+        } catch (Exception e) {
+            log.error("重启卡片流式更新异常", e);
+            return false;
+        }
+    }
     
     @Override
     public boolean sendFileMessage(String receiveId, String fileKey, String fileName) {

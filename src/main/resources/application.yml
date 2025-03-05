@@ -33,11 +33,12 @@ spring:
     # Redis数据库索引（默认为0）
     database: 0
     # Redis服务器地址
-    host: localhost
+
+    host: r-bp11xxsuz83hqsqzq0pd.redis.rds.aliyuncs.comhost
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
-    password: 
+    password: P@ssw0rdlzr
     # 连接超时时间
     timeout: 10s
     # lettuce连接池配置
@@ -106,8 +107,8 @@ logging:
     name: logs/backend.log
 
 feishu:
-  app-id: cli_a73db2954dfad00e
-  app-secret: Kj5jOfzZRJrAjfkOudVg6bCZrnfNNBgb
+  app-id: cli_a73c62ce90b0d013
+  app-secret: 8juXimyoR1HEatIpx4aGGhs8wcKCEcQm
 
 
 dify:

@@ -49,7 +49,17 @@ public interface IMessageService {
      * @return 是否成功
      */
     boolean stopStreamingMode(String cardInfo, int sequence);
-    
+
+
+    /**
+     * 重启卡片的流式更新模式
+     *
+     * @param cardInfo 卡片信息，格式为"cardId:elementId"
+     * @param sequence 序列号
+     * @return 是否成功
+     */
+    boolean restartStreamingMode(String cardInfo, int sequence);
+
     /**
      * 发送文件消息
      * 
