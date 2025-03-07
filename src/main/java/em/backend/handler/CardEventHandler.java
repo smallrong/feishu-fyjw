@@ -54,10 +54,19 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
                     log.info("案件总览选择的案件ID: {}", caseId);
                     return caseService.handleCaseOverview(caseId, operatorId);
                     
-                case "button_study_submit":
+                case "button_study_submit_no":
                     // 处理法律研究输入
                     log.info("法律研究输入: {}", formData);
                     return caseService.handleLegalResearchInput(formData, operatorId);
+                    
+                case "button_study_inquire_submit_ok":
+                    // 处理法律研究查询确认
+                    log.info("法律研究查询确认: {}", formData);
+                
+                case "button_study_inquire_submit_no":
+                    // 处理法律研究查询取消
+                    log.info("法律研究查询取消: {}", formData);
+                   
                     
                 case "button_strategy_analysis":
                     // 处理策略分析请求

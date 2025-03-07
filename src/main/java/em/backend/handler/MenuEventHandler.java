@@ -10,6 +10,9 @@ import em.backend.service.IMessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import em.backend.common.CardTemplateConstants;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -52,10 +55,15 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
                     break;
                     
                 case "legal_research":  // 法律研究事件
-                    // 直接发送法律研究卡片，不需要先选择案件
                     UserStatus userStatus = caseService.getCurrentCase(openId);
                     if (userStatus != null && userStatus.getCurrentCaseId() != null) {
-                        caseService.sendLegalResearchCard(openId, userStatus.getCurrentCaseId().toString());
+                        // 发送法律研究模板卡片
+                        CaseInfo caseInfo = caseService.getCurrentCaseInfo(userStatus.getCurrentCaseId().toString());
+                        Map<String, Object> params = new HashMap<>();
+                        params.put("case", caseInfo.getCaseName());
+                        
+                        String cardContent = cardTemplateService.buildTemplateCard(CardTemplateConstants.LEGAL_RESEARCH, params);
+                        messageService.sendCardMessage(openId, cardContent);
                     } else {
                         // 如果没有当前案件，提示用户先选择案件
                         messageService.sendMessage(openId, "请先选择一个案件", openId);

@@ -3,9 +3,9 @@ package em.backend.service.impl;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import em.backend.common.CardTemplateConstants;
 import em.backend.pojo.CaseInfo;
 import em.backend.service.ICardTemplateService;
-import em.backend.service.IFeishuFolderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -65,7 +65,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
 
             // 创建卡片模板数据
             Map<String, Object> templateData = new HashMap<>();
-            templateData.put("template_id", "AAqB3OtipZWJR"); // 替换为实际的模板ID
+            templateData.put("template_id", CardTemplateConstants.SELECT_CASE_CARD);
             templateData.put("template_variable", templateVariables);
 
             // 创建完整的卡片内容
@@ -108,7 +108,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
 
             // 创建卡片模板数据
             Map<String, Object> templateData = new HashMap<>();
-            templateData.put("template_id", "AAqB3OW3kjMy0"); // 替换为实际的模板ID
+            templateData.put("template_id", CardTemplateConstants.CREATE_CASE_SUCCESS);
             templateData.put("template_variable", templateVariables);
             
             // 创建完整的卡片内容
@@ -135,7 +135,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
             
             // 创建卡片模板数据
             Map<String, Object> templateData = new HashMap<>();
-            templateData.put("template_id", "AAqB3OKYhZkFC"); // 使用实际的模板ID
+            templateData.put("template_id", CardTemplateConstants.SELECT_CASE_SUCCESS);
             templateData.put("template_variable", templateVariables);
             
             // 创建完整的卡片内容
@@ -198,7 +198,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
     public String buildStreamingCard(String title) {
         try {
             // 读取JSON模板
-            ClassPathResource resource = new ClassPathResource("template/json.json");
+            ClassPathResource resource = new ClassPathResource("template/StreamingMessage.json");
             String jsonTemplate = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
             
             // 替换模板中的变量
@@ -237,7 +237,7 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
             
             // 创建卡片模板数据
             Map<String, Object> templateData = new HashMap<>();
-            templateData.put("template_id", "AAqB02Ps6ef1E"); // 法律研究模板ID
+            templateData.put("template_id", CardTemplateConstants.LEGAL_RESEARCH);
             templateData.put("template_variable", templateVariables);
             
             // 创建完整的卡片内容
