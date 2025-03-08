@@ -3,7 +3,9 @@ package em.backend.service.impl;
 import em.backend.dify.IDifyClient;
 import em.backend.dify.handler.FeishuStreamingMessageHandler;
 import em.backend.mapper.UserGroupMapper;
+import em.backend.mapper.CaseInfoMapper;
 import em.backend.pojo.UserGroup;
+import em.backend.pojo.CaseInfo;
 import em.backend.pojo.UserStatus;
 import em.backend.service.IDifyMessageService;
 import em.backend.service.IMessageService;
@@ -12,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -26,6 +30,7 @@ public class DifyMessageServiceImpl implements IDifyMessageService {
     private final IMessageService messageService;
     private final UserGroupMapper userGroupMapper;
     private final IUserStatusService userStatusService;
+    private final CaseInfoMapper caseInfoMapper;
 
     @Override
     public boolean handleUserMessage(String openId, String chatId, String query ,String _conversationId,
@@ -78,9 +83,21 @@ public class DifyMessageServiceImpl implements IDifyMessageService {
             
             CompletableFuture.runAsync(() -> {
                 try {
+                    // 获取当前用户状态和案件信息
+                    Map<String, Object> inputs = null;
+                    if (userStatus != null && userStatus.getCurrentCaseId() != null) {
+                        CaseInfo caseInfo = caseInfoMapper.selectById(userStatus.getCurrentCaseId());
+                        if (caseInfo != null && caseInfo.getDifyKnowledgeId() != null) {
+                            // 将知识库ID添加到额外变量中
+                            inputs = new HashMap<>();
+                            inputs.put("knowledge_id", caseInfo.getDifyKnowledgeId());
+                            log.info("获取到案件知识库ID: {}", caseInfo.getDifyKnowledgeId());
+                        }
+                    }
+                    
                     difyClient.chatStreaming(
                         query,          // 用户输入
-                        null,           // 无额外变量
+                        inputs,         // 额外变量 - 知识库ID
                         openId,         // 用户标识
                         messageHandler, // 消息处理器
                         conversationId,
