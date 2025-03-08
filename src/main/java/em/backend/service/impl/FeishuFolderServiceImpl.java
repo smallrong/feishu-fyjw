@@ -401,7 +401,7 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
                         record.put("文件内容", analysisResult);
                         record.put("创建人", openId);
 
-                        uploadToMultiSheet("AY2JbDhHBaU7HYsvjMncKMh7n6Y", "tblXyJKE7HZlDWFE", openId, record);
+                        uploadToMultiSheet("DznnbROuUa1d9DsOA8McwW3Kn8b", "tblNPVzVsaIHWkYr", openId, record);
                     }
                 } finally {
                     downloadedFile.delete();
@@ -517,7 +517,7 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
     private String analyzeImage(File file, String openId, String difyKnowledgeId) {
         try {
             log.info("开始分析图片: {}", file.getName());
-            messageService.sendMessage(openId, String.format("开始分析图片: %s", file.getName()), openId);
+//            messageService.sendMessage(openId, String.format("开始分析图片: %s", file.getName()), openId);
 
             // 1. 调用dify工作流进行图片分析
             String analysisResult = difyService.analyzeFileBlocking(file);
@@ -538,7 +538,7 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
             }
             
             log.info("图片分析和上传完成: {}", file.getName());
-            messageService.sendMessage(openId, String.format("图片分析和上传完成: %s", file.getName()), openId);
+//            messageService.sendMessage(openId, String.format("图片分析和上传完成: %s", file.getName()), openId);
 
             return analysisResult;
         } catch (Exception e) {
@@ -555,7 +555,7 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
     private String analyzeAudio(File file, String openId, String difyKnowledgeId) {
         try {
             log.info("开始分析音频: {}", file.getName());
-            messageService.sendMessage(openId, String.format("开始分析音频: %s", file.getName()), openId);
+//            messageService.sendMessage(openId, String.format("开始分析音频: %s", file.getName()), openId);
 
             // 1. 调用dify工作流进行图片分析
             String analysisResult = difyService.analyzeFileBlocking(file);
@@ -576,7 +576,7 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
             }
 
             log.info("音频分析和上传完成: {}", file.getName());
-            messageService.sendMessage(openId, String.format("音频分析和上传完成: %s", file.getName()), openId);
+//            messageService.sendMessage(openId, String.format("音频分析和上传完成: %s", file.getName()), openId);
 
             return analysisResult;
         } catch (Exception e) {
