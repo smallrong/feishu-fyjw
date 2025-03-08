@@ -28,12 +28,20 @@ public class DifyMessageServiceImpl implements IDifyMessageService {
     private final IUserStatusService userStatusService;
 
     @Override
-    public boolean handleUserMessage(String openId, String chatId, String query) {
+    public boolean handleUserMessage(String openId, String chatId, String query ,String _conversationId,
+                                     String _apikey ) {
         log.info("处理用户消息: 用户=[{}], 查询=[{}]", openId, query);
         try {
             // 查询用户群组信息
             UserGroup userGroup = userGroupMapper.selectById(openId);
-            String conversationId = (userGroup != null) ? userGroup.getChatId() : null;
+
+            String conversationId;
+            if(_apikey!=null && !_apikey.isEmpty()) {
+                //当前处于法律研究模式
+                conversationId = _conversationId;
+            }else {
+                conversationId =   (userGroup != null) ? userGroup.getChatId() : null;
+            }
 
             // 查询用户当前案件
             UserStatus userStatus = userStatusService.lambdaQuery()
@@ -44,15 +52,25 @@ public class DifyMessageServiceImpl implements IDifyMessageService {
             String currentCase = userStatus != null && userStatus.getCurrentCaseName() != null
                     ? userStatus.getCurrentCaseName()
                     : "未选择案件";
-
-
-            // 1. 创建并发送流式卡片
-            String cardInfo = messageService.sendStreamingMessage(openId, "思考中...", currentCase);
-            if (cardInfo == null) {
-                log.error("创建流式卡片失败");
-                return false;
+            String cardInfo = null;
+            if(_apikey != null){
+                // 1. 创建并发送流式卡片
+                cardInfo = messageService.sendStreamingMessageV2(openId, "思考中...", currentCase);
+                System.out.println(cardInfo);
+                if (cardInfo == null) {
+                    log.error("创建流式卡片失败");
+                    return false;
+                }
+                log.info("创建法律流式卡片成功: [{}]", cardInfo);
+            }else {
+                // 1. 创建并发送流式卡片
+                cardInfo = messageService.sendStreamingMessage(openId, "思考中...", currentCase);
+                if (cardInfo == null) {
+                    log.error("创建流式卡片失败");
+                    return false;
+                }
+                log.info("创建普通流式卡片成功: [{}]", cardInfo);
             }
-            log.info("创建流式卡片成功: [{}]", cardInfo);
             
             // 2. 创建消息处理器并异步调用Dify流式API
             FeishuStreamingMessageHandler messageHandler = new FeishuStreamingMessageHandler(
@@ -65,9 +83,10 @@ public class DifyMessageServiceImpl implements IDifyMessageService {
                         null,           // 无额外变量
                         openId,         // 用户标识
                         messageHandler, // 消息处理器
-                        conversationId, // 使用查询到的会话ID
+                        conversationId,
                         null,           // 无文件
-                        true            // 自动生成标题
+                        true,           // 自动生成标题
+                        _apikey
                     );
                 } catch (Exception e) {
                     log.error("调用Dify API失败: {}", e.getMessage());

@@ -73,6 +73,12 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
      * 案情陈述工作流API Key
      */
     private static final String CASE_STATEMENT_WORKFLOW_KEY = "app-6QQh84PayZnD2GDL1lfVtNNs";
+     
+    /**
+     * 法律研究聊天API Key
+     */
+    public static final String LEGAL_RESEARCH_CHAT_KEY = "app-apBHFUFvPbfY47LTUrvliMLL";
+    
 
     private final IFeishuFolderService folderService;
     private final IUserStatusService userStatusService;
@@ -86,6 +92,8 @@ public class CaseServiceImpl extends ServiceImpl<CaseInfoMapper, CaseInfo> imple
     private final ICaseLegalResearchDelegate caseLegalResearchDelegate;
     private final ICaseStrategyAnalysisDelegate caseStrategyAnalysisDelegate;
     private final ICaseDocumentGenerationDelegate caseDocumentGenerationDelegate;
+    
+
 
     @Override
     public P2CardActionTriggerResponse handleCreateCaseForm(Map<String, Object> formData, String operatorId) {

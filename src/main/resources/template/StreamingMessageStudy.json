@@ -1,0 +1,138 @@
+{
+    "schema": "2.0",
+    "config": {
+        "update_multi": true,
+        "locales": [
+            "en_us"
+        ],
+        "streaming_mode": true,
+        "streaming_config": {
+            "print_step": {
+                "default": 1
+            },
+            "print_frequency_ms": {
+                "default": 70
+            },
+            "print_strategy": "fast"
+        },
+        "style": {
+            "text_size": {
+                "normal_v2": {
+                    "default": "normal",
+                    "pc": "normal",
+                    "mobile": "heading"
+                }
+            }
+        }
+    },
+    "body": {
+        "direction": "vertical",
+        "padding": "12px 12px 12px 12px",
+        "elements": [
+            {
+                "tag": "hr",
+                "margin": "0px 0px 0px 0px"
+            },
+            {
+                "tag": "markdown",
+                "content": "[生成中...]",
+                "element_id": "streaming_sey",
+                "text_align": "left",
+                "text_size": "normal_v2",
+                "margin": "0px 0px 0px 0px"
+            },
+            {
+                "tag": "hr",
+                "margin": "0px 0px 0px 0px"
+            },
+            {
+                "tag": "div",
+                "text": {
+                    "tag": "plain_text",
+                    "content": "是否要结合您的咨询生成法律研究报告？您也可以继续咨询",
+                    "text_size": "normal_v2",
+                    "text_align": "left",
+                    "text_color": "default"
+                },
+                "margin": "0px 0px 0px 0px"
+            },
+            {
+                "tag": "column_set",
+                "horizontal_spacing": "8px",
+                "horizontal_align": "left",
+                "columns": [
+                    {
+                        "tag": "column",
+                        "width": "weighted",
+                        "elements": [
+                            {
+                                "tag": "button",
+                                "text": {
+                                    "tag": "plain_text",
+                                    "content": "基于目前咨询生成"
+                                },
+                                "behaviors": [
+                                    {
+                                        "type": "callback",
+                                        "value": {
+                                            "key": "button_baseOn_chat_study"
+                                        }
+                                    }
+                                ],
+                                "type": "primary_filled",
+                                "width": "fill",
+                                "size": "medium",
+                                "margin": "0px 0px 0px 0px"
+                            }
+                        ],
+                        "vertical_align": "top",
+                        "weight": 1
+                    },
+                    {
+                        "tag": "column",
+                        "width": "weighted",
+                        "elements": [
+                            {
+                                "tag": "button",
+                                "text": {
+                                    "tag": "plain_text",
+                                    "content": "直接生成"
+                                },
+                                "type": "default",
+                                "behaviors": [
+                                    {
+                                        "type": "callback",
+                                        "value": {
+                                            "key": "button_direct_study"
+                                        }
+                                    }
+                                ],
+                                "width": "fill",
+                                "size": "medium",
+                                "margin": "0px 0px 0px 0px"
+                            }
+                        ],
+                        "vertical_align": "top",
+                        "weight": 1
+                    }
+                ],
+                "margin": "0px 0px 0px 0px"
+            }
+        ]
+    },
+    "header": {
+        "title": {
+            "tag": "plain_text",
+            "content": "法律研究：${case}",
+            "i18n_content": {
+                "en_us": "👋 Dive into Bot Card Interactions: A Hands-on Tutorial"
+            }
+        },
+        "subtitle": {
+            "tag": "plain_text",
+            "content": ""
+        },
+        "template": "blue",
+        "padding": "12px 12px 12px 12px"
+    }
+}

@@ -107,8 +107,8 @@ logging:
     name: logs/backend.log
 
 feishu:
-  app-id: cli_a73db2954dfad00e
-  app-secret: Kj5jOfzZRJrAjfkOudVg6bCZrnfNNBgb
+  app-id: cli_a74bc115a7f8101c
+  app-secret: 1vnsX5sNtX0Z0amVOVDa9f8w1lGkGPzd
 
 
 dify:

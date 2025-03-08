@@ -7,6 +7,7 @@ import em.backend.pojo.UserStatus;
 import em.backend.service.ICardTemplateService;
 import em.backend.service.ICaseService;
 import em.backend.service.IMessageService;
+import em.backend.service.delegate.ICaseLegalResearchDelegate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
     private final ICaseService caseService;
     private final IMessageService messageService;
     private final ICardTemplateService cardTemplateService;
+    private final ICaseLegalResearchDelegate caseLegalResearchDelegate;
 
     @Override
     public Void handle(P2BotMenuV6 event) {
@@ -31,7 +33,6 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
             String eventKey = event.getEvent().getEventKey();
             String openId = event.getEvent().getOperator().getOperatorId().getOpenId();
             UserStatus fileClassStatus = caseService.getCurrentCase(openId);
-            CaseInfo currentCaseInfo = caseService.getCurrentCaseInfo(fileClassStatus.getCurrentCaseId().toString());
             // 根据菜单事件类型分发处理
             switch (eventKey) {
                 case "create_case":
@@ -43,10 +44,9 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
                     break;
 
                 case "case_overview":  // 新增案件总览事件
-
-
                     if (fileClassStatus != null && fileClassStatus.getCurrentCaseId() != null) {
                         // 如果有当前案件，发送文件分类卡片
+                        CaseInfo currentCaseInfo = caseService.getCurrentCaseInfo(fileClassStatus.getCurrentCaseId().toString());
                         caseService.handleCaseOverview(String.valueOf(currentCaseInfo.getId()), openId);
                     } else {
                         // 如果没有当前案件，提示用户先选择案件
@@ -55,19 +55,7 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
                     break;
                     
                 case "legal_research":  // 法律研究事件
-                    UserStatus userStatus = caseService.getCurrentCase(openId);
-                    if (userStatus != null && userStatus.getCurrentCaseId() != null) {
-                        // 发送法律研究模板卡片
-                        CaseInfo caseInfo = caseService.getCurrentCaseInfo(userStatus.getCurrentCaseId().toString());
-                        Map<String, Object> params = new HashMap<>();
-                        params.put("case", caseInfo.getCaseName());
-                        
-                        String cardContent = cardTemplateService.buildTemplateCard(CardTemplateConstants.LEGAL_RESEARCH, params);
-                        messageService.sendCardMessage(openId, cardContent);
-                    } else {
-                        // 如果没有当前案件，提示用户先选择案件
-                        messageService.sendMessage(openId, "请先选择一个案件", openId);
-                    }
+                    caseLegalResearchDelegate.handleLegalResearchMenuEvent(openId);
                     break;
                     
                 case "indictment_generation":  // 起诉状/答辩状生成事件
@@ -107,9 +95,9 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
                     break;
 
                 case "file_analysis":  // 文件分类事件
-
                     if (fileClassStatus != null && fileClassStatus.getCurrentCaseId() != null) {
                         // 如果有当前案件，发送文件分类卡片
+                        CaseInfo currentCaseInfo = caseService.getCurrentCaseInfo(fileClassStatus.getCurrentCaseId().toString());
                         caseService.sendFileClassificationCard(openId, fileClassStatus.getCurrentCaseId().toString(),currentCaseInfo.getDifyKnowledgeId());
                     } else {
                         // 如果没有当前案件，提示用户先选择案件

@@ -34,4 +34,9 @@ public class CardTemplateConstants {
      * 确定案由成功
      */
     public static final String CONFIRM_CAUSE_SUCCESS = "AAqB7FSv59taw";
+
+    /**
+     * 法律研究-确认修改关键字
+     */
+    public static final String LEGAL_RESEARCH_CONFIRM = "AAqBdiCdiczf3";
 } 

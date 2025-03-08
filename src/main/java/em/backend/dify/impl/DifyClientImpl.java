@@ -2,6 +2,7 @@ package em.backend.dify.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import em.backend.dify.IDifyClient;
 import em.backend.dify.model.ChatCompletionResponse;
 import em.backend.dify.model.ChunkResponse;
@@ -10,7 +11,13 @@ import em.backend.dify.model.workflow.WorkflowCompletionResponse;
 import em.backend.dify.model.workflow.WorkflowChunkResponse;
 import em.backend.dify.model.workflow.WorkflowRunRequest;
 import em.backend.mapper.UserGroupMapper;
+import em.backend.mapper.LegalResearchMessageMapper;
+import em.backend.mapper.UserStatusMapper;
+import em.backend.mapper.LegalResearchGroupMapper;
 import em.backend.pojo.UserGroup;
+import em.backend.pojo.LegalResearchMessage;
+import em.backend.pojo.UserStatus;
+import em.backend.pojo.LegalResearchGroup;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,6 +47,7 @@ import java.util.function.Consumer;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.nio.file.Files;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 @Slf4j
 @Service
@@ -55,7 +63,9 @@ public class DifyClientImpl implements IDifyClient {
     private final RestTemplate restTemplate = new RestTemplate();
     private final ExecutorService executorService = Executors.newCachedThreadPool();
     private final UserGroupMapper userGroupMapper;
-
+    private final LegalResearchMessageMapper legalResearchMessageMapper;
+    private final UserStatusMapper userStatusMapper;
+    private final LegalResearchGroupMapper legalResearchGroupMapper;
     @PostConstruct
     public void init() {
         log.info("Dify API URL: {}", apiUrl);
@@ -135,13 +145,22 @@ public class DifyClientImpl implements IDifyClient {
             Consumer<ChunkResponse> messageHandler,
             String conversationId, 
             List<FileObject> files, 
-            Boolean autoGenerateName) {
+            Boolean autoGenerateName,
+            String _apiKey) {
         log.info("调用Dify流式API: query=[{}], user=[{}]", query, user);
 
         executorService.submit(() -> {
             HttpURLConnection connection = null;
+
             BufferedReader reader = null;
             String newConversationId = conversationId;
+
+            if("load".equals(newConversationId)){
+                newConversationId = null;
+            }
+            // 添加StringBuilder用于收集AI回复
+            final StringBuilder aiResponse = new StringBuilder();
+            
             try {
                 // 构建请求体
                 Map<String, Object> requestBody = new HashMap<>();
@@ -149,9 +168,9 @@ public class DifyClientImpl implements IDifyClient {
                 requestBody.put("inputs", inputs != null ? inputs : new HashMap<>());
                 requestBody.put("response_mode", "streaming");
                 requestBody.put("user", user);
-                
-                if (conversationId != null) {
-                    requestBody.put("conversation_id", conversationId);
+
+                if (newConversationId != null) {
+                    requestBody.put("conversation_id", newConversationId);
                 }
                 
                 if (files != null && !files.isEmpty()) {
@@ -168,7 +187,7 @@ public class DifyClientImpl implements IDifyClient {
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");
-                connection.setRequestProperty("Authorization", "Bearer " + apiKey);
+                connection.setRequestProperty("Authorization", "Bearer " + (_apiKey == null? apiKey:_apiKey) );
                 
                 // 添加必要的请求头，模拟浏览器行为  不知道为什么不加报错403
                 connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
@@ -204,18 +223,74 @@ public class DifyClientImpl implements IDifyClient {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("data: ")) {
-                        String jsonData = line.substring(6); // 去掉 "data: " 前缀
+                        String jsonData = line.substring(6);
                         ChunkResponse chunk = JSON.parseObject(jsonData, ChunkResponse.class);
+                        
+                        // 收集AI的回复
+                        if ("message".equals(chunk.getEvent()) && chunk.getAnswer() != null) {
+                            aiResponse.append(chunk.getAnswer());
+                        }
+                        
                         messageHandler.accept(chunk);
-                        // 捕获新的会话ID
-                        if ( newConversationId == null || newConversationId.isEmpty()) {
+
+                        if ( conversationId == null && _apiKey == null ) {
+                            // 只有当原来没有对话组的时候，并且不在法律研究状态才插入
                             newConversationId = chunk.getConversation_id();
                             log.info("获取到新会话ID: {}", newConversationId);
-                            // 保存到数据库
                             saveConversationId(user, newConversationId);
                         }
-                        // 如果是结束事件或错误事件，则退出循环
+
                         if ("message_end".equals(chunk.getEvent()) || "error".equals(chunk.getEvent())) {
+                            // 如果是法律研究对话，保存消息记录
+                            if (_apiKey != null) {
+                                try {
+                                    if(newConversationId == null || newConversationId.isEmpty()){
+                                        newConversationId = chunk.getConversation_id();
+                                        log.info("获取到法律研究对话ID: {}", newConversationId);
+                                    }
+                                    
+                                    // 保存消息记录
+                                    LegalResearchMessage message = new LegalResearchMessage();
+                                    message.setGroupId(newConversationId);
+                                    message.setUserMessage(query);
+                                    message.setAssistantMessage(aiResponse.toString());
+                                    legalResearchMessageMapper.insert(message);
+                                    log.info("保存法律研究对话记录成功: groupId={}, conversationId={}",
+                                            newConversationId, newConversationId);
+
+                                    // 获取用户当前的 case_id
+                                    UserStatus currentStatus = userStatusMapper.selectOne(
+                                        new QueryWrapper<UserStatus>().eq("open_id", user));
+                                    if (currentStatus == null || currentStatus.getCurrentCaseId() == null) {
+                                        log.error("未找到用户当前案件信息: user={}", user);
+                                        return;
+                                    }
+
+                                    LegalResearchGroup group = new LegalResearchGroup();
+                                    log.debug("原来的id为{}",conversationId);
+                                    if(conversationId == null || conversationId.isEmpty()) {
+                                     //只有当原来没有对话组的时候，我才插入一个新的对话组
+                                        group.setDifyGroupId(newConversationId);
+                                        group.setOpenId(user);
+                                        group.setCaseId(currentStatus.getCurrentCaseId());
+                                        legalResearchGroupMapper.insert(group);
+                                        log.info("保存法律研究组信息成功: difyGroupId={}, openId={}, caseId={}",
+                                                newConversationId, user, currentStatus.getCurrentCaseId());
+                                    }
+
+
+
+                                    // 更新用户状态中的法律研究组ID
+                                    UserStatus userStatus = new UserStatus();
+                                    userStatus.setCurrentLegalResearchGroupId(newConversationId);
+                                    userStatus.setLegal(true);
+                                    userStatusMapper.update(userStatus, 
+                                        new QueryWrapper<UserStatus>().eq("open_id", user));
+                                    log.info("更新用户法律研究组ID成功: user={}, groupId={}", user, newConversationId);
+                                } catch (Exception e) {
+                                    log.error("保存法律研究对话记录失败", e);
+                                }
+                            }
                             break;
                         }
                     }
@@ -245,12 +320,15 @@ public class DifyClientImpl implements IDifyClient {
 
     private void saveConversationId(String userId, String conversationId) {
         try {
-            UserGroup userGroup = new UserGroup();
-            userGroup.setOpenId(userId);
-            userGroup.setChatId(conversationId);
-            userGroupMapper.insert(userGroup);
-            log.info("成功保存会话ID: userId={}, conversationId={}", userId, conversationId);
-        } catch (Exception e) {
+            UserGroup userGroup = userGroupMapper.selectById(userId);
+            if(userGroup == null || userGroup.getChatId() == null) {
+                UserGroup group = new UserGroup();
+                group.setOpenId(userId);
+                group.setChatId(conversationId);
+                userGroupMapper.insert(group);
+                log.info("成功保存会话ID: userId={}, conversationId={}", userId, conversationId);
+            }
+           } catch (Exception e) {
             log.error("保存会话ID失败", e);
         }
     }
@@ -492,7 +570,6 @@ public class DifyClientImpl implements IDifyClient {
         executorService.submit(() -> {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
-            
             try {
                 // 创建请求体
                 WorkflowRunRequest request = WorkflowRunRequest.createStreamingRequest(inputs, user, files);

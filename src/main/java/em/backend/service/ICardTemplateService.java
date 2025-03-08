@@ -57,6 +57,13 @@ public interface ICardTemplateService {
     String buildStreamingCard(String title);
 
     /**
+     * 法律研究专用流式消息构建
+     * @param title
+     * @return
+     */
+    String buildStreamingCardV2(String title);
+
+    /**
      * 构建卡片实体ID的内容
      * @param cardId 卡片实体ID
      * @return 卡片内容JSON字符串

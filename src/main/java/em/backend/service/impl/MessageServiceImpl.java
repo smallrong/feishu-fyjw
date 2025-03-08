@@ -45,12 +45,11 @@ public class MessageServiceImpl implements IMessageService {
                 : "未选择案件";
             
             String cardContent = cardTemplateService.buildMessageCard(content, currentCase);
-
             // 发送卡片消息
             CreateMessageReq req = CreateMessageReq.newBuilder()
-                    .receiveIdType(ReceiveIdTypeEnum.CHAT_ID.getValue())
+                    .receiveIdType(ReceiveIdTypeEnum.OPEN_ID.getValue())
                     .createMessageReqBody(CreateMessageReqBody.newBuilder()
-                            .receiveId(chatId)
+                            .receiveId(openId)
                             .msgType(MsgTypeEnum.MSG_TYPE_INTERACTIVE.getValue())
                             .content(cardContent)
                             .build())
@@ -65,6 +64,7 @@ public class MessageServiceImpl implements IMessageService {
         }
     }
 
+ 
     @Override
     public void sendCardMessage(String receiveId, String cardContent) {
         try {
@@ -143,7 +143,67 @@ public class MessageServiceImpl implements IMessageService {
             return null;
         }
     }
-    
+
+
+    @Override
+    public String sendStreamingMessageV2(String receiveId, String initialContent, String title) {
+        try {
+            // 1. 使用卡片模板服务构建流式卡片
+            String jsonTemplate = cardTemplateService.buildStreamingCardV2(title);
+            if (jsonTemplate == null) {
+                return null;
+            }
+            System.out.println("jsonTemplate"+jsonTemplate);
+            // 2. 创建卡片实体
+            CreateCardReq req = CreateCardReq.newBuilder()
+                    .createCardReqBody(CreateCardReqBody.newBuilder()
+                            .type("card_json")
+                            .data(jsonTemplate)
+                            .build())
+                    .build();
+
+            CreateCardResp resp = feishuClient.cardkit().v1().card().create(req);
+
+            if (!resp.success()) {
+                log.error("创建卡片实体失败: code={}, msg={}", resp.getCode(), resp.getMsg());
+                return null;
+            }
+
+            String cardId = resp.getData().getCardId();
+
+            // 3. 使用卡片模板服务构建卡片实体内容
+            String cardContent = cardTemplateService.buildCardEntityContent(cardId);
+
+            // 4. 发送卡片实体
+            CreateMessageReq sendReq = CreateMessageReq.newBuilder()
+                    .receiveIdType("open_id")
+                    .createMessageReqBody(CreateMessageReqBody.newBuilder()
+                            .receiveId(receiveId)
+                            .msgType("interactive")
+                            .content(cardContent)
+                            .build())
+                    .build();
+
+            CreateMessageResp sendResp = feishuClient.im().v1().message().create(sendReq);
+
+            if (sendResp.getCode() != 0) {
+                log.error("发送卡片实体失败: code={}, msg={}", sendResp.getCode(), sendResp.getMsg());
+                return null;
+            }
+
+            // 5. 更新初始内容
+            if (initialContent != null && !initialContent.isEmpty()) {
+                updateStreamingContent(cardId + ":streaming_sey", initialContent, 1);
+            }
+
+            return cardId + ":streaming_sey";
+        } catch (Exception e) {
+            log.error("发送流式消息失败", e);
+            return null;
+        }
+    }
+
+
     @Override
     public boolean updateStreamingContent(String cardInfo, String content, int sequence) {
         try {
@@ -152,7 +212,8 @@ public class MessageServiceImpl implements IMessageService {
                 log.error("卡片信息格式错误: {}", cardInfo);
                 return false;
             }
-            
+
+            log.debug("cardInfo: {}，content{}", cardInfo,content);
             String cardId = parts[0];
             String elementId = parts[1];
             
@@ -168,7 +229,7 @@ public class MessageServiceImpl implements IMessageService {
             ContentCardElementResp resp = feishuClient.cardkit().v1().cardElement().content(req);
             
             if (!resp.success()) {
-                log.error("更新流式消息内容失败: code={}, msg={}", resp.getCode(), resp.getMsg());
+                log.error("更新流式消息内容失败updateStreamingContent: code={}, msg={}", resp.getCode(), resp.getMsg());
                 return false;
             }
             

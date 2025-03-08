@@ -5,6 +5,7 @@ import com.lark.oapi.event.cardcallback.model.P2CardActionTrigger;
 import com.lark.oapi.event.cardcallback.model.P2CardActionTriggerResponse;
 import com.lark.oapi.event.cardcallback.model.CallBackToast;
 import em.backend.service.ICaseService;
+import em.backend.service.delegate.ICaseLegalResearchDelegate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2CardActionTriggerResponse> {
     
     private final ICaseService caseService;
+    private final ICaseLegalResearchDelegate caseLegalResearchDelegate;
     
     @Override
     public P2CardActionTriggerResponse handle(P2CardActionTrigger event) {
@@ -29,13 +31,16 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
             log.info("消息ID: {}", openMessageId);
             
             String actionName = event.getEvent().getAction().getName();
+            if(actionName == null || actionName.isEmpty()){
+                actionName = event.getEvent().getAction().getValue().toString();
+                log.info("actionName: {}", actionName);
+            }
             Map<String, Object> formData = event.getEvent().getAction().getFormValue();
             String operatorId = event.getEvent().getOperator().getOpenId();
 
             if (actionName == null) {
                 return null; // 不需要处理的事件
             }
-
             // 根据按钮动作处理
             switch (actionName) {
                 case "submit_create_case":
@@ -62,11 +67,17 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
                 case "button_study_inquire_submit_ok":
                     // 处理法律研究查询确认
                     log.info("法律研究查询确认: {}", formData);
+                    return caseLegalResearchDelegate.handleLegalResearchConfirm(operatorId);
                 
                 case "button_study_inquire_submit_no":
                     // 处理法律研究查询取消
                     log.info("法律研究查询取消: {}", formData);
-                   
+                    return caseLegalResearchDelegate.handleLegalResearchCancel(formData, operatorId);
+                    
+                case "button_keyword_ok":
+                    // 处理关键词确认，调用原有的法律研究输入处理
+                    log.info("处理关键词确认: formData={}", formData);
+                    return caseLegalResearchDelegate.handleLegalResearchInput(formData, operatorId);
                     
                 case "button_strategy_analysis":
                     // 处理策略分析请求

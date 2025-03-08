@@ -208,6 +208,21 @@ public class CardTemplateServiceImpl implements ICardTemplateService {
             return null;
         }
     }
+    @Override
+    public String buildStreamingCardV2(String title) {
+        try {
+            // 读取JSON模板
+            ClassPathResource resource = new ClassPathResource("template/StreamingMessageStudy.json");
+            String jsonTemplate = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+
+            // 替换模板中的变量
+            return jsonTemplate.replace("${case}", title);
+        } catch (Exception e) {
+            log.error("构建流式消息卡片失败", e);
+            return null;
+        }
+    }
+
 
     @Override
     public String buildCardEntityContent(String cardId) {

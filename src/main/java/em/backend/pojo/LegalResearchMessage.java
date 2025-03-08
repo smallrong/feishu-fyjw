@@ -5,24 +5,22 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-@TableName("user_status")
-public class UserStatus {
+@TableName("legal_research_message")
+public class LegalResearchMessage {
     
-    @TableId
-    private String openId;
+    @TableId(value = "message_id", type = IdType.AUTO)
+    private Long messageId;
     
-    private Long currentCaseId;
+    private String groupId;
     
-    private String currentCaseName;
-
-    private String  currentLegalResearchGroupId;
+    private String userMessage;
+    
+    private String assistantMessage;
     
     private LocalDateTime createTime;
     
     private LocalDateTime updateTime;
-
-    private  boolean isLegal;
-
+    
     @TableLogic
     private Integer deleted;
 } 

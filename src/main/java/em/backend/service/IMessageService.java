@@ -6,8 +6,10 @@ import java.io.File;
  * 消息服务接口
  */
 public interface IMessageService {
+
+
     /**
-     * 发送消息（带用户当前案件信息）
+     * 发送消息（带用户当前案件信息,卡片版）
      * @param chatId 会话ID
      * @param content 消息内容
      * @param openId 用户ID，用于查询当前案件
@@ -31,6 +33,14 @@ public interface IMessageService {
      */
     String sendStreamingMessage(String receiveId, String initialContent, String title);
 
+    /**
+     * 发送法律研究，V2版本
+     * @param receiveId
+     * @param initialContent
+     * @param title
+     * @return
+     */
+    String sendStreamingMessageV2(String receiveId, String initialContent, String title);
     /**
      * 更新流式消息内容
      * 
