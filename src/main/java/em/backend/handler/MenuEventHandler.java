@@ -28,7 +28,6 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
             String eventKey = event.getEvent().getEventKey();
             String openId = event.getEvent().getOperator().getOperatorId().getOpenId();
             UserStatus fileClassStatus = caseService.getCurrentCase(openId);
-            CaseInfo currentCaseInfo = caseService.getCurrentCaseInfo(fileClassStatus.getCurrentCaseId().toString());
             // 根据菜单事件类型分发处理
             switch (eventKey) {
                 case "create_case":
@@ -43,6 +42,8 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
 
 
                     if (fileClassStatus != null && fileClassStatus.getCurrentCaseId() != null) {
+
+                        CaseInfo currentCaseInfo = caseService.getCurrentCaseInfo(fileClassStatus.getCurrentCaseId().toString());
                         // 如果有当前案件，发送文件分类卡片
                         caseService.handleCaseOverview(String.valueOf(currentCaseInfo.getId()), openId);
                     } else {
@@ -100,7 +101,11 @@ public class MenuEventHandler implements IEventHandler<P2BotMenuV6, Void> {
 
                 case "file_analysis":  // 文件分类事件
 
+
+
+
                     if (fileClassStatus != null && fileClassStatus.getCurrentCaseId() != null) {
+                        CaseInfo currentCaseInfo = caseService.getCurrentCaseInfo(fileClassStatus.getCurrentCaseId().toString());
                         // 如果有当前案件，发送文件分类卡片
                         caseService.sendFileClassificationCard(openId, fileClassStatus.getCurrentCaseId().toString(),currentCaseInfo.getDifyKnowledgeId());
                     } else {
