@@ -1,15 +1,23 @@
 package em.backend.handler;
 
+import com.alibaba.fastjson2.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.lark.oapi.core.utils.Jsons;
 import com.lark.oapi.event.cardcallback.model.P2CardActionTrigger;
 import com.lark.oapi.event.cardcallback.model.P2CardActionTriggerResponse;
 import com.lark.oapi.event.cardcallback.model.CallBackToast;
+import em.backend.common.CardTemplateConstants;
+import em.backend.mapper.LegalResearchMessageMapper;
+import em.backend.pojo.LegalResearchMessage;
+import em.backend.pojo.UserStatus;
 import em.backend.service.ICaseService;
+import em.backend.service.IUserStatusService;
 import em.backend.service.delegate.ICaseLegalResearchDelegate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -19,6 +27,8 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
     
     private final ICaseService caseService;
     private final ICaseLegalResearchDelegate caseLegalResearchDelegate;
+    private final IUserStatusService userStatusService;
+    private final LegalResearchMessageMapper legalResearchMessageMapper;
     
     @Override
     public P2CardActionTriggerResponse handle(P2CardActionTrigger event) {
@@ -32,7 +42,7 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
             
             String actionName = event.getEvent().getAction().getName();
             if(actionName == null || actionName.isEmpty()){
-                actionName = event.getEvent().getAction().getValue().toString();
+                actionName = String.valueOf(event.getEvent().getAction().getValue().get("key"));
                 log.info("actionName: {}", actionName);
             }
             Map<String, Object> formData = event.getEvent().getAction().getFormValue();
@@ -70,9 +80,9 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
                     return caseLegalResearchDelegate.handleLegalResearchConfirm(operatorId);
                 
                 case "button_study_inquire_submit_no":
-                    // 处理法律研究查询取消
-                    log.info("法律研究查询取消: {}", formData);
-                    return caseLegalResearchDelegate.handleLegalResearchCancel(formData, operatorId);
+                    // 法律研究不咨询 ，直接生成
+                    log.info("法律研究不咨询 ，直接生成: {}", formData);
+                    return caseLegalResearchDelegate.handleLegalResearchCancel(formData, operatorId,null);
                     
                 case "button_keyword_ok":
                     // 处理关键词确认，调用原有的法律研究输入处理
@@ -88,7 +98,19 @@ public class CardEventHandler implements IEventHandler<P2CardActionTrigger, P2Ca
                     // 处理策略分析确认
                     log.info("策略分析确认: formData={}", formData);
                     return caseService.handleStrategyAnalysisConfirm(formData, operatorId,openMessageId);
-                    
+                case "button_baseOn_chat_study":
+                    // 确定使用上下文来生成内容
+                    log.info("法律研究使用上下文: {}", formData);
+                    return caseLegalResearchDelegate.handleLegalResearchWithContext(formData, operatorId);
+                case "button_direct_study":
+                    // 法律研究不咨询 ，直接生成
+                    log.info("法律研究不咨询 ，直接生成: {}", formData);
+                    return caseLegalResearchDelegate.handleLegalResearchCancel(formData, operatorId,null);
+                
+                case "study_logout":
+                    // 直接退出法律研究状态
+                    log.info("直接退出法律研究状态: operatorId={}", operatorId);
+                    return caseLegalResearchDelegate.handleLegalResearchLogout(operatorId);
                 default:
                     log.warn("未知的按钮动作: {}", actionName);
                     toast.setType("warning");
