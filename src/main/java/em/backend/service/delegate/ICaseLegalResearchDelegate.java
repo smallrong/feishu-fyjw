@@ -42,7 +42,7 @@ public interface ICaseLegalResearchDelegate {
      * @param operatorId 操作人ID
      * @return 卡片回调响应
      */
-    P2CardActionTriggerResponse handleLegalResearchCancel(Map<String, Object> formData, String operatorId);
+    P2CardActionTriggerResponse handleLegalResearchCancel(Map<String, Object> formData, String operatorId,String context);
 
     /**
      * 处理法律研究确认事件
@@ -52,4 +52,23 @@ public interface ICaseLegalResearchDelegate {
      * @return 卡片回调响应
      */
     P2CardActionTriggerResponse handleLegalResearchConfirm(String operatorId);
+
+    /**
+     * 处理基于历史对话上下文的法律研究请求
+     * 查询历史消息并作为上下文传递给处理函数
+     *
+     * @param formData 表单数据
+     * @param operatorId 操作人ID
+     * @return 卡片回调响应
+     */
+    P2CardActionTriggerResponse handleLegalResearchWithContext(Map<String, Object> formData, String operatorId);
+
+    /**
+     * 处理法律研究退出事件
+     * 清除用户的法律研究状态并发送退出成功的通知
+     *
+     * @param operatorId 操作人ID
+     * @return 卡片回调响应，包含退出成功的Toast消息
+     */
+    P2CardActionTriggerResponse handleLegalResearchLogout(String operatorId);
 } 

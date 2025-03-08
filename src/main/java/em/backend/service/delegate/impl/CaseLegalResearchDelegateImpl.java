@@ -21,11 +21,17 @@ import org.springframework.stereotype.Service;
 import em.backend.common.CardTemplateConstants;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import em.backend.mapper.LegalResearchGroupMapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import java.util.List;
 
 import java.util.Map;
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import em.backend.mapper.LegalResearchMessageMapper;
+import em.backend.pojo.LegalResearchMessage;
+import em.backend.service.impl.CaseServiceImpl;
 
 /**
  * 案件法律研究委托实现类
@@ -43,6 +49,7 @@ public class CaseLegalResearchDelegateImpl extends ServiceImpl<LegalResearchGrou
     private final ICardTemplateService cardTemplateService;
     private final IMessageService messageService;
     private final IDifyClient difyClient;
+    private final LegalResearchMessageMapper legalResearchMessageMapper;
 
     /**
      * 获取当前案件状态
@@ -286,7 +293,7 @@ public class CaseLegalResearchDelegateImpl extends ServiceImpl<LegalResearchGrou
     }
 
     @Override
-    public P2CardActionTriggerResponse handleLegalResearchCancel(Map<String, Object> formData, String operatorId) {
+    public P2CardActionTriggerResponse handleLegalResearchCancel(Map<String, Object> formData, String operatorId,String context) {
         P2CardActionTriggerResponse resp = new P2CardActionTriggerResponse();
         CallBackToast toast = new CallBackToast();
 
@@ -342,7 +349,7 @@ public class CaseLegalResearchDelegateImpl extends ServiceImpl<LegalResearchGrou
             }
             
             inputs.put("case", caseInfoBuilder.toString());
-            
+            inputs.put("context",context);
             // 添加知识库ID
             if (caseInfo.getDifyKnowledgeId() != null && !caseInfo.getDifyKnowledgeId().isEmpty()) {
                 log.info("案件关联知识库ID: {}", caseInfo.getDifyKnowledgeId());
@@ -460,6 +467,22 @@ public class CaseLegalResearchDelegateImpl extends ServiceImpl<LegalResearchGrou
             toast.setType("success");
             toast.setContent("法律研究分析请求已提交，请等待结果");
             resp.setToast(toast);
+            
+            // 7. 更新用户状态，退出法律研究模式
+            try {
+                UserStatus currentUserStatus = userStatusService.lambdaQuery()
+                        .eq(UserStatus::getOpenId, operatorId)
+                        .one();
+                if (currentUserStatus != null) {
+                    currentUserStatus.setCurrentLegalResearchGroupId(null);
+                    currentUserStatus.setLegal(false);
+                    userStatusService.updateById(currentUserStatus);
+                    log.info("已清除用户法律研究状态: operatorId={}", operatorId);
+                }
+            } catch (Exception e) {
+                log.error("更新用户状态失败，但不影响主流程", e);
+            }
+            
             return resp;
 
         } catch (Exception e) {
@@ -529,5 +552,101 @@ public class CaseLegalResearchDelegateImpl extends ServiceImpl<LegalResearchGrou
             resp.setToast(toast);
             return resp;
         }
+    }
+
+    @Override
+    public P2CardActionTriggerResponse handleLegalResearchWithContext(Map<String, Object> formData, String operatorId) {
+        log.info("处理基于历史对话上下文的法律研究请求: operatorId={}", operatorId);
+        
+        try {
+            // 查询用户当前法律研究组ID
+            UserStatus userStatus = userStatusService.lambdaQuery()
+                    .eq(UserStatus::getOpenId, operatorId)
+                    .one();
+            
+            if (userStatus == null || userStatus.getCurrentLegalResearchGroupId() == null) {
+                log.warn("用户没有当前法律研究会话: {}", operatorId);
+                return handleLegalResearchCancel(formData, operatorId, null);
+            }
+            
+            // 查询历史消息
+            List<LegalResearchMessage> messages = legalResearchMessageMapper.selectList(
+                    new LambdaQueryWrapper<LegalResearchMessage>()
+                    .eq(LegalResearchMessage::getGroupId, userStatus.getCurrentLegalResearchGroupId())
+                    .orderByAsc(LegalResearchMessage::getCreateTime)); // 按时间正序，越早的消息越在前面
+            
+            if (messages.isEmpty()) {
+                log.warn("用户法律研究会话没有历史消息: groupId={}", userStatus.getCurrentLegalResearchGroupId());
+                return handleLegalResearchCancel(formData, operatorId, null);
+            }
+            
+            // 拼接上下文内容
+            StringBuilder context = new StringBuilder();
+            for (LegalResearchMessage message : messages) {
+                context.append("用户: ").append(message.getUserMessage()).append("\n");
+                context.append("助手: ").append(message.getAssistantMessage()).append("\n\n");
+            }
+            
+            log.info("获取到法律研究历史消息，数量: {}", messages.size());
+            
+            // 更新用户状态，清除法律研究状态
+            userStatus.setCurrentLegalResearchGroupId(null);
+            userStatus.setLegal(false);
+            userStatusService.updateById(userStatus);
+            log.info("已更新用户状态，清除法律研究状态: operatorId={}", operatorId);
+            
+            return handleLegalResearchCancel(formData, operatorId, context.toString());
+            
+        } catch (Exception e) {
+            log.error("处理基于历史对话上下文的法律研究请求异常", e);
+            P2CardActionTriggerResponse response = buildErrorResponse("获取历史对话失败，请重试");
+            return response;
+        }
+    }
+
+    @Override
+    public P2CardActionTriggerResponse handleLegalResearchLogout(String operatorId) {
+        log.info("处理法律研究退出事件: operatorId={}", operatorId);
+        
+        try {
+            // 查询用户当前状态
+            UserStatus userStatus = userStatusService.lambdaQuery()
+                    .eq(UserStatus::getOpenId, operatorId)
+                    .one();
+            
+            if (userStatus != null) {
+                // 清除法律研究状态
+                userStatus.setCurrentLegalResearchGroupId(null);
+                userStatus.setLegal(false);
+                userStatusService.updateById(userStatus);
+                log.info("已清除用户法律研究状态: operatorId={}", operatorId);
+            } else {
+                log.warn("未找到用户状态: operatorId={}", operatorId);
+            }
+            
+            // 返回带有Toast的响应
+            P2CardActionTriggerResponse response = new P2CardActionTriggerResponse();
+            CallBackToast toast = new CallBackToast();
+            toast.setType("success");
+            toast.setContent("已退出法律研究模式");
+            response.setToast(toast);
+            return response;
+            
+        } catch (Exception e) {
+            log.error("处理法律研究退出事件异常", e);
+            return buildErrorResponse("退出法律研究模式失败，请重试");
+        }
+    }
+    
+    /**
+     * 构建错误响应
+     */
+    private P2CardActionTriggerResponse buildErrorResponse(String message) {
+        P2CardActionTriggerResponse response = new P2CardActionTriggerResponse();
+        CallBackToast toast = new CallBackToast();
+        toast.setType("error");
+        toast.setContent(message);
+        response.setToast(toast);
+        return response;
     }
 } 

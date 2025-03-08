@@ -71,6 +71,7 @@
                                     "tag": "plain_text",
                                     "content": "基于目前咨询生成"
                                 },
+                                "type": "primary_filled",
                                 "behaviors": [
                                     {
                                         "type": "callback",
@@ -79,14 +80,13 @@
                                         }
                                     }
                                 ],
-                                "type": "primary_filled",
                                 "width": "fill",
                                 "size": "medium",
                                 "margin": "0px 0px 0px 0px"
                             }
                         ],
                         "vertical_align": "top",
-                        "weight": 1
+                        "weight": 2
                     },
                     {
                         "tag": "column",
@@ -98,7 +98,6 @@
                                     "tag": "plain_text",
                                     "content": "直接生成"
                                 },
-                                "type": "default",
                                 "behaviors": [
                                     {
                                         "type": "callback",
@@ -107,6 +106,34 @@
                                         }
                                     }
                                 ],
+                                "type": "default",
+                                "width": "fill",
+                                "size": "medium",
+                                "margin": "0px 0px 0px 0px"
+                            }
+                        ],
+                        "vertical_align": "top",
+                        "weight": 2
+                    },
+                    {
+                        "tag": "column",
+                        "width": "weighted",
+                        "elements": [
+                            {
+                                "tag": "button",
+                                "text": {
+                                    "tag": "plain_text",
+                                    "content": "退出咨询"
+                                },
+                                "behaviors": [
+                                    {
+                                        "type": "callback",
+                                        "value": {
+                                            "key": "study_logout"
+                                        }
+                                    }
+                                ],
+                                "type": "default",
                                 "width": "fill",
                                 "size": "medium",
                                 "margin": "0px 0px 0px 0px"
