@@ -277,7 +277,8 @@ public class FeishuFolderServiceImpl implements IFeishuFolderService {
             
             if (counter.totalFiles == 0) {
                 log.warn("文件夹为空，无需分析: folderToken={}", folderToken);
-                messageService.sendMessage(openId, "文件夹为空，无需分析", openId);
+                messageService.updateStreamingContent(cardInfo, "文件夹为空，无需分析", counter.messageCount++);
+                messageService.stopStreamingMode(cardInfo,counter.messageCount++);
                 return;
             }
 

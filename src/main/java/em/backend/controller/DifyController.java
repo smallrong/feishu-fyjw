@@ -118,7 +118,7 @@ public class DifyController {
                 log.error("发送SSE事件失败", e);
                 emitter.completeWithError(e);
             }
-        }, conversationId, null, null);
+        }, conversationId, null, null,null);
         
         return emitter;
     }

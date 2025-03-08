@@ -107,12 +107,12 @@ logging:
     name: logs/backend.log
 
 feishu:
-  app-id: cli_a740576dc73e500e
-  app-secret: hIY44OQDhP1QE3BLzNIIcfA03AX737kX
+  app-id: cli_a74068d3d639100e
+  app-secret: A7zfVIDHcll8l6o5gPkJXbSK4TQ58sd5
 
 
 dify:
   api-url: http://1.13.79.29:8088/v1
-  api-key: app-s1Cv9pTc0Ulf9FQUvpd9pHNJ
+  api-key: app-apBHFUFvPbfY47LTUrvliMLL
   api-knowledge-key: dataset-f4YbNiU99LcX38H6fhybVfXY
   api-file-opea-key: app-81sNK1GrKlJJHUUNDoVdFUy3

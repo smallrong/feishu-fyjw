@@ -47,6 +47,7 @@ public interface IDifyClient {
      * @param conversationId 会话ID（可选）
      * @param files 文件列表（可选）
      * @param autoGenerateName 是否自动生成会话名称（可选）
+     * @param apiKey
      */
     void chatStreaming(
             String query, 
@@ -55,7 +56,7 @@ public interface IDifyClient {
             Consumer<ChunkResponse> messageHandler,
             String conversationId, 
             List<FileObject> files, 
-            Boolean autoGenerateName);
+            Boolean autoGenerateName,String apiKey);
 
     /**
      * 停止聊天响应

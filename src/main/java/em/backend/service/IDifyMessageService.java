@@ -14,5 +14,5 @@ public interface IDifyMessageService {
      * @param query 用户输入内容
      * @return 处理结果
      */
-    boolean handleUserMessage(String userId, String chatId, String query);
+    boolean handleUserMessage(String userId, String chatId, String query,String conversationId,String _apikey);
 } 

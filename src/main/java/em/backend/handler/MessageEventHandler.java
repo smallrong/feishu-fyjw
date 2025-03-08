@@ -4,6 +4,9 @@ import com.alibaba.fastjson2.JSONObject;
 import com.lark.oapi.service.im.v1.model.P2MessageReceiveV1;
 import em.backend.service.IDifyMessageService;
 import em.backend.service.IFileMessageService;
+import em.backend.service.IUserStatusService;
+import em.backend.pojo.UserStatus;
+import em.backend.service.impl.CaseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,6 +18,7 @@ public class MessageEventHandler implements IEventHandler<P2MessageReceiveV1, Vo
     
     private final IDifyMessageService difyMessageService;
     private final IFileMessageService fileMessageService;
+    private final IUserStatusService userStatusService;
     
     @Override
     public Void handle(P2MessageReceiveV1 event) {
@@ -27,12 +31,28 @@ public class MessageEventHandler implements IEventHandler<P2MessageReceiveV1, Vo
             log.info("收到消息事件: event=[{}]", JSONObject.toJSONString(event));
             log.info("收到消息: type=[{}], user=[{}]", messageType, userId);
 
+
             switch (messageType) {
                 case "text":
                     // 处理文本消息
                     String text = JSONObject.parseObject(event.getEvent().getMessage().getContent())
                             .getString("text");
-                    difyMessageService.handleUserMessage(userId, chatId, text);
+                    String _apikey = null;
+                    // 获取用户状态，检查是否在法律研究模式
+                    UserStatus userStatus = userStatusService.lambdaQuery()
+                            .eq(UserStatus::getOpenId, userId)
+                            .one();
+                    String groupId = null;
+                    if (userStatus != null && userStatus.isLegal()) {
+                        System.out.println("用户状态 +"+ userStatus.getCurrentLegalResearchGroupId());
+                        _apikey = CaseServiceImpl.LEGAL_RESEARCH_CHAT_KEY;
+                        if(userStatus.getCurrentLegalResearchGroupId() != null) {
+                            groupId = userStatus.getCurrentLegalResearchGroupId();
+                        }
+                        log.info("用户处于法律研究模式，对话组ID: {}", groupId);
+                    }
+                    
+                    difyMessageService.handleUserMessage(userId, chatId, text, groupId, _apikey);
                     break;
                     
                 case "file":
